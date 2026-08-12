@@ -3,118 +3,544 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>UPBRAINROTS</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
+            min-height: 100vh;
             font-family: Arial, sans-serif;
-            background: #111111;
             color: white;
-            text-align: center;
+            background:
+                radial-gradient(circle at top, #35106b 0%, #12091f 35%, #07070b 75%);
         }
 
-        .header {
-            padding: 30px 20px 20px;
+        .container {
+            max-width: 480px;
+            margin: auto;
+            padding: 18px;
         }
 
-        .title {
-            font-size: 32px;
-            font-weight: bold;
-        }
+        /* Верхняя панель */
 
-        .balance {
-            margin-top: 15px;
-            font-size: 22px;
-        }
-
-        .coin {
-            font-size: 28px;
-        }
-
-        .game {
-            margin: 40px 20px;
-            padding: 25px;
-            background: #1d1d1d;
-            border-radius: 20px;
-        }
-
-        .game-title {
-            font-size: 24px;
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
         }
 
-        button {
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .profile {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #9d4edd, #5a189a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        /* Баланс */
+
+        .balance-card {
+            padding: 25px;
+            border-radius: 25px;
+            background: linear-gradient(
+                135deg,
+                rgba(151, 52, 255, 0.35),
+                rgba(48, 14, 83, 0.7)
+            );
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.35),
+                inset 0 0 30px rgba(180,80,255,0.08);
+
+            text-align: center;
+        }
+
+        .balance-title {
+            color: #bcb0d0;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .balance {
+            font-size: 38px;
+            font-weight: 900;
+        }
+
+        .coin {
+            font-size: 30px;
+        }
+
+        /* Бонус */
+
+        .bonus {
+            margin-top: 15px;
+            width: 100%;
+            padding: 15px;
             border: none;
-            border-radius: 15px;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
+            border-radius: 17px;
+
+            background: linear-gradient(
+                135deg,
+                #ffb703,
+                #fb8500
+            );
+
+            color: white;
+            font-size: 17px;
+            font-weight: 900;
+
+            box-shadow: 0 8px 25px rgba(251,133,0,0.25);
+
             cursor: pointer;
         }
+
+        .bonus:active {
+            transform: scale(0.97);
+        }
+
+        /* Раздел */
+
+        .section-title {
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-size: 21px;
+            font-weight: 900;
+        }
+
+        /* Игра */
+
+        .game-card {
+            padding: 22px;
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(35,35,48,0.95),
+                    rgba(17,17,25,0.95)
+                );
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+        }
+
+        .game-icon {
+            font-size: 60px;
+            text-align: center;
+        }
+
+        .game-name {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        .game-description {
+            text-align: center;
+            color: #aaa;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .play-button {
+            width: 100%;
+            margin-top: 20px;
+
+            padding: 16px;
+
+            border: none;
+            border-radius: 17px;
+
+            background: linear-gradient(
+                135deg,
+                #8338ec,
+                #c112ff
+            );
+
+            color: white;
+
+            font-size: 18px;
+            font-weight: 900;
+
+            box-shadow:
+                0 8px 25px rgba(131,56,236,0.35);
+
+            cursor: pointer;
+        }
+
+        .play-button:active {
+            transform: scale(0.97);
+        }
+
+        /* Слот */
+
+        #slots {
+            display: none;
+
+            margin-top: 20px;
+            padding: 20px;
+
+            border-radius: 20px;
+
+            background: rgba(0,0,0,0.35);
+
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .slot-machine {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+
+            margin: 15px 0;
+        }
+
+        .slot {
+            width: 70px;
+            height: 70px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 15px;
+
+            background: #fff;
+            color: black;
+
+            font-size: 38px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.4);
+        }
+
+        .bet {
+            text-align: center;
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+
+        .spin {
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+            border-radius: 15px;
+
+            background: linear-gradient(
+                135deg,
+                #00b4d8,
+                #0077b6
+            );
+
+            color: white;
+
+            font-size: 17px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .message {
+            text-align: center;
+            min-height: 25px;
+
+            margin-top: 15px;
+
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Нижняя навигация */
+
+        .bottom {
+            display: flex;
+            justify-content: space-around;
+
+            margin-top: 30px;
+            padding: 15px;
+
+            border-radius: 20px;
+
+            background: rgba(25,25,35,0.8);
+
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .nav-item {
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        .nav-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
     </style>
 </head>
 
 <body>
 
-    <div class="header">
-        <div class="title">🎰 UPBRAINROTS</div>
+<div class="container">
 
-        <div class="balance">
-            Баланс: <span id="balance">0</span>
-            <span class="coin">🪙</span>
+    <!-- Верх -->
+
+    <div class="top">
+
+        <div class="logo">
+            🤖 UPBRAINROTS
         </div>
+
+        <div class="profile">
+            👤        </div>
+
     </div>
 
-    <div class="game">
-    <div class="game-title">
+
+    <!-- Баланс -->
+
+    <div class="balance-card">
+
+        <div class="balance-title">
+            ТВОЙ БАЛАНС
+        </div>
+
+        <div class="balance">
+            <span id="balance">0</span>
+            <span class="coin">🪙</span>
+        </div>
+
+        <button class="bonus" onclick="getBonus()">
+            🎁 Получить 30 🪙        </button>
+
+    </div>
+
+
+    <!-- Игры -->
+
+    <div class="section-title">
         🎮 Мини-игры
     </div>
 
-    <button onclick="getBonus()">
-        🎁 Получить 30 🪙    </button>
 
-    <button onclick="playGame()">
-        🎰 Играть
-    </button>
+    <div class="game-card">
 
-<br><br>
+        <div class="game-icon">
+            🎰        </div>
 
- <button onclick="openSlots()">
-    🎰 Слот-машина
-</button>
+        <div class="game-name">
+            Слот-машина
+        </div>
 
-<div id="slots" style="display: none; margin-top: 20px;">
-    <div style="font-size: 40px;">
-        🍒 🍋 🍉    </div>
+        <div class="game-description">
+            Испытай удачу и попробуй увеличить свой баланс!
+        </div>
 
-    <p>Ставка: 15 🪙</p>
+        <button class="play-button" onclick="openSlots()">
+            🎰 Открыть слот
+        </button>
 
-    <button onclick="spinSlots()">
-        🎰 Крутить
-    </button>   
+
+        <!-- Слот -->
+
+        <div id="slots">
+
+            <div class="slot-machine">
+
+                <div class="slot" id="slot1">
+                    🍒                </div>
+
+                <div class="slot" id="slot2">
+                    🍋                </div>
+
+                <div class="slot" id="slot3">
+                    🍉                </div>
+
+            </div>
+
+
+            <div class="bet">
+                Минимальная ставка: <b>15 🪙</b>
+            </div>
+
+
+            <button class="spin" onclick="spinSlots()">
+                🎰 Крутить — 15 🪙            </button>
+
+
+            <div class="message" id="message"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Нижнее меню -->
+
+    <div class="bottom">
+
+        <div class="nav-item">
+            <div class="nav-icon"</div>
+            Главная
+        </div>
+
+        <div class="nav-item">
+            <div class="nav-icon">🎮</div>
+            Игры
+        </div>
+
+        <div class="nav-item">
+            <div class="nav-icon">🏆</div>
+            Рейтинг
+        </div>
+
+        <div class="nav-item">
+            <div class="nav-icon">👤</div>
+            Профиль
+        </div>
+
+    </div>
+
 </div>
 
-    <script>
-        function playGame() {
-            alert("Скоро здесь появится игра! 🎮");
+
+<script>
+
+    let balance = 0;
+
+
+    function updateBalance() {
+
+        document.getElementById("balance").textContent = balance;
+
+    }
+
+
+    function getBonus() {
+
+        balance = balance + 30;
+
+        updateBalance();
+
+        alert("🎁 Ты получил 30 🪙!");
+
+    }
+
+
+    function openSlots() {
+
+        document.getElementById("slots").style.display = "block";
+
+    }
+
+
+    function spinSlots() {
+
+        if (balance < 15) {
+
+            document.getElementById("message").textContent =
+                "❌ Недостаточно монет! Получи бонус 30 🪙.";
+
+            return;
+
         }
 
-        function openSlots() {
-            alert("🎰 Слот-машина открыта!");
+
+        balance = balance - 15;
+
+
+        const symbols = [
+            "🍒",
+            "🍋",
+            "🍉",
+            "⭐",
+            "💎"
+        ];
+
+
+        const a =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        const b =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        const c =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+
+        document.getElementById("slot1").textContent = a;
+
+        document.getElementById("slot2").textContent = b;
+
+        document.getElementById("slot3").textContent = c;
+
+
+        let win = 0;
+
+
+        if (a === b && b === c) {
+
+            win = 250;
+
+            document.getElementById("message").textContent =
+                "🎉 ДЖЕКПОТ! +250 🪙";
+
         }
-	
-		function getBonus() {
-    let balanceElement = document.getElementById("balance");
 
-    let balance = Number(balanceElement.textContent);
+        else if (
+            a === b ||
+            b === c ||
+            a === c
+        ) {
 
-    balance = balance + 30;
+            win = 100;
 
-    balanceElement.textContent = balance;
+            document.getElementById("message").textContent =
+                "🔥 Два совпадения! +100 🪙";
 
-    alert("🎁 Ты получил 30 🪙!");
-}
-   </script>
+        }
+
+        else {
+
+            document.getElementById("message").textContent =
+                "😢 Не повезло! -15 🪙";
+
+        }
+
+
+        balance = balance + win;
+
+
+        updateBalance();
+
+    }
+
+
+    updateBalance();
+
+</script>
+
 </body>
 </html>
