@@ -31,7 +31,7 @@ body:before{
     background-size:42px 42px;
 }
 
-.square{
+.square-bg{
     position:fixed;
     width:80px;
     height:80px;
@@ -81,7 +81,6 @@ body:before{
     font-size:38px;
     font-weight:1000;
     margin:8px 0;
-    color:#fff;
     text-shadow:0 0 18px #9d00ff;
 }
 
@@ -101,21 +100,6 @@ body:before{
     box-shadow:0 0 20px rgba(0,198,255,.25);
 }
 
-button{
-    border:0;
-    cursor:pointer;
-    color:#fff;
-    font-weight:900;
-    font-size:16px;
-    border-radius:15px;
-    padding:13px;
-    transition:.15s;
-}
-
-button:active{
-    transform:scale(.96);
-}
-
 .card{
     background:rgba(13,13,27,.94);
     border:1px solid rgba(255,255,255,.08);
@@ -129,9 +113,28 @@ h2{
     margin:0 0 8px;
 }
 
+h3{
+    margin-top:20px;
+}
+
 .sub{
     color:#8585a5;
     font-size:13px;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    color:#fff;
+    font-weight:900;
+    font-size:16px;
+    border-radius:15px;
+    padding:13px;
+    transition:.15s;
+}
+
+button:active{
+    transform:scale(.96);
 }
 
 .play{
@@ -162,6 +165,20 @@ h2{
     background:linear-gradient(90deg,#ff1744,#ff0055);
 }
 
+.input{
+    width:100%;
+    padding:13px;
+    margin-top:8px;
+    border-radius:12px;
+    border:1px solid #29293b;
+    background:#080812;
+    color:white;
+    outline:none;
+}
+
+
+/* СЛОТЫ */
+
 .slot{
     display:flex;
     justify-content:center;
@@ -187,9 +204,18 @@ h2{
 }
 
 @keyframes spin{
-    0%{transform:translateY(-20px) rotateX(0);filter:blur(5px)}
-    50%{transform:translateY(20px) rotateX(180deg);filter:blur(3px)}
-    100%{transform:translateY(0) rotateX(360deg);filter:blur(0)}
+    0%{
+        transform:translateY(-20px) rotateX(0);
+        filter:blur(5px);
+    }
+    50%{
+        transform:translateY(20px) rotateX(180deg);
+        filter:blur(3px);
+    }
+    100%{
+        transform:translateY(0) rotateX(360deg);
+        filter:blur(0);
+    }
 }
 
 .message{
@@ -199,10 +225,17 @@ h2{
     font-weight:900;
 }
 
+
+/* АПГРЕЙДЕР */
+
 .upgrade-box{
+    position:relative;
+    width:250px;
+	height:250px;
+    margin:25px auto;
     display:flex;
+    align-items:center;
     justify-content:center;
-    margin:20px 0;
 }
 
 .wheel{
@@ -210,18 +243,22 @@ h2{
     width:220px;
     height:220px;
     border-radius:50%;
+
     background:
         conic-gradient(
-            #111 0deg 25deg,
-            #00e676 25deg 160deg,
-            #111 160deg 185deg,
-            #00e676 185deg 300deg,
-	    #111 300deg 360deg
+            #00e676 0deg 270deg,
+            #080808 270deg 360deg
         );
+
     box-shadow:
         0 0 20px rgba(0,255,120,.25),
         inset 0 0 20px #000;
+
     border:5px solid #29293d;
+
+    /*
+       Круг НЕ вращается.
+    */
 }
 
 .wheel:after{
@@ -238,27 +275,89 @@ h2{
     box-shadow:0 0 20px #00ffff;
 }
 
+
+/*
+   Отдельный вращающийся указатель.
+*/
+
 .pointer{
     position:absolute;
     left:50%;
-    top:-13px;
-    transform:translateX(-50%);
+    top:50%;
+    width:105px;
+    height:5px;
+
+    transform-origin:0% 50%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #fff
+    );
+
+    border-radius:10px;
+
+    filter:
+        drop-shadow(0 0 6px #fff)
+        drop-shadow(0 0 12px #00ffff);
+
+    z-index:10;
+    pointer-events:none;
+}
+
+.pointer:after{
+    content:"";
+    position:absolute;
+    right:-8px;
+    top:50%;
+    transform:translateY(-50%);
+
     width:0;
     height:0;
-    border-left:12px solid transparent;
-    border-right:12px solid transparent;
-    border-top:28px solid #fff;
-    filter:drop-shadow(0 0 7px #fff);
-    z-index:5;
+
+    border-top:9px solid transparent;
+    border-bottom:9px solid transparent;
+    border-right:18px solid #fff;
 }
 
-.rotate{
-    animation:wheelSpin 2.5s cubic-bezier(.12,.75,.2,1);
+.pointer.spinning{
+    animation:
+        pointerSpin
+        3.2s
+        cubic-bezier(.12,.72,.12,1);
 }
 
-@keyframes wheelSpin{
-    from{transform:rotate(0)}
-    to{transform:rotate(1120deg)}
+@keyframes pointerSpin{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(1800deg);
+    }
+}
+
+.selected-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin:10px 0;
+}
+
+.selected-info div{
+    padding:12px;
+    text-align:center;
+    border-radius:13px;
+    background:#10101c;
+    border:1px solid #29293d;
+    color:#aaaac0;
+}
+
+.selected-info b{
+    display:block;
+    margin-top:4px;
+    color:#00ff66;
+    font-size:19px;
 }
 
 .chances{
@@ -268,50 +367,93 @@ h2{
     margin-top:12px;
 }
 
-.chance{
+.chances button{
     background:#11111e;
-    border:1px solid #29293b;
+    border:1px solid #29293d;
     padding:10px 3px;
-    text-align:center;
-    border-radius:12px;
-    font-size:12px;
 }
 
-.chance b{
+.chances button b{
     display:block;
     color:#00ff95;
     font-size:18px;
 }
 
+.chances button small{
+    color:#aaa;
+    font-size:12px;
+}
+
+
+/* COLOR DICE */
+
 .dice{
     display:flex;
     justify-content:center;
-    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
     margin:20px 0;
+    min-height:90px;
 }
 
-.color{
-    width:80px;
-    height:80px;
-    border-radius:18px;
-    border:2px solid rgba(255,255,255,.15);
+.dice-square{
+    width:55px;
+    height:55px;
+    border-radius:12px;
+    transition:background .1s,transform .1s;
+    animation:diceSquare .25s infinite;
 }
 
-.c-red{background:#ff1744;box-shadow:0 0 30px rgba(255,23,68,.35)}
-.c-blue{background:#2979ff;box-shadow:0 0 30px rgba(41,121,255,.35)}
-.c-green{background:#00c853;box-shadow:0 0 30px rgba(0,200,83,.35)}
-.c-yellow{background:#ffd600;box-shadow:0 0 30px rgba(255,214,0,.35)}
+@keyframes diceSquare{
+    50%{
+        transform:scale(1.08) rotate(3deg);
+    }
+}
 
 .color-buttons{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:7px;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
 }
 
 .color-buttons button{
-    padding:10px 3px;
-    font-size:12px;
+    padding:12px 5px;
+    font-size:13px;
 }
+
+.c-red{
+    background:#ff1744;
+    box-shadow:0 0 30px rgba(255,23,68,.35);
+}
+
+.c-blue{
+    background:#2979ff;
+    box-shadow:0 0 30px rgba(41,121,255,.35);
+}
+
+.c-green{
+    background:#00c853;
+    box-shadow:0 0 30px rgba(0,200,83,.35);
+}
+
+.c-yellow{
+    background:#ffd600;
+    box-shadow:0 0 30px rgba(255,214,0,.35);
+}
+
+.c-orange{
+    background:#ff6d00;
+    box-shadow:0 0 30px rgba(255,109,0,.45);
+}
+
+.c-purple{
+    background:#9c27ff;
+    box-shadow:0 0 30px rgba(156,39,255,.45);
+}
+
+
+/* JACKPOT */
 
 .jackpot{
     text-align:center;
@@ -327,19 +469,13 @@ h2{
 }
 
 @keyframes pulse{
-    50%{transform:scale(1.05)}
+    50%{
+        transform:scale(1.05);
+    }
 }
 
-.input{
-    width:100%;
-    padding:13px;
-    margin-top:8px;
-    border-radius:12px;
-    border:1px solid #29293b;
-    background:#080812;
-    color:white;
-    outline:none;
-}
+
+/* ADMIN */
 
 .admin{
     display:none;
@@ -359,139 +495,252 @@ h2{
     color:#777791;
     margin-top:8px;
 }
+
 </style>
 </head>
 
+
 <body>
 
-<div class="square s1"></div>
-<div class="square s2"></div>
-<div class="square s3"></div>
-<div class="square s4"></div>
+<div class="square-bg s1"></div>
+<div class="square-bg s2"></div>
+<div class="square-bg s3"></div>
+<div class="square-bg s4"></div>
+
 
 <div class="app">
+	<header class="header">
 
-<header class="header">
-    <div class="logo">🧠 UPBRAINROTS</div>
+    <div class="logo">
+        🧠 UPBRAINROTS
+    </div>
 
     <div class="balance">
         <span id="balance">0</span> 🧠
     </div>
 
-    <button class="daily" onclick="dailyBonus()">
+    <button
+        class="daily"
+        onclick="dailyBonus()"
+    >
         🎁 Получить 3 мозга
     </button>
 
-    <div class="small" id="dailyInfo"></div>
+    <div
+        class="small"
+        id="dailyInfo"
+    ></div>
+
 </header>
 
 
 <!-- СЛОТЫ -->
+
 <section class="card">
 
 <h2>🎰 СЛОТЫ</h2>
-<div class="sub">Собери комбинацию и получи награду</div>
+
+<div class="sub">
+    Собери комбинацию и получи награду.
+</div>
 
 <div class="slot">
+
     <div class="reel" id="reel1">🍒</div>
     <div class="reel" id="reel2">🍋</div>
     <div class="reel" id="reel3">🍉</div>
+
 </div>
 
-<button class="play purple" onclick="spinSlots()">
+<button
+    class="play purple"
+    onclick="spinSlots()"
+>
     🎰 КРУТИТЬ — 1 🧠
 </button>
 
-<div class="message" id="slotMsg"></div>
+<div
+    class="message"
+    id="slotMsg"
+></div>
 
 </section>
 
 
 <!-- АПГРЕЙДЕР -->
+
 <section class="card">
 
-<h2>⚡ АПГРЕЙДЕР</h2>
+<h2>⚡️ АПГРЕЙДЕР</h2>
+
 <div class="sub">
     Выбери шанс. Зелёная зона — победа, чёрная — проигрыш.
 </div>
 
 <div class="upgrade-box">
 
-    <div class="wheel" id="wheel">
+    <div
+        class="wheel"
+        id="wheel"
+    ></div>
+
+    <div
+        class="pointer"
+        id="upgradePointer"
+    ></div>
+
+</div>
+
+<div class="selected-info">
+
+    <div>
+        Зелёная зона:
+        <b id="greenDegrees">270°</b>
     </div>
 
-    <div class="pointer"></div>
+    <div>
+        Чёрная зона:
+        <b id="blackDegrees">90°</b>
+    </div>
 
 </div>
 
 <div class="chances">
-    <div class="chance">
+
+    <button onclick="setChance(15)">
         <b>15%</b>
-        x6
-    </div>
-    <div class="chance">
+        <small>x6</small>
+    </button>
+
+    <button onclick="setChance(35)">
         <b>35%</b>
-        x3
-    </div>
-    <div class="chance">
+        <small>x3</small>
+    </button>
+
+    <button onclick="setChance(50)">
         <b>50%</b>
-        x2
-    </div>
-    <div class="chance">
+        <small>x2</small>
+    </button>
+
+    <button onclick="setChance(75)">
         <b>75%</b>
-        x1.3
-    </div>
+        <small>x1.3</small>
+    </button>
+
 </div>
 
-<input class="input" id="upgradeAmount" type="number" min="1" value="1">
+<input
+    class="input"
+    id="upgradeAmount"
+    type="number"
+    min="1"
+    value="1"
+>
 
-<div class="chances">
-    <button onclick="setChance(15)">15%</button>
-    <button onclick="setChance(35)">35%</button>
-    <button onclick="setChance(50)">50%</button>
-    <button onclick="setChance(75)">75%</button>
-</div>
-
-<button class="play green" onclick="upgrade()">
-    ⚡ ЗАПУСТИТЬ АПГРЕЙД
+<button
+    class="play green"
+    onclick="upgrade()"
+>
+    ⚡️ ЗАПУСТИТЬ АПГРЕЙД
 </button>
 
-<div class="message" id="upgradeMsg"></div>
+<div
+    class="message"
+    id="upgradeMsg"
+></div>
 
 </section>
 
 
 <!-- COLOR DICE -->
+
 <section class="card">
 
 <h2>🎨 COLOR DICE</h2>
+
 <div class="sub">
-    Выбери цвет. Если выпадет твой цвет — получишь x2.
+    Выбери цвет и количество квадратов.
+    Если выпадет твой цвет — получишь x2.
 </div>
 
-<div class="dice">
-    <div class="color c-red" id="diceColor"></div>
-</div>
+<div
+    class="dice"
+    id="diceBoard"
+></div>
 
 <div class="color-buttons">
-    <button class="c-red" onclick="chooseColor('red')">🔴 Красный</button>
-    <button class="c-blue" onclick="chooseColor('blue')">🔵 Синий</button>
-    <button class="c-green" onclick="chooseColor('green')">🟢 Зелёный</button>
-    <button class="c-yellow" onclick="chooseColor('yellow')">🟡 Жёлтый</button>
+
+    <button
+        class="c-red"
+        onclick="chooseColor('red')"
+    >
+        🔴 Красный
+    </button>
+
+    <button
+        class="c-blue"
+        onclick="chooseColor('blue')"
+    >
+        🔵 Синий
+    </button>
+
+    <button
+        class="c-green"
+        onclick="chooseColor('green')"
+    >
+        🟢 Зелёный
+    </button>
+
+    <button
+        class="c-yellow"
+        onclick="chooseColor('yellow')"
+    >
+        🟡 Жёлтый
+    </button>
+
+    <button
+        class="c-orange"
+        onclick="chooseColor('orange')"
+    >
+        🟠 Оранжевый
+    </button>
+
+    <button
+        class="c-purple"
+        onclick="chooseColor('purple')"
+    >
+        🟣 Фиолетовый
+    </button>
+
 </div>
 
-<input class="input" id="diceAmount" type="number" min="1" value="1">
+<input
+    class="input"
+    id="diceAmount"
+    type="number"
+    min="1"
+    max="50"
+    value="1"
+    placeholder="Количество квадратов"
+>
 
-<button class="play blue" onclick="rollDice()">
-    🎲 КРУТИТЬ
+<button
+    class="play blue"
+    onclick="rollDice()"
+>
+    🎲 ПОСТАВИТЬ КВАДРАТЫ
 </button>
 
-<div class="message" id="diceMsg"></div>
+<div
+    class="message"
+    id="diceMsg"
+></div>
 
 </section>
 
 
-<!-- ДЖЕКПОТ -->
+<!-- JACKPOT -->
+
 <section class="card jackpot">
 
 <h2>💰 ДЖЕКПОТ</h2>
@@ -504,110 +753,178 @@ h2{
     Стоимость игры: 2 🧠
 </div>
 
-<button class="play orange" onclick="playJackpot()">
+<button
+    class="play orange"
+    onclick="playJackpot()"
+>
     💰 ИСПЫТАТЬ УДАЧУ
 </button>
 
-<div class="message" id="jackMsg"></div>
+<div
+    class="message"
+    id="jackMsg"
+></div>
 
 </section>
 
 
-<!-- АДМИН -->
+<!-- ADMIN -->
+
 <section class="card">
 
 <h2>👑 ADMIN</h2>
 
-<button class="red" onclick="toggleAdmin()">
+<button
+    class="red"
+    onclick="toggleAdmin()"
+>
     🔐 Открыть админ-панель
 </button>
 
-<div class="admin" id="adminPanel">
+<div
+    class="admin"
+    id="adminPanel"
+>
 
-    <input class="input" id="adminPassword"
-           type="password"
-           placeholder="Пароль администратора">
+<input
+    class="input"
+    id="adminPassword"
+    type="password"
+    placeholder="Пароль администратора"
+>
 
-    <button class="play red" onclick="loginAdmin()">
-        Войти
-    </button>
+<button
+    class="play red"
+    onclick="loginAdmin()"
+>
+    Войти
+</button>
 
-    <div id="adminContent" style="display:none">
+<div
+    id="adminContent"
+    style="display:none"
+>
 
-        <h3>💰 Выдать мозги</h3>
+<h3>💰 Выдать мозги</h3>
 
-        <input class="input"
-               id="adminGive"
-               type="number"
-               placeholder="Количество">
+<input
+    class="input"
+	id="adminGive"
+    type="number"
+    placeholder="Количество"
+>
 
-        <button class="play green" onclick="adminGive()">
-            Выдать
-        </button>
+<button
+    class="play green"
+    onclick="adminGive()"
+>
+    Выдать
+</button>
 
-        <h3>🚫 Бан</h3>
 
-        <button class="play red" onclick="adminBan()">
-            Заблокировать текущего игрока
-        </button>
+<h3>🚫 Бан</h3>
 
-        <h3>🎟 Промокод</h3>
+<button
+    class="play red"
+    onclick="adminBan()"
+>
+    Заблокировать текущего игрока
+</button>
 
-        <input class="input"
-               id="promoCode"
-               placeholder="Код">
 
-        <input class="input"
-               id="promoReward"
-               type="number"
-               placeholder="Награда">
+<h3>🎟 Промокод</h3>
 
-        <button class="play purple" onclick="createPromo()">
-            Создать промокод
-        </button>
+<input
+    class="input"
+    id="promoCode"
+    placeholder="Код"
+>
 
-        <div id="promoList" class="small"></div>
+<input
+    class="input"
+    id="promoReward"
+    type="number"
+    placeholder="Награда"
+>
 
-        <button class="play blue" onclick="resetGame()">
-            ♻️ Сбросить тестовые данные
-        </button>
+<button
+    class="play purple"
+    onclick="createPromo()"
+>
+    Создать промокод
+</button>
 
-    </div>
+<div
+    id="promoList"
+    class="small"
+></div>
+
+<button
+    class="play blue"
+    onclick="resetGame()"
+>
+    ♻️ Сбросить данные
+</button>
+
+</div>
+
 </div>
 
 </section>
+
 
 </div>
 
 
 <script>
 
+
+/* STORAGE */
+
 const STORAGE_BALANCE = "upbrain_balance";
 const STORAGE_DAILY = "upbrain_daily";
 const STORAGE_JACKPOT = "upbrain_jackpot";
 const STORAGE_BANNED = "upbrain_banned";
 const STORAGE_PROMOS = "upbrain_promos";
-const STORAGE_USED_PROMOS = "upbrain_used_promos";
 
-let balance = Number(localStorage.getItem(STORAGE_BALANCE));
 
-if(!Number.isFinite(balance)){
+/* BALANCE */
+
+let balance =
+    Number(
+        localStorage.getItem(
+            STORAGE_BALANCE
+        )
+    );
+
+if(
+    !Number.isFinite(balance)
+){
     balance = 10;
 }
 
+
 let jackpot =
-    Number(localStorage.getItem(STORAGE_JACKPOT)) || 100;
+    Number(
+        localStorage.getItem(
+            STORAGE_JACKPOT
+        )
+    ) || 100;
 
-let selectedChance = 50;
 
+let selectedChance = 75;
 let selectedColor = "red";
+
 
 const colors = [
     "red",
     "blue",
     "green",
-    "yellow"
+    "yellow",
+    "orange",
+    "purple"
 ];
+
 
 const symbols = [
     "🍒",
@@ -616,6 +933,17 @@ const symbols = [
     "⭐",
     "💎"
 ];
+
+
+const upgradeMultipliers = {
+    15:6,
+    35:3,
+    50:2,
+    75:1.3
+};
+
+
+/* SAVE */
 
 function save(){
 
@@ -628,64 +956,104 @@ function save(){
         STORAGE_JACKPOT,
         String(jackpot)
     );
+
 }
+
+
+/* UPDATE */
 
 function update(){
 
-    document.getElementById("balance")
-        .textContent = Math.floor(balance);
+    document
+        .getElementById("balance")
+        .textContent =
+        Math.floor(balance);
 
-    document.getElementById("jackpot")
-        .textContent = Math.floor(jackpot);
+    document
+        .getElementById("jackpot")
+        .textContent =
+        Math.floor(jackpot);
 
     save();
 
     updateDailyText();
+
 }
+
+
+/* DAILY */
 
 function updateDailyText(){
 
     const last =
-        Number(localStorage.getItem(STORAGE_DAILY)) || 0;
+        Number(
+            localStorage.getItem(
+                STORAGE_DAILY
+            )
+        ) || 0;
 
-    if(Date.now() - last >= 86400000){
+    if(
+        Date.now() - last >=
+        86400000
+    ){
 
-        document.getElementById("dailyInfo")
-            .textContent = "🎁 Ежедневный бонус доступен";
+        document
+            .getElementById("dailyInfo")
+            .textContent =
+            "🎁 Ежедневный бонус доступен";
 
     }else{
-const left =
-            86400000 - (Date.now() - last);
+
+        const left =
+            86400000 -
+            (
+                Date.now() -
+                last
+            );
 
         const hours =
-            Math.floor(left / 3600000);
+            Math.floor(
+                left / 3600000
+            );
 
         const minutes =
             Math.floor(
-                (left % 3600000) / 60000
+                (
+                    left % 3600000
+                ) / 60000
             );
 
-        document.getElementById("dailyInfo")
+        document
+            .getElementById("dailyInfo")
             .textContent =
             "Следующий бонус через " +
-            hours + "ч " +
-            minutes + "м";
+            hours +
+            "ч " +
+            minutes +
+            "м";
     }
 }
 
 
-/* =========================
-   DAILY BONUS
-========================= */
-alert("JS ЗАПУЩЕН");
+/* DAILY BONUS */
+
 function dailyBonus(){
 
     const last =
-        Number(localStorage.getItem(STORAGE_DAILY)) || 0;
+        Number(
+            localStorage.getItem(
+                STORAGE_DAILY
+            )
+        ) || 0;
 
-    if(Date.now() - last < 86400000){
+    if(
+        Date.now() - last <
+        86400000
+    ){
 
-        alert("⏳ Ежедневный бонус уже получен");
+        alert(
+            "⏳ Ежедневный бонус уже получен"
+        );
 
         return;
     }
@@ -699,19 +1067,20 @@ function dailyBonus(){
 
     update();
 
-    alert("🎁 Ты получил 3 🧠!");
+    alert(
+        "🎁 Ты получил 3 🧠!"
+    );
 }
 
 
-/* =========================
-   SLOTS
-========================= */
+/* SLOTS */
 
 function spinSlots(){
 
     if(balance < 1){
 
-        document.getElementById("slotMsg")
+        document
+            .getElementById("slotMsg")
             .textContent =
             "❌ Нужно минимум 1 🧠";
 
@@ -721,280 +1090,434 @@ function spinSlots(){
     balance -= 1;
 
     const reels = [
+
         document.getElementById("reel1"),
         document.getElementById("reel2"),
         document.getElementById("reel3")
+
     ];
 
-    reels.forEach((r,i)=>{
+    reels.forEach(
+        (r,i)=>{
 
-        r.classList.remove("spin");
+            r.classList.remove("spin");
 
-        void r.offsetWidth;
+            void r.offsetWidth;
 
-        r.classList.add("spin");
+            r.classList.add("spin");
 
-        setTimeout(()=>{
+            setTimeout(
+                ()=>{
 
-            r.textContent =
-                symbols[
-                    Math.floor(
-                        Math.random()*symbols.length
-                    )
-                ];
+                    r.textContent = symbols[
+						Math.floor(
+                                Math.random() *
+                                symbols.length
+                            )
+                        ];
 
-        },300 + i*180);
-
-    });
-
-    setTimeout(()=>{
-
-        const a = reels[0].textContent;
-        const b = reels[1].textContent;
-        const c = reels[2].textContent;
-
-        let win = 0;
-
-        if(a === b && b === c){
-
-            win = 20;
-
-            document.getElementById("slotMsg")
-                .textContent =
-                "💎 ТРИ ОДИНАКОВЫХ! +20 🧠";
-
-		}else if(a === b || b === c || a === c){
-
-            win = 5;
-
-            document.getElementById("slotMsg")
-                .textContent =
-                "🔥 Два совпадения! +5 🧠";
-
-        }else{
-
-            document.getElementById("slotMsg")
-                .textContent =
-                "😢 Не повезло";
+                },
+                300 + i*180
+            );
 
         }
+    );
 
-        balance += win;
+    setTimeout(
+        ()=>{
 
-        update();
+            const a =
+                reels[0].textContent;
 
-    },1100);
+            const b =
+                reels[1].textContent;
+
+            const c =
+                reels[2].textContent;
+
+            let win = 0;
+
+            if(
+                a === b &&
+                b === c
+            ){
+
+                win = 20;
+
+                document
+                    .getElementById("slotMsg")
+                    .textContent =
+                    "💎 ТРИ ОДИНАКОВЫХ! +20 🧠";
+
+            }else if(
+                a === b 
+                b === c 
+                a === c
+            ){
+
+                win = 5;
+
+                document
+                    .getElementById("slotMsg")
+                    .textContent =
+                    "🔥 Два совпадения! +5 🧠";
+
+            }else{
+
+                document
+                    .getElementById("slotMsg")
+                    .textContent =
+                    "😢 Не повезло";
+
+            }
+
+            balance += win;
+
+            update();
+
+        },
+        1100
+    );
 }
 
 
-/* =========================
-   UPGRADE
-========================= */
+/* SET CHANCE */
 
 function setChance(chance){
 
     selectedChance = chance;
 
-    document.getElementById("upgradeMsg")
+    const greenDegrees =
+        chance * 3.6;
+
+    const blackDegrees =
+        360 -
+        greenDegrees;
+
+    const wheel =
+        document.getElementById("wheel");
+
+    wheel.style.background =
+        `
+        conic-gradient(
+            #00e676
+            0deg
+            ${greenDegrees}deg,
+            #080808
+            ${greenDegrees}deg
+            360deg
+        )
+        `;
+
+    document
+        .getElementById("greenDegrees")
         .textContent =
-        "Выбран шанс: " + chance + "%";
+        greenDegrees + "°";
+
+    document
+        .getElementById("blackDegrees")
+        .textContent =
+        blackDegrees + "°";
+
+    document
+        .getElementById("upgradeMsg")
+        .textContent =
+        "Выбран шанс " +
+        chance +
+        "%";
 }
+
+
+/* UPGRADE */
 
 function upgrade(){
 
     const amount =
         Number(
-            document.getElementById("upgradeAmount")
+            document
+                .getElementById("upgradeAmount")
                 .value
         );
 
-    if(!Number.isFinite(amount) ||
-       amount <= 0){
+    const message =
+        document
+            .getElementById("upgradeMsg");
+
+    const pointer =
+        document
+            .getElementById("upgradePointer");
+
+    if(
+        !Number.isFinite(amount) ||
+        amount <= 0
+    ){
+
+        message.textContent =
+            "❌ Введи количество 🧠";
 
         return;
     }
 
     if(balance < amount){
 
-        document.getElementById("upgradeMsg")
-            .textContent =
-            "❌ Недостаточно мозгов";
+        message.textContent =
+            "❌ Недостаточно 🧠";
 
         return;
     }
 
     balance -= amount;
 
-    const wheel =
-        document.getElementById("wheel");
+    update();
 
-    wheel.classList.remove("rotate");
+    const resultAngle =
+        Math.random() * 360;
 
-    void wheel.offsetWidth;
+    const greenDegrees =
+        selectedChance * 3.6;
 
-    wheel.classList.add("rotate");
+    const won =
+        resultAngle <
+        greenDegrees;
 
-    setTimeout(()=>{
+    const finalRotation =
+        5 * 360 +
+        resultAngle;
 
-        const roll = Math.random()*100;
+    pointer.classList.remove(
+        "spinning"
+    );
 
-        let multiplier = 1;
+    pointer.style.transform =
+        "rotate(0deg)";
 
-        if(selectedChance === 15)
-            multiplier = 6;
+    void pointer.offsetWidth;
 
-        if(selectedChance === 35)
-            multiplier = 3;
+    pointer.classList.add(
+        "spinning"
+    );
 
-        if(selectedChance === 50)
-            multiplier = 2;
+    pointer.style.transform =
+        rotate(${finalRotation}deg);
 
-        if(selectedChance === 75)
-            multiplier = 1.3;
+    message.textContent =
+        "🎰 Рулетка вращается...";
 
-        if(roll < selectedChance){
+    setTimeout(
+        ()=>{
 
-            const win =
-                Math.floor(
-                    amount * multiplier
-                );
+            const multiplier =
+                upgradeMultipliers[
+                    selectedChance
+                ];
 
-            balance += win;
+            if(won){
 
-            document.getElementById("upgradeMsg")
-                .textContent =
-                "🟢 ПОБЕДА! +" +
-                win +
-                " 🧠";
+                const win =
+                    Math.floor(
+                        amount *
+                        multiplier
+                    );
 
-        }else{
+                balance += win;
 
-            document.getElementById("upgradeMsg")
-                .textContent =
-                "⚫ ЧЁРНАЯ ЗОНА — проигрыш";
+                message.textContent =
+                    "🟢 ПОБЕДА! +" +
+                    win +
+                    " 🧠";
 
-        }
+            }else{
 
-        update();
+                message.textContent =
+                    "⚫️ ПРОИГРЫШ!";
 
-    },2500);
+            }
+
+            update();
+
+        },
+        3300
+    );
 }
 
 
-/* =========================
-   COLOR DICE
-========================= */
+/* COLOR */
+	function chooseColor(color){
 
-function chooseColor(color){
+    selectedColor =
+        color;
 
-    selectedColor = color;
-
-    const dice =
-        document.getElementById("diceColor");
-
-    dice.className =
-        "color c-" + color;
-
-    document.getElementById("diceMsg")
+    document
+        .getElementById("diceMsg")
         .textContent =
-        "Выбран цвет: " + color;
+        "Выбран цвет: " +
+        color;
 }
+
+
+/* COLOR DICE */
 
 function rollDice(){
 
     const amount =
         Number(
-            document.getElementById("diceAmount")
+            document
+                .getElementById("diceAmount")
                 .value
         );
 
-    if(!Number.isFinite(amount) ||
-       amount <= 0){
+    const msg =
+        document
+            .getElementById("diceMsg");
+
+    const board =
+        document
+            .getElementById("diceBoard");
+
+    if(
+        !Number.isInteger(amount) ||
+        amount < 1 ||
+        amount > 50
+    ){
+
+        msg.textContent =
+            "❌ Можно поставить от 1 до 50 квадратов";
 
         return;
     }
 
     if(balance < amount){
 
-        document.getElementById("diceMsg")
-            .textContent =
-            "❌ Недостаточно мозгов";
+        msg.textContent =
+            "❌ Недостаточно 🧠";
 
         return;
     }
 
     balance -= amount;
 
-    const dice =
-        document.getElementById("diceColor");
+    board.innerHTML = "";
+
+    for(
+        let i = 0;
+        i < amount;
+        i++
+    ){
+
+        const square =
+            document.createElement("div");
+
+        square.className =
+            "color dice-square";
+
+        board.appendChild(square);
+    }
 
     let ticks = 0;
 
     const animation =
-        setInterval(()=>{
+        setInterval(
+            ()=>{
 
-            const random =
-                colors[
-                    Math.floor(
-                        Math.random()*colors.length
-                    )
-                ];
+                const squares =
+                    document.querySelectorAll(
+                        ".dice-square"
+                    );
 
-            dice.className =
-                "color c-" + random;
+                squares.forEach(
+                    square => {
 
-            ticks++;
+                        const random =
+                            colors[
+                                Math.floor(
+                                    Math.random() *
+                                    colors.length
+                                )
+                            ];
 
-            if(ticks >= 12){
+                        square.className =
+                            "color dice-square c-" +
+                            random;
 
-                clearInterval(animation);
+                    }
+                );
 
-                const result =
-                    colors[
-                        Math.floor(
-                            Math.random()*colors.length
-                        )
-                    ];
+                ticks++;
 
-                dice.className =
-                    "color c-" + result;
+                if(
+                    ticks >= 15
+                ){
 
-                if(result === selectedColor){
+                    clearInterval(
+                        animation
+                    );
 
-                    const win = amount*2;
+                    const result =
+                        colors[
+                            Math.floor(
+                                Math.random() *
+                                colors.length
+                            )
+                        ];
 
-                    balance += win;
+                    const squares =
+                        document.querySelectorAll(
+                            ".dice-square"
+                        );
 
-                    document.getElementById("diceMsg")
-                        .textContent =
-                        "🎉 ВЫПАЛ ТВОЙ ЦВЕТ! +" +
-                        win +
-                        " 🧠";
+                    squares.forEach(
+                        square => {
 
-                }else{
+                            square.className =
+                                "color dice-square c-" +
+                                result;
 
-                    document.getElementById("diceMsg")
-                        .textContent =
-                        "❌ Цвет не совпал";
+                        }
+                    );
 
+                    if(
+                        result ===
+                        selectedColor
+                    ){
+
+                        const win =
+                            amount * 2;
+
+                        balance += win;
+
+                        msg.textContent =
+                            "🎉 ВЫПАЛ " +
+                            result.toUpperCase() +
+                            "! +" +
+                            win +
+                            " 🧠";
+
+                    }else{
+
+                        msg.textContent =
+                            "❌ Выпал " +
+                            result.toUpperCase() +
+                            ". Ставка проиграна.";
+
+                    }
+
+                    update();
                 }
 
-                update();
-            }
-
-        },100);
+            },
+            100
+        );
 }
 
 
-/* =========================
-   JACKPOT
-========================= */
+/* JACKPOT */
 
 function playJackpot(){
 
     if(balance < 2){
 
-        document.getElementById("jackMsg")
+        document
+            .getElementById("jackMsg")
             .textContent =
             "❌ Нужно 2 🧠";
 
@@ -1012,7 +1535,8 @@ function playJackpot(){
 
         balance += jackpot;
 
-        document.getElementById("jackMsg")
+        document
+            .getElementById("jackMsg")
             .textContent =
             "🏆 ДЖЕКПОТ! +" +
             jackpot +
@@ -1022,7 +1546,9 @@ function playJackpot(){
 
     }else{
 
-        document.getElementById("jackMsg")
+        document
+            .
+			getElementById("jackMsg")
             .textContent =
             "😢 Джекпот пока не сорван";
 
@@ -1032,43 +1558,48 @@ function playJackpot(){
 }
 
 
-/* =========================
-   ADMIN
-========================= */
+/* ADMIN */
 
 function toggleAdmin(){
 
-    document.getElementById("adminPanel")
+    document
+        .getElementById("adminPanel")
         .classList.toggle("show");
+
 }
 
 
-/*
-    ВАЖНО:
-    Это только демонстрационная локальная админка.
-    Пароль находится в клиентском коде и НЕ является
-    настоящей защитой.
-*/
+const ADMIN_PASSWORD =
+    "brainadmin";
 
-const ADMIN_PASSWORD = "brainadmin";
 
 function loginAdmin(){
 
     const password =
-        document.getElementById("adminPassword")
+        document
+            .getElementById("adminPassword")
             .value;
 
-    if(password !== ADMIN_PASSWORD){
+    if(
+        password !==
+        ADMIN_PASSWORD
+    ){
 
-        alert("❌ Неверный пароль");
+        alert(
+            "❌ Неверный пароль"
+        );
 
         return;
     }
 
-    document.getElementById("adminContent")
-        .style.display = "block";
+    document
+        .getElementById("adminContent")
+        .style.display =
+        "block";
 
-    alert("👑 Админ-панель открыта");
+    alert(
+        "👑 Админ-панель открыта"
+    );
 }
 
 
@@ -1076,12 +1607,15 @@ function adminGive(){
 
     const amount =
         Number(
-            document.getElementById("adminGive")
+            document
+                .getElementById("adminGive")
                 .value
         );
 
-    if(!Number.isFinite(amount) ||
-       amount <= 0){
+    if(
+        !Number.isFinite(amount) ||
+        amount <= 0
+    ){
 
         return;
     }
@@ -1114,20 +1648,24 @@ function adminBan(){
 function createPromo(){
 
     const code =
-        document.getElementById("promoCode")
+        document
+            .getElementById("promoCode")
             .value
             .trim()
             .toUpperCase();
 
     const reward =
         Number(
-document.getElementById("promoReward")
+            document
+                .getElementById("promoReward")
                 .value
         );
 
-    if(!code ||
-       !Number.isFinite(reward) ||
-       reward <= 0){
+    if(
+        !code ||
+        !Number.isFinite(reward) ||
+        reward <= 0
+    ){
 
         return;
     }
@@ -1136,17 +1674,20 @@ document.getElementById("promoReward")
         JSON.parse(
             localStorage.getItem(
                 STORAGE_PROMOS
-            ) || "{}"
+            ) ||
+            "{}"
         );
 
-    promos[code] = reward;
+    promos[code] =
+        reward;
 
     localStorage.setItem(
         STORAGE_PROMOS,
         JSON.stringify(promos)
     );
 
-    document.getElementById("promoList")
+    document
+        .getElementById("promoList")
         .textContent =
         "Создан промокод " +
         code +
@@ -1154,71 +1695,15 @@ document.getElementById("promoReward")
         reward +
         " 🧠";
 
-    document.getElementById("promoCode")
+    document
+        .getElementById("promoCode")
         .value = "";
 
-    document.getElementById("promoReward")
+    document
+        .getElementById("promoReward")
         .value = "";
 }
 
-
-/* =========================
-   PROMO через консоль
-========================= */
-
-function usePromo(code){
-
-    code =
-        String(code)
-        .trim()
-        .toUpperCase();
-
-    const promos =
-        JSON.parse(
-            localStorage.getItem(
-                STORAGE_PROMOS
-            ) || "{}"
-        );
-
-    const used =
-        JSON.parse(
-            localStorage.getItem(
-                STORAGE_USED_PROMOS
-            ) || "[]"
-        );
-
-    if(used.includes(code)){
-
-        return "Промокод уже использован";
-
-    }
-
-    if(!promos[code]){
-
-        return "Промокод не найден";
-
-    }
-
-    balance += Number(promos[code]);
-
-    used.push(code);
-
-    localStorage.setItem(
-        STORAGE_USED_PROMOS,
-        JSON.stringify(used)
-    );
-
-    update();
-
-    return "Промокод активирован: +" +
-        promos[code] +
-        " 🧠";
-}
-
-
-/* =========================
-   RESET
-========================= */
 
 function resetGame(){
 
@@ -1229,18 +1714,32 @@ function resetGame(){
 
     update();
 
-    alert("♻️ Данные сброшены");
+    alert(
+        "♻️ Данные сброшены"
+    );
 }
 
 
-/* =========================
-   START
-========================= */
+/* START */
 
-if(localStorage.getItem(STORAGE_BANNED) === "1"){
+if(
+    localStorage.getItem(
+        STORAGE_BANNED
+    ) === "1"
+){
 
     document.body.innerHTML =
-        "<h1 style='text-align:center;margin-top:30vh'>🚫 ИГРОК ЗАБЛОКИРОВАН</h1>";
+        `
+        <h1
+            style="
+            text-align:center;
+            margin-top:30vh;
+            color:white;
+            "
+        >
+            🚫 ИГРОК ЗАБЛОКИРОВАН
+        </h1>
+        `;
 
 }else{
 
@@ -1248,7 +1747,10 @@ if(localStorage.getItem(STORAGE_BANNED) === "1"){
 
 }
 
+setChance(75);
+
 </script>
 
 </body>
 </html>
+						
