@@ -428,12 +428,13 @@
 
 <script>
 
-    let balance = 0;
+    let balance = Number(LocalStorage.getItem("upbrainrots_balance")) || 0;
 
 
     function updateBalance() {
 
         document.getElementById("balance").textContent = balance;
+	LocalStorage.setItem("upbrainrots_balance", balance);
 
     }
 
