@@ -4,15 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UPBRAINROTS</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111111;
+            color: white;
+            text-align: center;
+        }
+
+        .header {
+            padding: 30px 20px 20px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .balance {
+            margin-top: 15px;
+            font-size: 22px;
+        }
+
+        .coin {
+            font-size: 28px;
+        }
+
+        .game {
+            margin: 40px 20px;
+            padding: 25px;
+            background: #1d1d1d;
+            border-radius: 20px;
+        }
+
+        .game-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            border: none;
+            border-radius: 15px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>🎰 UPBRAINROTS</h1>
+    <div class="header">
+        <div class="title">🎰 UPBRAINROTS</div>
 
-    <p>🪙 Баланс: 0</p>
+        <div class="balance">
+            Баланс: <span id="balance">1000</span>
+            <span class="coin">🪙</span>
+        </div>
+    </div>
 
-    <button>🎮 Играть</button>
+    <div class="game">
+        <div class="game-title">
+            🎮 Мини-игры
+        </div>
+
+        <button onclick="playGame()">
+            🎰 Играть
+        </button>
+    </div>
+
+    <script>
+        function playGame() {
+            alert("Скоро здесь появится игра! 🎮");
+        }
+    </script>
 
 </body>
 </html>
