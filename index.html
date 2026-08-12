@@ -67,13 +67,16 @@
     </div>
 
     <div class="game">
-        <div class="game-title">
-            🎮 Мини-игры
-        </div>
+    <div class="game-title">
+        🎮 Мини-игры
+    </div>
 
-        <button onclick="playGame()">
-    🎰 Играть
-</button>
+    <button onclick="getBonus()">
+        🎁 Получить 30 🪙    </button>
+
+    <button onclick="playGame()">
+        🎰 Играть
+    </button>
 
 <br><br>
 
@@ -83,13 +86,17 @@
 </div>
 
     <script>
-    function playGame() {
-        alert("Скоро здесь появится игра! 🎮");
-    }
+        function playGame() {
+            alert("Скоро здесь появится игра! 🎮");
+        }
 
-    function openSlots() {
-        alert("🎰 Слот-машина открыта!");
-    }
-</script>
+        function openSlots() {
+            alert("🎰 Слот-машина открыта!");
+        }
+
+	function getBonus() {
+	    alert("Вы получили бонус 30 мозгов!");
+	}   
+   </script>
 </body>
 </html>
