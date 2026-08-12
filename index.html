@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>UPBRAINROTS</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,sans-serif;
+    color:#fff;
+    background:#05050b;
+    overflow-x:hidden;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-3;
+    background:
+        linear-gradient(90deg,rgba(0,255,255,.035) 1px,transparent 1px),
+        linear-gradient(rgba(255,0,255,.035) 1px,transparent 1px);
+    background-size:42px 42px;
+}
+
+.square{
+    position:fixed;
+    width:80px;
+    height:80px;
+    border:1px solid rgba(0,255,255,.2);
+    box-shadow:0 0 30px rgba(0,255,255,.08);
+    transform:rotate(25deg);
+    animation:float 8s infinite ease-in-out;
+    z-index:-2;
+}
+
+.s1{left:5%;top:15%}
+.s2{right:8%;top:30%;animation-delay:2s}
+.s3{left:15%;bottom:12%;animation-delay:4s}
+.s4{right:20%;bottom:20%;animation-delay:1s}
+
+@keyframes float{
+    0%,100%{transform:translateY(0) rotate(25deg)}
+    50%{transform:translateY(-35px) rotate(55deg)}
+}
+
+.app{
+    width:min(480px,100%);
+    margin:auto;
+    padding:14px;
+}
+
+.header{
+    background:linear-gradient(145deg,rgba(18,18,40,.95),rgba(8,8,20,.95));
+    border:1px solid rgba(0,255,255,.25);
+    border-radius:24px;
+    padding:18px;
+    box-shadow:0 0 35px rgba(0,255,255,.08);
+    margin-bottom:15px;
+}
+
+.logo{
+    text-align:center;
+    font-size:28px;
+    font-weight:1000;
+    letter-spacing:2px;
+    color:#00ffff;
+    text-shadow:0 0 18px #00ffff;
+}
+
+.balance{
+    text-align:center;
+    font-size:38px;
+    font-weight:1000;
+    margin:8px 0;
+    color:#fff;
+    text-shadow:0 0 18px #9d00ff;
+}
+
+.balance span{
+    color:#00ffff;
+}
+
+.daily{
+    width:100%;
+    border:0;
+    border-radius:15px;
+    padding:14px;
+    background:linear-gradient(90deg,#00c6ff,#7b2cff);
+    color:white;
+    font-size:16px;
+    font-weight:900;
+    box-shadow:0 0 20px rgba(0,198,255,.25);
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    color:#fff;
+    font-weight:900;
+    font-size:16px;
+    border-radius:15px;
+    padding:13px;
+    transition:.15s;
+}
+
+button:active{
+    transform:scale(.96);
+}
+
+.card{
+    background:rgba(13,13,27,.94);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    padding:18px;
+    margin-bottom:15px;
+    box-shadow:0 0 30px rgba(120,0,255,.08);
+}
+
+h2{
+    margin:0 0 8px;
+}
+
+.sub{
+    color:#8585a5;
+    font-size:13px;
+}
+
+.play{
+    width:100%;
+    margin-top:12px;
+}
+
+.purple{
+    background:linear-gradient(90deg,#7b2cff,#d100ff);
+    box-shadow:0 0 20px rgba(123,44,255,.3);
+}
+
+.green{
+    background:linear-gradient(90deg,#00c853,#00ff95);
+    color:#001b0c;
+    box-shadow:0 0 20px rgba(0,255,120,.2);
+}
+
+.orange{
+    background:linear-gradient(90deg,#ff7200,#ffb300);
+}
+
+.blue{
+    background:linear-gradient(90deg,#006eff,#00c6ff);
+}
+
+.red{
+    background:linear-gradient(90deg,#ff1744,#ff0055);
+}
+
+.slot{
+    display:flex;
+    justify-content:center;
+    gap:9px;
+    margin:20px 0;
+}
+
+.reel{
+    width:82px;
+    height:82px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fff;
+    color:#111;
+    border-radius:18px;
+    font-size:42px;
+    box-shadow:0 0 25px rgba(255,255,255,.12);
+}
+
+.spin{
+    animation:spin .7s ease;
+}
+
+@keyframes spin{
+    0%{transform:translateY(-20px) rotateX(0);filter:blur(5px)}
+    50%{transform:translateY(20px) rotateX(180deg);filter:blur(3px)}
+    100%{transform:translateY(0) rotateX(360deg);filter:blur(0)}
+}
+
+.message{
+    text-align:center;
+    min-height:23px;
+    margin-top:10px;
+    font-weight:900;
+}
+
+.upgrade-box{
+    display:flex;
+    justify-content:center;
+    margin:20px 0;
+}
+
+.wheel{
+    position:relative;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:
+        conic-gradient(
+            #111 0deg 25deg,
+            #00e676 25deg 160deg,
+            #111 160deg 185deg,
+            #00e676 185deg 300deg,
+	    #111 300deg 360deg
+        );
+    box-shadow:
+        0 0 20px rgba(0,255,120,.25),
+        inset 0 0 20px #000;
+    border:5px solid #29293d;
+}
+
+.wheel:after{
+    content:"";
+    position:absolute;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#080812;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border:2px solid #00ffff;
+    box-shadow:0 0 20px #00ffff;
+}
+
+.pointer{
+    position:absolute;
+    left:50%;
+    top:-13px;
+    transform:translateX(-50%);
+    width:0;
+    height:0;
+    border-left:12px solid transparent;
+    border-right:12px solid transparent;
+    border-top:28px solid #fff;
+    filter:drop-shadow(0 0 7px #fff);
+    z-index:5;
+}
+
+.rotate{
+    animation:wheelSpin 2.5s cubic-bezier(.12,.75,.2,1);
+}
+
+@keyframes wheelSpin{
+    from{transform:rotate(0)}
+    to{transform:rotate(1120deg)}
+}
+
+.chances{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
+    margin-top:12px;
+}
+
+.chance{
+    background:#11111e;
+    border:1px solid #29293b;
+    padding:10px 3px;
+    text-align:center;
+    border-radius:12px;
+    font-size:12px;
+}
+
+.chance b{
+    display:block;
+    color:#00ff95;
+    font-size:18px;
+}
+
+.dice{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin:20px 0;
+}
+
+.color{
+    width:80px;
+    height:80px;
+    border-radius:18px;
+    border:2px solid rgba(255,255,255,.15);
+}
+
+.c-red{background:#ff1744;box-shadow:0 0 30px rgba(255,23,68,.35)}
+.c-blue{background:#2979ff;box-shadow:0 0 30px rgba(41,121,255,.35)}
+.c-green{background:#00c853;box-shadow:0 0 30px rgba(0,200,83,.35)}
+.c-yellow{background:#ffd600;box-shadow:0 0 30px rgba(255,214,0,.35)}
+
+.color-buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
+}
+
+.color-buttons button{
+    padding:10px 3px;
+    font-size:12px;
+}
+
+.jackpot{
+    text-align:center;
+    padding:18px;
+}
+
+.jackpot-number{
+    font-size:38px;
+    font-weight:1000;
+    color:#ffd600;
+    text-shadow:0 0 20px #ff9100;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    50%{transform:scale(1.05)}
+}
+
+.input{
+    width:100%;
+    padding:13px;
+    margin-top:8px;
+    border-radius:12px;
+    border:1px solid #29293b;
+    background:#080812;
+    color:white;
+    outline:none;
+}
+
+.admin{
+    display:none;
+}
+
+.admin.show{
+    display:block;
+}
+
+.admin-grid{
+    display:grid;
+    gap:8px;
+}
+
+.small{
+    font-size:12px;
+    color:#777791;
+    margin-top:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="square s1"></div>
+<div class="square s2"></div>
+<div class="square s3"></div>
+<div class="square s4"></div>
+
+<div class="app">
+
+<header class="header">
+    <div class="logo">🧠 UPBRAINROTS</div>
+
+    <div class="balance">
+        <span id="balance">0</span> 🧠
+    </div>
+
+    <button class="daily" onclick="dailyBonus()">
+        🎁 Получить 3 мозга
+    </button>
+
+    <div class="small" id="dailyInfo"></div>
+</header>
+
+
+<!-- СЛОТЫ -->
+<section class="card">
+
+<h2>🎰 СЛОТЫ</h2>
+<div class="sub">Собери комбинацию и получи награду</div>
+
+<div class="slot">
+    <div class="reel" id="reel1">🍒</div>
+    <div class="reel" id="reel2">🍋</div>
+    <div class="reel" id="reel3">🍉</div>
+</div>
+
+<button class="play purple" onclick="spinSlots()">
+    🎰 КРУТИТЬ — 1 🧠
+</button>
+
+<div class="message" id="slotMsg"></div>
+
+</section>
+
+
+<!-- АПГРЕЙДЕР -->
+<section class="card">
+
+<h2>⚡ АПГРЕЙДЕР</h2>
+<div class="sub">
+    Выбери шанс. Зелёная зона — победа, чёрная — проигрыш.
+</div>
+
+<div class="upgrade-box">
+    <div class="wheel" id="wheel">
+        <div class="pointer"></div>
+    </div>
+</div>
+
+<div class="chances">
+    <div class="chance">
+        <b>15%</b>
+        x6
+    </div>
+    <div class="chance">
+        <b>35%</b>
+        x3
+    </div>
+    <div class="chance">
+        <b>50%</b>
+        x2
+    </div>
+    <div class="chance">
+        <b>75%</b>
+        x1.3
+    </div>
+</div>
+
+<input class="input" id="upgradeAmount" type="number" min="1" value="1">
+
+<div class="chances">
+    <button onclick="setChance(15)">15%</button>
+    <button onclick="setChance(35)">35%</button>
+    <button onclick="setChance(50)">50%</button>
+    <button onclick="setChance(75)">75%</button>
+</div>
+
+<button class="play green" onclick="upgrade()">
+    ⚡ ЗАПУСТИТЬ АПГРЕЙД
+</button>
+
+<div class="message" id="upgradeMsg"></div>
+
+</section>
+
+
+<!-- COLOR DICE -->
+<section class="card">
+
+<h2>🎨 COLOR DICE</h2>
+<div class="sub">
+    Выбери цвет. Если выпадет твой цвет — получишь x2.
+</div>
+
+<div class="dice">
+    <div class="color c-red" id="diceColor"></div>
+</div>
+
+<div class="color-buttons">
+    <button class="c-red" onclick="chooseColor('red')">🔴 Красный</button>
+    <button class="c-blue" onclick="chooseColor('blue')">🔵 Синий</button>
+    <button class="c-green" onclick="chooseColor('green')">🟢 Зелёный</button>
+    <button class="c-yellow" onclick="chooseColor('yellow')">🟡 Жёлтый</button>
+</div>
+
+<input class="input" id="diceAmount" type="number" min="1" value="1">
+
+<button class="play blue" onclick="rollDice()">
+    🎲 КРУТИТЬ
+</button>
+
+<div class="message" id="diceMsg"></div>
+
+</section>
+
+
+<!-- ДЖЕКПОТ -->
+<section class="card jackpot">
+
+<h2>💰 ДЖЕКПОТ</h2>
+
+<div class="jackpot-number">
+    <span id="jackpot">100</span> 🧠
+</div>
+
+<div class="sub">
+    Стоимость игры: 2 🧠
+</div>
+
+<button class="play orange" onclick="playJackpot()">
+    💰 ИСПЫТАТЬ УДАЧУ
+</button>
+
+<div class="message" id="jackMsg"></div>
+
+</section>
+
+
+<!-- АДМИН -->
+<section class="card">
+
+<h2>👑 ADMIN</h2>
+
+<button class="red" onclick="toggleAdmin()">
+    🔐 Открыть админ-панель
+</button>
+
+<div class="admin" id="adminPanel">
+
+    <input class="input" id="adminPassword"
+           type="password"
+           placeholder="Пароль администратора">
+
+    <button class="play red" onclick="loginAdmin()">
+        Войти
+    </button>
+
+    <div id="adminContent" style="display:none">
+
+        <h3>💰 Выдать мозги</h3>
+
+        <input class="input"
+               id="adminGive"
+               type="number"
+               placeholder="Количество">
+
+        <button class="play green" onclick="adminGive()">
+            Выдать
+        </button>
+
+        <h3>🚫 Бан</h3>
+
+        <button class="play red" onclick="adminBan()">
+            Заблокировать текущего игрока
+        </button>
+
+        <h3>🎟 Промокод</h3>
+
+        <input class="input"
+               id="promoCode"
+               placeholder="Код">
+
+        <input class="input"
+               id="promoReward"
+               type="number"
+               placeholder="Награда">
+
+        <button class="play purple" onclick="createPromo()">
+            Создать промокод
+        </button>
+
+        <div id="promoList" class="small"></div>
+
+        <button class="play blue" onclick="resetGame()">
+            ♻️ Сбросить тестовые данные
+        </button>
+
+    </div>
+</div>
+
+</section>
+
+</div>
+
+
+<script>
+
+const STORAGE_BALANCE = "upbrain_balance";
+const STORAGE_DAILY = "upbrain_daily";
+const STORAGE_JACKPOT = "upbrain_jackpot";
+const STORAGE_BANNED = "upbrain_banned";
+const STORAGE_PROMOS = "upbrain_promos";
+const STORAGE_USED_PROMOS = "upbrain_used_promos";
+
+let balance = Number(localStorage.getItem(STORAGE_BALANCE));
+
+if(!Number.isFinite(balance)){
+    balance = 10;
+}
+
+let jackpot =
+    Number(localStorage.getItem(STORAGE_JACKPOT)) || 100;
+
+let selectedChance = 50;
+
+let selectedColor = "red";
+
+const colors = [
+    "red",
+    "blue",
+    "green",
+    "yellow"
+];
+
+const symbols = [
+    "🍒",
+    "🍋",
+    "🍉",
+    "⭐",
+    "💎"
+];
+
+function save(){
+
+    localStorage.setItem(
+        STORAGE_BALANCE,
+        String(balance)
+    );
+
+    localStorage.setItem(
+        STORAGE_JACKPOT,
+        String(jackpot)
+    );
+}
+
+function update(){
+
+    document.getElementById("balance")
+        .textContent = Math.floor(balance);
+
+    document.getElementById("jackpot")
+        .textContent = Math.floor(jackpot);
+
+    save();
+
+    updateDailyText();
+}
+
+function updateDailyText(){
+
+    const last =
+        Number(localStorage.getItem(STORAGE_DAILY)) || 0;
+
+    if(Date.now() - last >= 86400000){
+
+        document.getElementById("dailyInfo")
+            .textContent = "🎁 Ежедневный бонус доступен";
+
+    }else{
+const left =
+            86400000 - (Date.now() - last);
+
+        const hours =
+            Math.floor(left / 3600000);
+
+        const minutes =
+            Math.floor(
+                (left % 3600000) / 60000
+            );
+
+        document.getElementById("dailyInfo")
+            .textContent =
+            "Следующий бонус через " +
+            hours + "ч " +
+            minutes + "м";
+    }
+}
+
+
+/* =========================
+   DAILY BONUS
+========================= */
+
+function dailyBonus(){
+
+    const last =
+        Number(localStorage.getItem(STORAGE_DAILY)) || 0;
+
+    if(Date.now() - last < 86400000){
+
+        alert("⏳ Ежедневный бонус уже получен");
+
+        return;
+    }
+
+    balance += 3;
+
+    localStorage.setItem(
+        STORAGE_DAILY,
+        String(Date.now())
+    );
+
+    update();
+
+    alert("🎁 Ты получил 3 🧠!");
+}
+
+
+/* =========================
+   SLOTS
+========================= */
+
+function spinSlots(){
+
+    if(balance < 1){
+
+        document.getElementById("slotMsg")
+            .textContent =
+            "❌ Нужно минимум 1 🧠";
+
+        return;
+    }
+
+    balance -= 1;
+
+    const reels = [
+        document.getElementById("reel1"),
+        document.getElementById("reel2"),
+        document.getElementById("reel3")
+    ];
+
+    reels.forEach((r,i)=>{
+
+        r.classList.remove("spin");
+
+        void r.offsetWidth;
+
+        r.classList.add("spin");
+
+        setTimeout(()=>{
+
+            r.textContent =
+                symbols[
+                    Math.floor(
+                        Math.random()*symbols.length
+                    )
+                ];
+
+        },300 + i*180);
+
+    });
+
+    setTimeout(()=>{
+
+        const a = reels[0].textContent;
+        const b = reels[1].textContent;
+        const c = reels[2].textContent;
+
+        let win = 0;
+
+        if(a === b && b === c){
+
+            win = 20;
+
+            document.getElementById("slotMsg")
+                .textContent =
+                "💎 ТРИ ОДИНАКОВЫХ! +20 🧠";
+
+        }else if(a === b  b === c  a === c){
+
+            win = 5;
+
+            document.getElementById("slotMsg")
+                .textContent =
+                "🔥 Два совпадения! +5 🧠";
+
+        }else{
+
+            document.getElementById("slotMsg")
+                .textContent =
+                "😢 Не повезло";
+
+        }
+
+        balance += win;
+
+        update();
+
+    },1100);
+}
+
+
+/* =========================
+   UPGRADE
+========================= */
+
+function setChance(chance){
+
+    selectedChance = chance;
+
+    document.getElementById("upgradeMsg")
+        .textContent =
+        "Выбран шанс: " + chance + "%";
+}
+
+function upgrade(){
+
+    const amount =
+        Number(
+            document.getElementById("upgradeAmount")
+                .value
+        );
+
+    if(!Number.isFinite(amount) ||
+       amount <= 0){
+
+        return;
+    }
+
+    if(balance < amount){
+
+        document.getElementById("upgradeMsg")
+            .textContent =
+            "❌ Недостаточно мозгов";
+
+        return;
+    }
+
+    balance -= amount;
+
+    const wheel =
+        document.getElementById("wheel");
+
+    wheel.classList.remove("rotate");
+
+    void wheel.offsetWidth;
+
+    wheel.classList.add("rotate");
+
+    setTimeout(()=>{
+
+        const roll = Math.random()*100;
+
+        let multiplier = 1;
+
+        if(selectedChance === 15)
+            multiplier = 6;
+
+        if(selectedChance === 35)
+            multiplier = 3;
+
+        if(selectedChance === 50)
+            multiplier = 2;
+
+        if(selectedChance === 75)
+            multiplier = 1.3;
+
+        if(roll < selectedChance){
+
+            const win =
+                Math.floor(
+                    amount * multiplier
+                );
+
+            balance += win;
+
+            document.getElementById("upgradeMsg")
+                .textContent =
+                "🟢 ПОБЕДА! +" +
+                win +
+                " 🧠";
+
+        }else{
+
+            document.getElementById("upgradeMsg")
+                .textContent =
+                "⚫ ЧЁРНАЯ ЗОНА — проигрыш";
+
+        }
+
+        update();
+
+    },2500);
+}
+
+
+/* =========================
+   COLOR DICE
+========================= */
+
+function chooseColor(color){
+
+    selectedColor = color;
+
+    const dice =
+        document.getElementById("diceColor");
+
+    dice.className =
+        "color c-" + color;
+
+    document.getElementById("diceMsg")
+        .textContent =
+        "Выбран цвет: " + color;
+}
+
+function rollDice(){
+
+    const amount =
+        Number(
+            document.getElementById("diceAmount")
+                .value
+        );
+
+    if(!Number.isFinite(amount) ||
+       amount <= 0){
+
+        return;
+    }
+
+    if(balance < amount){
+
+        document.getElementById("diceMsg")
+            .textContent =
+            "❌ Недостаточно мозгов";
+
+        return;
+    }
+
+    balance -= amount;
+
+    const dice =
+        document.getElementById("diceColor");
+
+    let ticks = 0;
+
+    const animation =
+        setInterval(()=>{
+
+            const random =
+                colors[
+                    Math.floor(
+                        Math.random()*colors.length
+                    )
+                ];
+
+            dice.className =
+                "color c-" + random;
+
+            ticks++;
+
+            if(ticks >= 12){
+
+                clearInterval(animation);
+
+                const result =
+                    colors[
+                        Math.floor(
+                            Math.random()*colors.length
+                        )
+                    ];
+
+                dice.className =
+                    "color c-" + result;
+
+                if(result === selectedColor){
+
+                    const win = amount*2;
+
+                    balance += win;
+
+                    document.getElementById("diceMsg")
+                        .textContent =
+                        "🎉 ВЫПАЛ ТВОЙ ЦВЕТ! +" +
+                        win +
+                        " 🧠";
+
+                }else{
+
+                    document.getElementById("diceMsg")
+                        .textContent =
+                        "❌ Цвет не совпал";
+
+                }
+
+                update();
+            }
+
+        },100);
+}
+
+
+/* =========================
+   JACKPOT
+========================= */
+
+function playJackpot(){
+
+    if(balance < 2){
+
+        document.getElementById("jackMsg")
+            .textContent =
+            "❌ Нужно 2 🧠";
+
+        return;
+    }
+
+    balance -= 2;
+
+    jackpot += 2;
+
+    const win =
+        Math.random() < 0.1;
+
+    if(win){
+
+        balance += jackpot;
+
+        document.getElementById("jackMsg")
+            .textContent =
+            "🏆 ДЖЕКПОТ! +" +
+            jackpot +
+            " 🧠";
+
+        jackpot = 100;
+
+    }else{
+
+        document.getElementById("jackMsg")
+            .textContent =
+            "😢 Джекпот пока не сорван";
+
+    }
+
+    update();
+}
+
+
+/* =========================
+   ADMIN
+========================= */
+
+function toggleAdmin(){
+
+    document.getElementById("adminPanel")
+        .classList.toggle("show");
+}
+
+
+/*
+    ВАЖНО:
+    Это только демонстрационная локальная админка.
+    Пароль находится в клиентском коде и НЕ является
+    настоящей защитой.
+*/
+
+const ADMIN_PASSWORD = "brainadmin";
+
+function loginAdmin(){
+
+    const password =
+        document.getElementById("adminPassword")
+            .value;
+
+    if(password !== ADMIN_PASSWORD){
+
+        alert("❌ Неверный пароль");
+
+        return;
+    }
+
+    document.getElementById("adminContent")
+        .style.display = "block";
+
+    alert("👑 Админ-панель открыта");
+}
+
+
+function adminGive(){
+
+    const amount =
+        Number(
+            document.getElementById("adminGive")
+                .value
+        );
+
+    if(!Number.isFinite(amount) ||
+       amount <= 0){
+
+        return;
+    }
+
+    balance += amount;
+
+    update();
+
+    alert(
+        "💰 Выдано " +
+        amount +
+        " 🧠"
+    );
+}
+
+
+function adminBan(){
+
+    localStorage.setItem(
+        STORAGE_BANNED,
+        "1"
+    );
+
+    alert(
+        "🚫 Игрок заблокирован локально"
+    );
+}
+
+
+function createPromo(){
+
+    const code =
+        document.getElementById("promoCode")
+            .value
+            .trim()
+            .toUpperCase();
+
+    const reward =
+        Number(
+document.getElementById("promoReward")
+                .value
+        );
+
+    if(!code ||
+       !Number.isFinite(reward) ||
+       reward <= 0){
+
+        return;
+    }
+
+    const promos =
+        JSON.parse(
+            localStorage.getItem(
+                STORAGE_PROMOS
+            ) || "{}"
+        );
+
+    promos[code] = reward;
+
+    localStorage.setItem(
+        STORAGE_PROMOS,
+        JSON.stringify(promos)
+    );
+
+    document.getElementById("promoList")
+        .textContent =
+        "Создан промокод " +
+        code +
+        " → +" +
+        reward +
+        " 🧠";
+
+    document.getElementById("promoCode")
+        .value = "";
+
+    document.getElementById("promoReward")
+        .value = "";
+}
+
+
+/* =========================
+   PROMO через консоль
+========================= */
+
+function usePromo(code){
+
+    code =
+        String(code)
+        .trim()
+        .toUpperCase();
+
+    const promos =
+        JSON.parse(
+            localStorage.getItem(
+                STORAGE_PROMOS
+            ) || "{}"
+        );
+
+    const used =
+        JSON.parse(
+            localStorage.getItem(
+                STORAGE_USED_PROMOS
+            ) || "[]"
+        );
+
+    if(used.includes(code)){
+
+        return "Промокод уже использован";
+
+    }
+
+    if(!promos[code]){
+
+        return "Промокод не найден";
+
+    }
+
+    balance += Number(promos[code]);
+
+    used.push(code);
+
+    localStorage.setItem(
+        STORAGE_USED_PROMOS,
+        JSON.stringify(used)
+    );
+
+    update();
+
+    return "Промокод активирован: +" +
+        promos[code] +
+        " 🧠";
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetGame(){
+
+    localStorage.clear();
+
+    balance = 10;
+    jackpot = 100;
+
+    update();
+
+    alert("♻️ Данные сброшены");
+}
+
+
+/* =========================
+   START
+========================= */
+
+if(localStorage.getItem(STORAGE_BANNED) === "1"){
+
+    document.body.innerHTML =
+        "<h1 style='text-align:center;margin-top:30vh'>🚫 ИГРОК ЗАБЛОКИРОВАН</h1>";
+
+}else{
+
+    update();
+
+}
+
+</script>
+
+</body>
+</html>
