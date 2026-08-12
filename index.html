@@ -95,8 +95,16 @@
         }
 	
 		function getBonus() {
-	    alert("Вы получили бонус 30 мозгов!");
-	    }   
+    let balanceElement = document.getElementById("balance");
+
+    let balance = Number(balanceElement.textContent);
+
+    balance = balance + 30;
+
+    balanceElement.textContent = balance;
+
+    alert("🎁 Ты получил 30 🪙!");
+}
    </script>
 </body>
 </html>
