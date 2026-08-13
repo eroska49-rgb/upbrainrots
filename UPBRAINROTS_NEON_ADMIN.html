@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>UPBRAINROTS</title>
+<style>
+body{margin:0;background:#050814;color:#eef4ff;font-family:Arial,Helvetica,sans-serif}
+body:before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(0,216,255,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(0,216,255,.10) 1px,transparent 1px);background-size:34px 34px}
+.app{max-width:430px;margin:0 auto;padding:14px}
+.top{background:linear-gradient(180deg,#12050b,#08101f);border:1px solid rgba(0,216,255,.18);border-radius:30px;padding:18px;box-shadow:0 24px 48px rgba(0,0,0,.45),0 0 30px rgba(0,216,255,.08)}
+.topbar{display:flex;justify-content:space-between;align-items:center}
+.title{text-align:center;flex:1}
+.title h1{margin:0;font-size:26px}
+.title small{color:#8ea0c9}
+.brand{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.logo{font-size:24px;font-weight:900;letter-spacing:3px}
+.balance{text-align:right}
+.balance .label{font-size:11px;color:#8ea0c9;text-transform:uppercase;letter-spacing:2px}
+.balance .value{font-size:24px;font-weight:900;color:#f4c430}
+.live{margin-top:16px;background:#090f1d;border:1px solid #1d2a4d;border-radius:20px;padding:12px;display:flex;gap:10px;align-items:center;overflow:auto}
+.live-item{min-width:110px;background:#101936;border:1px solid rgba(0,216,255,.35);border-radius:16px;padding:10px 12px}
+.live-item b{color:#4fdfff}
+.tabs{margin-top:14px;background:#090f1d;border:1px solid #1d2a4d;border-radius:22px;padding:10px;display:flex;gap:8px;overflow:auto}
+.tab{min-width:78px;background:transparent;border:1px solid transparent;color:#8ea0c9;border-radius:16px;padding:10px 8px;text-align:center;font-size:12px;font-weight:700}
+.tab.active{color:#f4c430;border-color:rgba(244,196,48,.45);background:linear-gradient(180deg,rgba(244,196,48,.16),rgba(244,196,48,.04))}
+.screen{display:none;margin-top:18px}
+.screen.active{display:block}
+.section{background:rgba(8,12,24,.86);border:1px solid #1d2a4d;border-radius:26px;padding:18px}
+.section h2{margin:0 0 8px;font-size:34px;letter-spacing:3px}
+.subtitle{color:#8ea0c9;margin-bottom:18px}
+.inventory-empty{border:1px dashed rgba(0,216,255,.35);border-radius:18px;padding:28px;text-align:center;color:#8ea0c9}
+.shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{background:linear-gradient(180deg,#0d1530,#091020);border:1px solid #20355f;border-radius:22px;padding:16px;position:relative}
+.card:before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:#00d8ff}
+.card.common:before{background:#94a3b8}
+.card.uncommon:before{background:#00ff95}
+.card.rare:before{background:#00d8ff}
+.card.epic:before{background:#d946ef}
+.card.legendary:before{background:#f59e0b}
+.img{height:120px;border-radius:16px;background:#111b36;display:grid;place-items:center;font-size:44px;margin-bottom:14px}
+.card h3{margin:0 0 8px;font-size:15px;letter-spacing:2px;text-transform:uppercase;min-height:36px}
+.price{font-size:22px;font-weight:900;color:#f4c430}
+.rarity{margin-top:12px;display:inline-block;padding:6px 12px;border-radius:999px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:900;background:#11182d;color:#c7d2fe}
+.buy,.bigbtn,.admin-action{margin-top:14px;width:100%;border:none;border-radius:14px;padding:14px;background:linear-gradient(180deg,#17c9ff,#0077ff);color:white;font-weight:900}
+.upgrade-wheel{width:220px;height:220px;border-radius:50%;margin:18px auto;position:relative;background:radial-gradient(circle at center,#131b33 0%,#09101f 70%);border:4px solid rgba(0,216,255,.75)}
+.up-pointer{position:absolute;left:50%;top:-12px;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:22px solid #00d8ff}
+.up-arrow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:72px;color:#f4c430}
+.chance-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:14px}
+.chance{background:#0d1530;border:1px solid rgba(0,216,255,.28);border-radius:14px;padding:12px 6px;text-align:center;font-weight:900;color:#00ff95}
+.mines-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.mine{aspect-ratio:1;border-radius:14px;background:linear-gradient(180deg,#141e3a,#0b1121);border:1px solid rgba(0,216,255,.42);display:grid;place-items:center;color:#7dd3fc;font-size:22px}
+.colors{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.color{background:#0d1530;border:1px solid #1d2a4d;border-radius:18px;padding:18px;text-align:center}
+.ball{width:58px;height:58px;border-radius:50%;margin:0 auto 10px}
+.red{background:#ff1744}.orange{background:#ff8a00}.yellow{background:#ffd600}.green{background:#00ff3c}.blue{background:#0066ff}.purple{background:#a020f0}
+.admin-panel{display:none;margin-top:14px;background:#0d1530;border:1px solid rgba(255,45,85,.35);border-radius:20px;padding:16px}
+.admin-panel.show{display:block}
+.field{width:100%;padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:#08101f;color:white;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top">
+<div class="topbar"><div>Закрыть</div><div class="title"><h1>UPBRAINROTS</h1><small>мини-приложение</small></div><div>⚙️</div></div>
+<div class="brand"><div class="logo">🧠 UPBRAINROTS</div><div class="balance"><div class="label">Мой баланс</div><div class="value" id="balance">128 🧠</div></div></div>
+<div class="live"><div class="live-item"><b>+4</b> 🧠</div><div class="live-item"><b>+8</b> 🧠</div><div class="live-item"><b>+5</b> 🧠</div></div>
+</div>
+
+<div class="tabs">
+<div class="tab active" data-screen="shop">🛒 Магазин</div>
+<div class="tab" data-screen="inventory">🎒 Инвентарь</div>
+<div class="tab" data-screen="upgrade">⬆️ Апгрейд</div>
+<div class="tab" data-screen="mines">💣 Мины</div>
+<div class="tab" data-screen="dice">🎲 Dice</div>
+</div>
+
+<div id="shop" class="screen active"><div class="section"><h2>МАГАЗИН</h2><div class="subtitle">Купи брейнроты за 🧠 мозги</div><div class="shop-grid">
+<div class="card common"><div class="img">🧂</div><h3>Garama and Madundung</h3><div class="price">50 🧠</div><div class="rarity">COMMON</div><button class="buy">Купить</button></div>
+<div class="card common"><div class="img">💳</div><h3>Cash or Card</h3><div class="price">55 🧠</div><div class="rarity">COMMON</div><button class="buy">Купить</button></div>
+<div class="card uncommon"><div class="img">🏴‍☠️</div><h3>Capitano Moby</h3><div class="price">110 🧠</div><div class="rarity">UNCOMMON</div><button class="buy">Купить</button></div>
+<div class="card rare"><div class="img">🦄</div><h3>Celestial Pegasus</h3><div class="price">150 🧠</div><div class="rarity">RARE</div><button class="buy">Купить</button></div>
+<div class="card epic"><div class="img">🐺</div><h3>Cerberus</h3><div class="price">160 🧠</div><div class="rarity">EPIC</div><button class="buy">Купить</button></div>
+<div class="card legendary"><div class="img">🐉</div><h3>Dragon Cannelloni</h3><div class="price">950 🧠</div><div class="rarity">LEGENDARY</div><button class="buy">Купить</button></div>
+</div></div></div>
+
+<div id="inventory" class="screen"><div class="section"><h2>ИНВЕНТАРЬ</h2><div class="subtitle">Твои брейнроты — продавай или выводи</div><div class="inventory-empty">Инвентарь пуст — купи что-нибудь в магазине!</div>
+<button class="bigbtn" onclick="toggleAdmin()">👑 ОТКРЫТЬ МОЮ АДМИН-ПАНЕЛЬ</button>
+<div id="adminPanel" class="admin-panel">
+<input id="adminPassword" class="field" type="password" placeholder="Пароль">
+<button class="admin-action" onclick="loginAdmin()">Войти</button>
+<div id="adminContent" style="display:none;margin-top:14px">
+<input id="giveAmount" class="field" type="number" placeholder="Сколько выдать мозгов">
+<button class="admin-action" onclick="giveBrains()">Выдать себе мозги</button>
+<input id="setBalance" class="field" type="number" placeholder="Установить баланс">
+<button class="admin-action" onclick="setBrains()">Установить баланс</button>
+<button class="admin-action" onclick="add1000()">+1000 🧠</button>
+<button class="admin-action" onclick="add10000()">+10000 🧠</button>
+</div></div></div></div>
+
+<div id="upgrade" class="screen"><div class="section"><h2>АПГРЕЙД</h2><div class="subtitle">Выбери шанс и запусти апгрейд</div><div class="upgrade-wheel"><div class="up-pointer"></div><div class="up-arrow">⬆️</div></div><button class="bigbtn">НАЧАТЬ АПГРЕЙД</button><div class="chance-row"><div class="chance">75%</div><div class="chance">50%</div><div class="chance">30%</div><div class="chance">20%</div><div class="chance">10%</div><div class="chance">5%</div></div></div></div>
+
+<div id="mines" class="screen"><div class="section"><h2>МИНЫ</h2><div class="subtitle">Выбери ставку и число мин</div><div class="mines-grid">
+<div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div>
+<div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div>
+<div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div>
+<div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div>
+<div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div>
+</div></div></div>
+
+<div id="dice" class="screen"><div class="section"><h2>DICE</h2><div class="subtitle">Выбери цвет и крути</div><div class="colors">
+<div class="color"><div class="ball red"></div>Red</div>
+<div class="color"><div class="ball orange"></div>Orange</div>
+<div class="color"><div class="ball yellow"></div>Yellow</div>
+<div class="color"><div class="ball green"></div>Green</div>
+<div class="color"><div class="ball blue"></div>Blue</div>
+<div class="color"><div class="ball purple"></div>Purple</div>
+</div><button class="bigbtn">КРУТИТЬ</button></div></div>
+</div>
+
+<script>
+const tabs=document.querySelectorAll('.tab');
+const screens=document.querySelectorAll('.screen');
+tabs.forEach(tab=>{tab.addEventListener('click',()=>{tabs.forEach(t=>t.classList.remove('active'));screens.forEach(s=>s.classList.remove('active'));tab.classList.add('active');document.getElementById(tab.dataset.screen).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});});});
+let balance=Number(localStorage.getItem('upb_balance')||128);
+function renderBalance(){document.getElementById('balance').textContent=balance+' 🧠';localStorage.setItem('upb_balance',balance);}
+renderBalance();
+function toggleAdmin(){document.getElementById('adminPanel').classList.toggle('show');}
+function loginAdmin(){const pass=document.getElementById('adminPassword').value;if(pass==='pasha2026'){document.getElementById('adminContent').style.display='block';alert('👑 Добро пожаловать, Паша!');}else{alert('❌ Неверный пароль');}}
+function giveBrains(){const amount=Number(document.getElementById('giveAmount').value||0);if(amount>0){balance+=amount;renderBalance();alert('Выдано '+amount+' 🧠');}}
+function setBrains(){const amount=Number(document.getElementById('setBalance').value||0);balance=amount;renderBalance();alert('Баланс установлен: '+amount+' 🧠');}
+function add1000(){balance+=1000;renderBalance();}
+function add10000(){balance+=10000;renderBalance();}
+</script>
+</body>
+</html>
