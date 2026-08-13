@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>UPBRAINROTS</title>
+<style>
+:root{
+  --bg:#06070c;
+  --panel:#0b0f1b;
+  --panel2:#0f1423;
+  --line:#2a2342;
+  --gold:#f4c430;
+  --cyan:#00d8ff;
+  --purple:#a855f7;
+  --green:#00ff95;
+  --text:#eef2ff;
+  --muted:#9aa3c7;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;
+  background-image:
+    linear-gradient(rgba(244,196,48,.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244,196,48,.12) 1px, transparent 1px);
+  background-size:36px 36px;
+}
+.app{max-width:430px;margin:0 auto;padding:14px}
+.top{
+  background:linear-gradient(180deg,#180507,#0b0f1b);
+  border:1px solid rgba(244,196,48,.2);
+  border-radius:28px;padding:18px;box-shadow:0 20px 40px rgba(0,0,0,.45);
+}
+.topbar{display:flex;justify-content:space-between;align-items:center}
+.close{font-size:18px}
+.title{text-align:center;flex:1}
+.title h1{margin:0;font-size:28px}
+.title small{color:var(--muted)}
+.gear{
+  width:42px;height:42px;border-radius:14px;background:#13182a;border:1px solid var(--line);
+  display:grid;place-items:center;box-shadow:0 0 20px rgba(168,85,247,.25)
+}
+.brand{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.brand .logo{font-size:22px;font-weight:900;letter-spacing:3px}
+.balance{text-align:right}
+.balance .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:2px}
+.balance .value{font-size:22px;font-weight:900;color:var(--gold)}
+
+.live{
+  margin-top:16px;background:#0a0d18;border:1px solid var(--line);border-radius:20px;
+  padding:12px;display:flex;gap:10px;align-items:center;overflow:auto
+}
+.live .dot{width:8px;height:8px;border-radius:50%;background:#ff1744;box-shadow:0 0 10px #ff1744}
+.live-item{
+  min-width:122px;background:#101527;border:1px solid rgba(0,255,149,.35);
+  border-radius:16px;padding:10px 12px
+}
+.live-item b{color:var(--green)}
+
+.tabs{
+  margin-top:14px;background:#090c17;border:1px solid var(--line);border-radius:20px;
+  padding:10px;display:flex;gap:8px;overflow:auto
+}
+.tab{
+  min-width:78px;background:transparent;border:1px solid transparent;color:var(--muted);
+  border-radius:16px;padding:10px 8px;text-align:center;font-size:12px;font-weight:700
+}
+.tab.active{
+  color:var(--gold);border-color:rgba(244,196,48,.45);
+  background:linear-gradient(180deg,rgba(244,196,48,.14),rgba(244,196,48,.04));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06)
+}
+
+.screen{display:none;margin-top:18px}
+.screen.active{display:block}
+
+.section{
+  background:rgba(8,10,18,.78);border:1px solid var(--line);border-radius:24px;padding:18px;
+  box-shadow:0 16px 40px rgba(0,0,0,.35)
+}
+.section h2{
+  margin:0 0 8px;font-size:38px;letter-spacing:4px;font-weight:900
+}
+.section .subtitle{color:var(--muted);margin-bottom:18px}
+
+.inventory-empty{
+  border:1px dashed rgba(168,85,247,.35);border-radius:18px;padding:28px;text-align:center;color:#8d86c9
+}
+
+.shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{
+  background:linear-gradient(180deg,#0d1020,#090b16);
+  border:1px solid #2b2344;border-radius:22px;padding:16px;position:relative;overflow:hidden
+}
+.card::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--cyan)
+}
+.card.common::before{background:#64748b}
+.card.uncommon::before{background:#00ff95}
+.card.rare::before{background:#00d8ff}
+.card.epic::before{background:#d946ef}
+.card.legendary::before{background:#f59e0b}
+.card .img{
+  height:120px;border-radius:16px;background:#12162a;display:grid;place-items:center;
+  font-size:44px;margin-bottom:14px
+}
+.card h3{
+  margin:0 0 8px;font-size:15px;letter-spacing:2px;text-transform:uppercase;min-height:36px
+}
+.price{font-size:22px;font-weight:900;color:var(--gold);display:flex;align-items:center;gap:6px}
+.rarity{
+  margin-top:12px;display:inline-block;padding:6px 12px;border-radius:999px;font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;font-weight:900;background:#141826;color:#c7d2fe;
+  border:1px solid rgba(255,255,255,.08)
+}
+.buy{
+  margin-top:14px;width:100%;border:none;border-radius:14px;padding:12px 14px;
+  background:linear-gradient(180deg,#f7d14b,#d89a00);color:#120b00;font-weight:900
+}
+
+.upgrade-info{
+  border:1px solid rgba(244,196,48,.25);border-radius:18px;padding:14px;color:#b7b0e6;
+  background:rgba(244,196,48,.05);margin-bottom:18px
+}
+.upgrade-wheel{
+  width:230px;height:230px;border-radius:50%;margin:18px auto;position:relative;
+  background:radial-gradient(circle at center,#13182b 0%,#0a0d18 70%);
+  border:4px solid rgba(168,85,247,.75);
+  box-shadow:0 0 30px rgba(168,85,247,.35), inset 0 0 30px rgba(0,0,0,.7)
+}
+.upgrade-wheel::before{
+  content:"";position:absolute;inset:22px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.08)
+}
+.up-arrow{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-size:72px;color:var(--gold);text-shadow:0 0 20px rgba(244,196,48,.7)
+}
+.up-pointer{
+  position:absolute;left:50%;top:-12px;transform:translateX(-50%);
+  width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;
+  border-bottom:22px solid var(--gold);filter:drop-shadow(0 0 10px rgba(244,196,48,.7))
+}
+.upgrade-btn{
+  width:100%;border:none;border-radius:18px;padding:18px 16px;font-size:22px;letter-spacing:6px;
+  background:linear-gradient(180deg,#f7d14b,#d89a00);color:#120b00;font-weight:900
+}
+.chance-row{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:14px
+}
+.chance{
+  background:#0d1020;border:1px solid rgba(0,255,149,.25);border-radius:14px;padding:12px 6px;
+  text-align:center;font-weight:900;color:var(--green)
+}
+.split{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px
+}
+.panel-btn{
+  background:#0d1020;border:1px solid rgba(244,196,48,.35);border-radius:16px;padding:16px;
+  text-align:center;font-weight:900;color:var(--gold)
+}
+
+.mines-board{
+  background:#090c17;border:1px solid rgba(168,85,247,.35);border-radius:22px;padding:14px
+}
+.mines-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px
+}
+.mine{
+  aspect-ratio:1;border-radius:14px;background:linear-gradient(180deg,#151a2f,#0c1020);
+  border:1px solid rgba(168,85,247,.45);display:grid;place-items:center;color:#c084fc;font-size:22px
+}
+.stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px
+}
+.stat{
+  background:#0d1020;border:1px solid rgba(168,85,247,.35);border-radius:16px;padding:14px
+}
+.stat .k{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:2px}
+.stat .v{margin-top:8px;font-size:28px;font-weight:900;color:var(--gold)}
+.mines-control{
+  margin-top:18px;background:#0d1020;border:1px solid rgba(168,85,247,.35);border-radius:18px;padding:16px
+}
+.counter{
+  display:grid;grid-template-columns:60px 1fr 60px;gap:10px;align-items:center;margin-top:10px
+}
+.counter button{
+  height:48px;border:none;border-radius:14px;background:#141933;color:var(--gold);font-size:28px;font-weight:900
+}
+.counter .num{
+  height:48px;border-radius:14px;background:#0a0d18;border:1px solid rgba(244,196,48,.25);
+  display:grid;place-items:center;font-size:28px;font-weight:900
+}
+.preset{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px
+}
+.preset button{
+  border:none;border-radius:12px;padding:12px 0;background:#101427;color:#9aa3c7;font-weight:900
+}
+.preset button.active{
+  background:linear-gradient(180deg,rgba(244,196,48,.18),rgba(244,196,48,.06));
+  border:1px solid rgba(244,196,48,.45);color:var(--gold)
+}
+
+.dice-mode{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px
+}
+.mode{
+  background:#0d1020;border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center;color:#b8c0e8
+}
+.mode.active{
+  border-color:rgba(0,216,255,.55);box-shadow:0 0 24px rgba(0,216,255,.18);color:var(--cyan)
+}
+.colors{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px
+}
+.color{
+  background:#0d1020;border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center
+}
+.ball{
+  width:58px;height:58px;border-radius:50%;margin:0 auto 10px
+}
+.red{background:#ff1744;box-shadow:0 0 20px rgba(255,23,68,.45)}
+.orange{background:#ff8a00;box-shadow:0 0 20px rgba(255,138,0,.45)}
+.yellow{background:#ffd600;box-shadow:0 0 20px rgba(255,214,0,.45)}
+.green{background:#00ff3c;box-shadow:0 0 20px rgba(0,255,60,.45)}
+.blue{background:#0066ff;box-shadow:0 0 20px rgba(0,102,255,.45)}
+.purple{background:#a020f0;box-shadow:0 0 20px rgba(160,32,240,.45)}
+
+.selected-row{
+  display:flex;gap:10px;justify-content:center;margin:18px 0
+}
+.selected{
+  width:64px;height:64px;border-radius:18px;background:#0d1020;border:1px solid rgba(255,255,255,.08);
+  display:grid;place-items:center
+}
+
+.bet-box{
+  background:#0d1020;border:1px solid rgba(168,85,247,.35);border-radius:18px;padding:14px;margin-top:18px
+}
+.bet-input{
+  display:flex;align-items:center;gap:10px;background:#080b14;border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;padding:14px
+}
+.bet-input input{
+  flex:1;background:transparent;border:none;outline:none;color:white;font-size:22px;margin:0
+}
+.quick{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px
+}
+.quick button{
+  border:none;border-radius:14px;padding:14px 0;background:#12162a;color:#c7d2fe;font-weight:900
+}
+.spin-btn{
+  width:100%;border:none;border-radius:18px;padding:18px 16px;font-size:22px;letter-spacing:6px;
+  background:linear-gradient(180deg,#f7d14b,#d89a00);color:#120b00;font-weight:900;margin-top:18px
+}
+.footer-space{height:24px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="topbar">
+      <div class="close">Закрыть</div>
+      <div class="title">
+        <h1>UPBRAINROTS</h1>
+        <small>мини-приложение</small>
+      </div>
+      <div class="gear">⚙️</div>
+    </div>
+
+    <div class="brand">
+      <div class="logo">🧠 UPBRAINROTS</div>
+      <div class="balance">
+        <div class="label">Мой баланс</div>
+        <div class="value">128 🧠</div>
+      </div>
+    </div>
+
+    <div class="live">
+      <div style="display:flex;align-items:center;gap:8px;font-weight:800;color:#ff5a78"><span class="dot"></span>LIVE</div>
+      <div class="live-item"><b>+4</b> 🧠</div>
+      <div class="live-item"><b>+8</b> 🧠</div>
+      <div class="live-item"><b>+5</b> 🧠</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-screen="shop">🛒 Магазин</div>
+    <div class="tab" data-screen="inventory">🎒 Инвентарь</div>
+    <div class="tab" data-screen="upgrade">⬆️ Апгрейд</div>
+    <div class="tab" data-screen="mines">💣 Мины</div>
+    <div class="tab" data-screen="dice">🎲 Dice</div>
+  </div>
+
+  <div id="inventory" class="screen">
+    <div class="section">
+      <h2>ИНВЕНТАРЬ</h2>
+      <div class="subtitle">Твои брейнроты — продавай или выводи</div>
+      <div class="inventory-empty">Инвентарь пуст — купи что-нибудь в магазине!</div>
+    </div>
+  </div>
+
+  <div id="shop" class="screen active">
+    <div class="section">
+      <h2>МАГАЗИН</h2>
+      <div class="subtitle">Купи брейнроты за 🧠 мозги</div>
+
+      <div class="shop-grid">
+        <div class="card common">
+          <div class="img">🧂</div>
+          <h3>Garama and Madundung</h3>
+          <div class="price">50 🧠</div>
+          <div class="rarity">COMMON</div>
+          <button class="buy">Купить</button>
+        </div>
+
+        <div class="card common">
+          <div class="img">💳</div>
+          <h3>Cash or Card</h3>
+          <div class="price">55 🧠</div>
+          <div class="rarity">COMMON</div>
+          <button class="buy">Купить</button>
+        </div>
+
+        <div class="card uncommon">
+          <div class="img">🏴‍☠️</div>
+          <h3>Capitano Moby</h3>
+          <div class="price">110 🧠</div>
+          <div class="rarity">UNCOMMON</div>
+          <button class="buy">Купить</button>
+        </div>
+
+        <div class="card rare">
+          <div class="img">🦄</div>
+          <h3>Celestial Pegasus</h3>
+          <div class="price">150 🧠</div>
+          <div class="rarity">RARE</div>
+          <button class="buy">Купить</button>
+        </div>
+
+        <div class="card epic">
+          <div class="img">🐺</div>
+          <h3>Cerberus</h3>
+          <div class="price">160 🧠</div>
+          <div class="rarity">EPIC</div>
+          <button class="buy">Купить</button>
+        </div>
+
+        <div class="card legendary">
+          <div class="img">🐉</div>
+          <h3>Dragon Cannelloni</h3>
+          <div class="price">950 🧠</div>
+          <div class="rarity">LEGENDARY</div>
+          <button class="buy">Купить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="upgrade" class="screen">
+    <div class="section">
+      <div class="upgrade-info">
+        Выбери материалы, выбери результат и запусти апгрейд!<br>
+        • предметы, полученные в апгрейдере, <b>не выводятся</b>
+      </div>
+
+      <div class="upgrade-wheel">
+        <div class="up-pointer"></div>
+        <div class="up-arrow">⬆️</div>
+      </div>
+
+      <button class="upgrade-btn">НАЧАТЬ АПГРЕЙД</button>
+
+      <div class="chance-row">
+        <div class="chance">75%</div>
+        <div class="chance">50%</div>
+        <div class="chance">30%</div>
+        <div class="chance">20%</div>
+        <div class="chance">10%</div>
+        <div class="chance">5%</div>
+      </div>
+
+      <div class="split">
+        <div class="panel-btn">🎒 МОИ ПРЕДМЕТЫ</div>
+        <div class="panel-btn" style="color:#c7d2fe;border-color:var(--line)">🛒 МАГАЗИН</div>
+      </div>
+
+      <div class="subtitle" style="margin-top:16px">Материалы: 0 🧠 (0 шт.)</div>
+      <div class="inventory-empty">Пусто. Купи материалы в 🛒 МАГАЗИНЕ ниже</div>
+    </div>
+  </div>
+
+  <div id="mines" class="screen">
+    <div class="section">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="letter-spacing:3px;color:var(--gold);font-weight:900">MINEFIELD 05×05</div>
+        <div style="display:flex;gap:8px"><span style="color:#c084fc">●</span><span style="color:#ffd600">●</span><span style="color:#67e8f9">●</span></div>
+      </div>
+
+      <div class="mines-board">
+        <div class="mines-grid">
+          <div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div>
+          <div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div>
+          <div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div>
+          <div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div>
+          <div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div><div class="mine">◇</div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="k">Открыто</div><div class="v">0 / 22</div></div>
+        <div class="stat"><div class="k">Сейчас</div><div class="v">x1</div></div>
+        <div class="stat"><div class="k">Следующая</div><div class="v">x1.102</div></div>
+        <div class="stat"><div class="k">Можно забрать</div><div class="v">0 🧠</div></div>
+      </div>
+
+      <div class="mines-control">
+        <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:12px;letter-spacing:2px">
+          <span>ЧИСЛО МИН</span>
+          <span>БОЛЬШЕ МИН — ВЫШЕ КОЭФФИЦИЕНТ</span>
+        </div>
+
+        <div class="counter">
+          <button>−</button>
+          <div class="num">3</div>
+          <button>+</button>
+        </div>
+
+        <div class="preset">
+          <button>2</button>
+          <button class="active">3</button>
+          <button>5</button>
+          <button>7</button>
+          <button>10</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dice" class="screen">
+    <div class="section">
+      <div class="dice-mode">
+        <div class="mode active">🎲 ОБЫЧНЫЙ</div>
+        <div class="mode">⚡ ЭПИК</div>
+      </div>
+
+      <div class="colors">
+        <div class="color"><div class="ball red"></div>Red</div>
+        <div class="color"><div class="ball orange"></div>Orange</div>
+        <div class="color"><div class="ball yellow"></div>Yellow</div>
+        <div class="color"><div class="ball green"></div>Green</div>
+        <div class="color"><div class="ball blue"></div>Blue</div>
+        <div class="color"><div class="ball purple"></div>Purple</div>
+      </div>
+
+      <div class="selected-row">
+        <div class="selected"><div class="ball red" style="width:38px;height:38px"></div></div>
+        <div class="selected"><div class="ball orange" style="width:38px;height:38px"></div></div>
+        <div class="selected"><div class="ball green" style="width:38px;height:38px"></div></div>
+        <div class="selected"><div class="ball blue" style="width:38px;height:38px"></div></div>
+      </div>
+
+      <div class="bet-box">
+        <div style="color:var(--muted);font-size:12px;letter-spacing:2px;margin-bottom:10px">СТАВКА</div>
+        <div class="bet-input">
+          <input type="number" value="0">
+          <span style="font-size:26px">🧠</span>
+        </div>
+
+        <div class="quick">
+          <button>10</button>
+          <button>50</button>
+          <button>100</button>
+          <button>500</button>
+        </div>
+      </div>
+
+      <button class="spin-btn">КРУТИТЬ</button>
+    </div>
+  </div>
+
+  <div class="footer-space"></div>
+</div>
+
+<script>
+const tabs=document.querySelectorAll('.tab');
+const screens=document.querySelectorAll('.screen');
+
+tabs.forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    tabs.forEach(t=>t.classList.remove('active'));
+    screens.forEach(s=>s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.screen).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
