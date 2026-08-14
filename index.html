@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
+>
 
 <title>UPBRAINROTS</title>
 
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 <style>
+
 *{
     box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
@@ -15,974 +22,930 @@
 
 html,body{
     margin:0;
+    padding:0;
     min-height:100%;
-    background:#02040b;
-    color:#eef7ff;
-    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
+
+    background:
+    radial-gradient(
+        circle at 20% 20%,
+        rgba(0,255,255,.12),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 80% 80%,
+        rgba(0,80,255,.18),
+        transparent 35%
+    ),
+    #030611;
+
+    color:#eef7ff;
+
+    font-family:
+    Arial,
+    sans-serif;
+
     overflow-x:hidden;
 }
 
-/* =========================
-   НЕОНОВЫЙ ФОН
-========================= */
+/* НЕОНОВЫЕ БОКОВЫЕ ЭФФЕКТЫ */
 
-body:before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-5;
-
-    background:
-        radial-gradient(circle at 10% 20%, rgba(0,230,255,.18), transparent 25%),
-        radial-gradient(circle at 90% 15%, rgba(0,110,255,.18), transparent 25%),
-        radial-gradient(circle at 15% 85%, rgba(120,0,255,.14), transparent 25%),
-        radial-gradient(circle at 85% 85%, rgba(0,255,180,.10), transparent 25%),
-        #02040b;
-}
-
-/* сетка */
-
+body:before,
 body:after{
+
     content:"";
+
     position:fixed;
-    inset:0;
-    z-index:-4;
+
+    width:260px;
+    height:260px;
+
+    border-radius:50%;
+
+    filter:blur(70px);
+
+    opacity:.45;
+
     pointer-events:none;
 
-    background-image:
-        linear-gradient(rgba(0,220,255,.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,220,255,.055) 1px, transparent 1px);
-
-    background-size:40px 40px;
-
-    mask-image:linear-gradient(
-        to bottom,
-        black,
-        transparent 90%
-    );
-}
-
-/* декоративные боковые линии */
-
-.neon-side{
-    position:fixed;
-    width:4px;
-    height:55vh;
-    top:22%;
-    border-radius:10px;
-    z-index:-2;
-    filter:blur(.2px);
-    box-shadow:
-        0 0 10px #00eaff,
-        0 0 30px #00eaff,
-        0 0 70px rgba(0,234,255,.8);
-    background:linear-gradient(
-        to bottom,
-        transparent,
-        #00eaff,
-        #0088ff,
-        transparent
-    );
-}
-
-.neon-left{
-    left:5%;
-}
-
-.neon-right{
-    right:5%;
-    background:linear-gradient(
-        to bottom,
-        transparent,
-        #7c3cff,
-        #00eaff,
-        transparent
-    );
-    box-shadow:
-        0 0 10px #7c3cff,
-        0 0 30px #7c3cff,
-        0 0 70px rgba(124,60,255,.8);
-}
-
-/* плавающие точки */
-
-.neon-dot{
-    position:fixed;
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:#00eaff;
-    box-shadow:
-        0 0 8px #00eaff,
-        0 0 20px #00eaff;
     z-index:-1;
-    animation:floatDot 5s infinite ease-in-out;
+
 }
 
-.dot1{left:8%;top:18%}
-.dot2{left:14%;top:70%;animation-delay:1s}
-.dot3{right:9%;top:32%;animation-delay:2s}
-.dot4{right:16%;top:76%;animation-delay:3s}
-.dot5{left:4%;top:48%;animation-delay:1.5s}
-.dot6{right:4%;top:58%;animation-delay:2.5s}
+body:before{
 
-@keyframes floatDot{
-    0%,100%{
-        transform:translateY(0) scale(1);
-        opacity:.5;
-    }
-    50%{
-        transform:translateY(-25px) scale(1.5);
-        opacity:1;
-    }
+    background:#00eaff;
+
+    left:-170px;
+    top:20%;
+
 }
 
-/* =========================
-   ОСНОВА
-========================= */
+body:after{
+
+    background:#0066ff;
+
+    right:-170px;
+    bottom:15%;
+
+}
+
+/* GRID */
+
+body{
+
+    background-image:
+
+    linear-gradient(
+        rgba(0,230,255,.035) 1px,
+        transparent 1px
+    ),
+
+    linear-gradient(
+        90deg,
+        rgba(0,230,255,.035) 1px,
+        transparent 1px
+    );
+
+    background-size:35px 35px;
+
+}
+
+/* APP */
 
 .app{
-    width:min(430px,100%);
-    margin:0 auto;
-    padding:14px;
-    position:relative;
+
+    max-width:480px;
+
+    margin:auto;
+
+    padding:12px 12px 30px;
+
 }
 
-/* =========================
-   TOP
-========================= */
+/* TOP */
 
 .top{
+
     position:relative;
+
     overflow:hidden;
 
     background:
-        linear-gradient(
-            145deg,
-            rgba(11,20,43,.96),
-            rgba(5,10,24,.96)
-        );
+    linear-gradient(
+        145deg,
+        rgba(13,26,55,.96),
+        rgba(5,12,30,.96)
+    );
 
-    border:1px solid rgba(0,220,255,.35);
+    border:1px solid rgba(0,220,255,.25);
+
     border-radius:28px;
-    padding:19px;
+
+    padding:20px;
 
     box-shadow:
-        0 0 25px rgba(0,200,255,.10),
-        inset 0 0 30px rgba(0,160,255,.035);
+    0 0 30px rgba(0,180,255,.12),
+    inset 0 0 30px rgba(0,180,255,.04);
+
 }
 
-.top:before{
+.top:after{
+
     content:"";
+
     position:absolute;
-    width:160px;
-    height:160px;
-    right:-70px;
-    top:-80px;
-    border-radius:50%;
-    background:#00d9ff;
-    filter:blur(70px);
-    opacity:.16;
+
+    width:180px;
+    height:180px;
+
+    background:#00eaff;
+
+    filter:blur(100px);
+
+    opacity:.12;
+
+    right:-100px;
+    top:-100px;
+
 }
 
-.top h1{
-    position:relative;
-    margin:0;
+.logo{
+
     text-align:center;
 
-    font-size:27px;
-    letter-spacing:2px;
+    font-size:25px;
+
     font-weight:1000;
+
+    letter-spacing:3px;
 
     color:#fff;
 
     text-shadow:
-        0 0 8px #00eaff,
-        0 0 25px rgba(0,234,255,.7);
+    0 0 8px #00eaff,
+    0 0 25px #0066ff;
+
 }
 
 .balance{
-    position:relative;
+
     text-align:center;
-    font-size:35px;
+
+    font-size:34px;
+
     font-weight:1000;
-    color:#ffd429;
+
+    color:#ffd83d;
+
     margin-top:8px;
 
     text-shadow:
-        0 0 10px rgba(255,212,41,.55);
+    0 0 12px rgba(255,216,61,.5);
+
 }
 
 .bonus{
-    width:100%;
-    padding:14px;
 
-    border:1px solid rgba(255,255,255,.16);
+    width:100%;
+
+    border:0;
+
     border-radius:16px;
 
+    padding:14px;
+
+    margin-top:14px;
+
     background:
-        linear-gradient(
-            135deg,
-            #00d9ff,
-            #0066ff
-        );
+    linear-gradient(
+        135deg,
+        #00eaff,
+        #0066ff
+    );
 
     color:white;
-    font-weight:1000;
+
+    font-size:15px;
+
+    font-weight:900;
+
+    box-shadow:
+    0 0 18px rgba(0,190,255,.25);
+
+    transition:.15s;
+
+}
+
+button{
 
     cursor:pointer;
 
-    box-shadow:
-        0 0 15px rgba(0,180,255,.3);
-
-    transition:.18s;
 }
 
-.bonus:hover{
-    transform:translateY(-2px);
-    box-shadow:
-        0 0 25px rgba(0,220,255,.6);
-}
+button:active{
 
-.bonus:active{
     transform:scale(.96);
+
 }
 
-/* =========================
-   TABS
-========================= */
+/* TABS */
 
 .tabs{
+
     display:flex;
+
     gap:8px;
+
     overflow-x:auto;
-    margin:14px 0;
-    padding-bottom:3px;
+
+    padding:12px 2px;
+
     scrollbar-width:none;
+
 }
 
 .tabs::-webkit-scrollbar{
+
     display:none;
+
 }
 
 .tab{
-    flex:0 0 auto;
-    min-width:82px;
 
-    padding:12px 10px;
+    flex:0 0 auto;
+
+    padding:12px 14px;
 
     border-radius:16px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #0d1730,
-            #080e20
-        );
+    background:#0b142b;
 
-    border:1px solid #1b3155;
+    border:1px solid #20345c;
 
-    color:#91a5cd;
+    color:#91a8cf;
 
-    text-align:center;
-    font-weight:900;
-
-    cursor:pointer;
+    font-weight:800;
 
     transition:.2s;
 
-    box-shadow:
-        inset 0 0 15px rgba(0,200,255,.02);
-}
-
-.tab:hover{
-    color:white;
-    border-color:#00d9ff;
-    transform:translateY(-2px);
-}
-
-.tab:active{
-    transform:scale(.94);
 }
 
 .tab.active{
-    color:#00eaff;
+
+    color:#fff;
+
     border-color:#00eaff;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(0,170,255,.16),
-            rgba(0,50,100,.18)
-        );
-
     box-shadow:
-        0 0 12px rgba(0,220,255,.3),
-        inset 0 0 15px rgba(0,220,255,.08);
+    0 0 14px rgba(0,220,255,.25);
+
+    background:
+    linear-gradient(
+        135deg,
+        #0d2940,
+        #0b1833
+    );
+
 }
 
-/* =========================
-   SCREEN
-========================= */
+/* SCREENS */
 
 .screen{
+
     display:none;
-    animation:screenIn .3s ease;
+
 }
 
 .screen.active{
+
     display:block;
+
+    animation:
+    screenIn .25s ease;
+
 }
 
 @keyframes screenIn{
+
     from{
         opacity:0;
         transform:translateY(8px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
+
 }
 
-.section{
-    background:
-        linear-gradient(
-            145deg,
-            rgba(10,18,38,.96),
-            rgba(5,10,23,.96)
-        );
+/* SECTION */
 
-    border:1px solid rgba(0,210,255,.20);
+.section{
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(12,22,45,.97),
+        rgba(5,12,27,.97)
+    );
+
+    border:1px solid #1b3158;
+
     border-radius:24px;
 
     padding:16px;
+
     margin-bottom:14px;
 
     box-shadow:
-        0 15px 45px rgba(0,0,0,.3),
-        inset 0 0 30px rgba(0,180,255,.025);
+    0 10px 35px rgba(0,0,0,.2);
+
 }
 
-.section h2{
-    margin-top:0;
-
-    text-shadow:
-        0 0 10px rgba(0,220,255,.35);
-}
-
-/* =========================
-   SHOP
-========================= */
+/* SHOP */
 
 .shop-grid{
+
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:10px;
+
 }
 
 .card{
-    background:
-        linear-gradient(
-            145deg,
-            #101b38,
-            #0b1228
-        );
 
-    border:1px solid #20355f;
+    background:#0c1730;
+
+    border:1px solid #203962;
+
     border-radius:20px;
 
-    padding:14px;
+    padding:12px;
 
-    transition:.25s;
+    transition:.2s;
+
 }
 
 .card:hover{
-    transform:translateY(-4px);
-    border-color:#00d9ff;
+
+    transform:translateY(-2px);
+
+    border-color:#00dfff;
 
     box-shadow:
-        0 0 20px rgba(0,220,255,.16);
+    0 0 15px rgba(0,220,255,.15);
+
 }
 
 .img{
-    height:100px;
 
-    border-radius:14px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0,220,255,.13),
-            transparent 65%
-        ),
-        #111b36;
-
-    display:grid;
-    place-items:center;
-
-    font-size:42px;
-
-    margin-bottom:12px;
-
-    transition:.3s;
-}
-
-.card:hover .img{
-    transform:scale(1.04);
-}
-
-.price{
-    font-size:20px;
-    font-weight:1000;
-    color:#ffd429;
-
-    text-shadow:
-        0 0 8px rgba(255,212,41,.35);
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.buy,
-.action{
-    width:100%;
-
-    padding:13px;
-
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:15px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #00d9ff,
-            #0068ff
-        );
-
-    color:white;
-    font-weight:1000;
-
-    margin-top:12px;
-
-    cursor:pointer;
-
-    transition:.18s;
-
-    box-shadow:
-        0 0 12px rgba(0,180,255,.18);
-}
-
-.buy:hover,
-.action:hover{
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 0 24px rgba(0,210,255,.5);
-}
-
-.buy:active,
-.action:active{
-    transform:scale(.95);
-}
-
-.action.green{
-    background:
-        linear-gradient(
-            135deg,
-            #00ff95,
-            #00a968
-        );
-
-    box-shadow:
-        0 0 20px rgba(0,255,149,.25);
-}
-
-/* =========================
-   INVENTORY
-========================= */
-
-.inventory-item{
-    background:
-        linear-gradient(
-            145deg,
-            #101936,
-            #0a1126
-        );
-
-    border:1px solid #20355f;
-    border-radius:18px;
-
-    padding:14px;
-    margin-top:10px;
-}
-
-/* =========================
-   UPGRADE
-========================= */
-
-.upgrade-wrap{
-    text-align:center;
-}
-
-.upgrade-circle{
-    width:230px;
-    height:230px;
-
-    margin:25px auto;
-
-    border-radius:50%;
-
-    /* ПО УМОЛЧАНИЮ 50% */
-
-    background:
-        conic-gradient(
-            #00ff88 0deg 180deg,
-            #020307 180deg 360deg
-        );
-
-    display:grid;
-    place-items:center;
-
-    position:relative;
-
-    box-shadow:
-        0 0 20px rgba(0,255,136,.20);
-
-    transition:
-        background .45s ease,
-        box-shadow .45s ease,
-        transform .3s ease;
-}
-
-.upgrade-circle:before{
-    content:"";
-
-    position:absolute;
-
-    inset:8px;
-
-    border-radius:50%;
-
-    background:#02040b;
-
-    box-shadow:
-        inset 0 0 25px rgba(0,0,0,.9);
-}
-
-.upgrade-circle.spinning{
-    animation:upgradeSpin .8s ease;
-}
-
-@keyframes upgradeSpin{
-    0%{
-        transform:rotate(0);
-    }
-    100%{
-        transform:rotate(360deg);
-    }
-}
-
-.upgrade-center{
-    position:relative;
-    z-index:2;
-
-    font-size:37px;
-    font-weight:1000;
-
-    color:#00ff95;
-
-    text-shadow:
-        0 0 12px #00ff95;
-}
-
-.percent-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:9px;
-    margin-top:10px;
-}
-
-.percent-btn{
-    padding:12px 5px;
-
-    border-radius:14px;
-
-    background:#0b1227;
-    border:1px solid #263a60;
-
-    color:#9eb3db;
-
-    font-weight:1000;
-
-    cursor:pointer;
-
-    transition:.18s;
-}
-
-.percent-btn:hover{
-    border-color:#00ff95;
-    color:#00ff95;
-}
-
-.percent-btn.active{
-    color:#00ff95;
-    border-color:#00ff95;
-
-    background:
-        rgba(0,255,149,.08);
-
-    box-shadow:
-        0 0 14px rgba(0,255,149,.22);
-}
-
-.upgrade-result{
-    min-height:25px;
-    margin-top:12px;
-    font-weight:1000;
-}
-
-/* =========================
-   MINES
-========================= */
-
-.mines{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:8px;
-}
-
-.mine{
-    aspect-ratio:1;
-
-    background:
-        linear-gradient(
-            145deg,
-            #101936,
-            #090f22
-        );
-
-    border:1px solid #20355f;
-
-    border-radius:14px;
-
-    display:grid;
-    place-items:center;
-
-    color:#67d9ff;
-    font-size:22px;
-
-    cursor:pointer;
-
-    transition:.15s;
-}
-
-.mine:hover{
-    border-color:#00d9ff;
-    transform:scale(1.04);
-}
-
-.mine.open{
-    background:#091327;
-}
-
-.mine.safe{
-    color:#00ff95;
-
-    box-shadow:
-        inset 0 0 20px rgba(0,255,149,.12);
-}
-
-.mine.bomb{
-    color:#ff315d;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,30,80,.2),
-            #130916
-        );
-
-    box-shadow:
-        0 0 18px rgba(255,30,80,.25);
-}
-
-/* =========================
-   DICE
-========================= */
-
-.colors{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-}
-
-.color{
-    background:#0d1730;
-    border:1px solid #20355f;
+    height:80px;
 
     border-radius:16px;
 
-    padding:14px;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    transition:.18s;
-}
-
-.color:hover{
-    transform:translateY(-3px);
-    border-color:#00d9ff;
-}
-
-.color.selected{
-    border-color:#00ff95;
-
-    box-shadow:
-        0 0 18px rgba(0,255,149,.2);
-}
-
-.ball{
-    width:54px;
-    height:54px;
-
-    border-radius:50%;
-
-    margin:0 auto 10px;
-
-    box-shadow:
-        0 0 18px currentColor;
-}
-
-.red{
-    background:#ff1744;
-    color:#ff1744;
-}
-
-.orange{
-    background:#ff8a00;
-    color:#ff8a00;
-}
-
-.yellow{
-    background:#ffd600;
-    color:#ffd600;
-}
-
-.green{
-    background:#00ff3c;
-    color:#00ff3c;
-}
-
-.blue{
-    background:#0066ff;
-    color:#0066ff;
-}
-
-.purple{
-    background:#a020f0;
-    color:#a020f0;
-}
-
-.dice-result{
-    text-align:center;
-    min-height:25px;
-    margin-top:12px;
-    font-weight:1000;
-}
-
-/* =========================
-   SLOTS
-========================= */
-
-.reels{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin:18px 0;
-}
-
-.reel{
-    width:78px;
-    height:78px;
-
-    border-radius:18px;
-
     background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #b9c6d6
-        );
-
-    color:#050814;
+    radial-gradient(
+        circle,
+        rgba(0,220,255,.12),
+        transparent 60%
+    ),
+    #081126;
 
     display:grid;
+
     place-items:center;
 
-    font-size:42px;
+    font-size:36px;
 
-    box-shadow:
-        0 0 15px rgba(255,255,255,.15);
-
-    transition:.1s;
 }
 
-.reel.spin-animation{
-    animation:reelShake .12s infinite;
+.price{
+
+    margin-top:8px;
+
+    color:#ffd83d;
+
+    font-size:18px;
+
+    font-weight:1000;
+
 }
 
-@keyframes reelShake{
-    0%{transform:translateY(-4px)}
-    50%{transform:translateY(4px)}
-    100%{transform:translateY(-4px)}
-}
+.buy,
+.action{
 
-/* =========================
-   ADMIN
-========================= */
-
-.admin{
-    display:none;
-
-    background:#0b1226;
-    border:1px solid #20355f;
-
-    border-radius:18px;
-
-    padding:14px;
-
-    margin-top:12px;
-}
-
-.admin.show{
-    display:block;
-}
-
-.field{
     width:100%;
 
     padding:12px;
 
-    border-radius:12px;
+    border:0;
 
-    border:1px solid #20355f;
+    border-radius:14px;
 
-    background:#050b18;
+    margin-top:10px;
 
     color:white;
 
-    margin-top:10px;
+    font-weight:900;
 
-    outline:none;
-}
-
-.field:focus{
-    border-color:#00d9ff;
+    background:
+    linear-gradient(
+        135deg,
+        #00dfff,
+        #0066ff
+    );
 
     box-shadow:
-        0 0 12px rgba(0,220,255,.15);
+    0 0 12px rgba(0,190,255,.18);
+
 }
+
+/* INVENTORY */
+
+.inventory-item{
+
+    background:#0b1730;
+
+    border:1px solid #203962;
+
+    border-radius:17px;
+
+    padding:12px;
+
+    margin-top:9px;
+
+}
+
+/* UPGRADE */
+
+.upgrade-circle{
+
+    width:240px;
+
+    height:240px;
+
+    border-radius:50%;
+
+    margin:20px auto;
+
+    position:relative;
+
+    display:grid;
+
+    place-items:center;
+
+    background:
+
+    conic-gradient(
+        #00ff91 0deg,
+        #00ff91 180deg,
+        #02050a 180deg,
+        #02050a 360deg
+    );
+
+    box-shadow:
+    0 0 35px rgba(0,255,145,.2);
+
+}
+
+.upgrade-circle:after{
+
+    content:"";
+
+    position:absolute;
+
+    width:205px;
+
+    height:205px;
+
+    border-radius:50%;
+
+    background:#050914;
+
+    box-shadow:
+    inset 0 0 30px rgba(0,0,0,.8);
+
+}
+
+.upgrade-percent{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:38px;
+
+    font-weight:1000;
+
+    color:white;
+
+    text-shadow:
+    0 0 12px #00ff91;
+
+}
+
+.chances{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:8px;
+
+}
+
+.chance{
+
+    padding:12px;
+
+    text-align:center;
+
+    border-radius:14px;
+
+    border:1px solid #203962;
+
+    background:#0b1730;
+
+    color:#91a8cf;
+
+    font-weight:900;
+
+}
+
+.chance.active{
+
+    color:#00ff91;
+
+    border-color:#00ff91;
+
+    box-shadow:
+    0 0 14px rgba(0,255,145,.2);
+
+}
+
+/* MINES */
+
+.mines{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(5,1fr);
+
+    gap:8px;
+
+}
+
+.mine{
+
+    aspect-ratio:1;
+
+    border:1px solid #203962;
+
+    border-radius:14px;
+
+    background:#0b1730;
+
+    display:grid;
+
+    place-items:center;
+
+    font-size:22px;
+
+    transition:.2s;
+
+}
+
+.mine.open{
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(0,255,145,.2),
+        #07162a
+    );
+
+    border-color:#00ff91;
+
+}
+
+.mine.bomb{
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,20,70,.3),
+        #250811
+    );
+
+    border-color:#ff1744;
+
+}
+
+/* DICE */
+
+.colors{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:10px;
+
+}
+
+.color{
+
+    padding:12px;
+
+    text-align:center;
+
+    border-radius:16px;
+
+    background:#0b1730;
+
+    border:1px solid #203962;
+
+    transition:.2s;
+
+}
+
+.color.selected{
+
+    border-color:#00eaff;
+
+    box-shadow:
+    0 0 18px rgba(0,220,255,.3);
+
+    transform:scale(1.03);
+
+}
+
+.ball{
+
+    width:50px;
+    height:50px;
+
+    border-radius:50%;
+
+    margin:0 auto 8px;
+
+}
+
+.red{
+    background:#ff1744;
+    box-shadow:0 0 18px #ff1744;
+}
+
+.orange{
+    background:#ff8a00;
+    box-shadow:0 0 18px #ff8a00;
+}
+
+.yellow{
+    background:#ffd600;
+    box-shadow:0 0 18px #ffd600;
+}
+
+.green{
+    background:#00ff3c;
+    box-shadow:0 0 18px #00ff3c;
+}
+
+.blue{
+    background:#0066ff;
+    box-shadow:0 0 18px #0066ff;
+}
+
+.purple{
+    background:#a020f0;
+    box-shadow:0 0 18px #a020f0;
+}
+
+/* SLOTS */
+
+.reels{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:9px;
+
+    margin:20px 0;
+
+}
+
+.reel{
+
+    width:76px;
+    height:76px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:18px;
+
+    background:#f5f8ff;
+
+    color:#111;
+
+    font-size:40px;
+
+}
+
+.spin{
+
+    animation:
+    reelSpin .45s ease;
+
+}
+
+@keyframes reelSpin{
+
+    0%{
+        transform:translateY(-15px);
+        opacity:.4;
+    }
+
+    100%{
+        transform:translateY(0);
+        opacity:1;
+    }
+
+}
+
+/* MESSAGE */
 
 .msg{
+
     text-align:center;
-    margin-top:10px;
-    color:#9fb0d8;
+
+    margin-top:12px;
+
+    color:#91a8cf;
+
+    min-height:20px;
+
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* LOADING */
 
-@media(max-width:500px){
+.loading{
 
-    .neon-left{
-        left:0;
-    }
+    position:fixed;
 
-    .neon-right{
-        right:0;
-    }
+    inset:0;
 
-    .app{
-        padding:10px;
-    }
+    background:#030611;
 
-    .top{
-        border-radius:23px;
-    }
+    display:flex;
 
-    .upgrade-circle{
-        width:210px;
-        height:210px;
-    }
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:100;
+
+    transition:.3s;
+
 }
+
+.loading.hide{
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+.loader{
+
+    text-align:center;
+
+    color:#00eaff;
+
+    font-weight:1000;
+
+    text-shadow:0 0 15px #00eaff;
+
+}
+
+.loader-circle{
+
+    width:50px;
+    height:50px;
+
+    border-radius:50%;
+
+    border:4px solid #12304c;
+
+    border-top-color:#00eaff;
+
+    animation:
+    load 1s linear infinite;
+
+    margin:auto auto 15px;
+
+}
+
+@keyframes load{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="neon-side neon-left"></div>
-<div class="neon-side neon-right"></div>
+<div class="loading" id="loading">
 
-<div class="neon-dot dot1"></div>
-<div class="neon-dot dot2"></div>
-<div class="neon-dot dot3"></div>
-<div class="neon-dot dot4"></div>
-<div class="neon-dot dot5"></div>
-<div class="neon-dot dot6"></div>
+    <div class="loader">
 
+        <div class="loader-circle"></div>
+
+        Загрузка UPBRAINROTS...
+
+    </div>
+
+</div>
 
 <div class="app">
 
-    <!-- TOP -->
-
     <div class="top">
 
-        <h1>🧠 UPBRAINROTS</h1>
-
-        <div class="balance">
-            <span id="balance">100</span> 🧠
+        <div class="logo">
+            🧠 UPBRAINROTS
         </div>
 
-        <button class="bonus" onclick="dailyBonus()">
+        <div class="balance">
+            <span id="balance">0</span> 🧠
+        </div>
+
+        <button
+            class="bonus"
+            onclick="dailyBonus()"
+        >
             🎁 Получить 3 мозга
         </button>
 
     </div>
 
-
-    <!-- TABS -->
-
     <div class="tabs">
 
-        <div class="tab active" data-screen="shop">
+        <div
+            class="tab active"
+            data-screen="shop"
+        >
             🛒 Магазин
         </div>
 
-        <div class="tab" data-screen="inventory">
+        <div
+            class="tab"
+            data-screen="inventory"
+        >
             🎒 Инвентарь
         </div>
 
-        <div class="tab" data-screen="upgrade">
+        <div
+            class="tab"
+            data-screen="upgrade"
+        >
             ⚡ Апгрейд
         </div>
 
-        <div class="tab" data-screen="mines">
+        <div
+            class="tab"
+            data-screen="mines"
+        >
             💣 Мины
         </div>
 
-        <div class="tab" data-screen="dice">
+        <div
+            class="tab"
+            data-screen="dice"
+        >
             🎲 Dice
         </div>
 
-        <div class="tab" data-screen="slots">
+        <div
+            class="tab"
+            data-screen="slots"
+        >
             🎰 Слоты
         </div>
 
@@ -991,55 +954,19 @@ body:after{
 
     <!-- SHOP -->
 
-    <div id="shop" class="screen active">
+    <div
+        id="shop"
+        class="screen active"
+    >
 
         <div class="section">
 
-            <h2>🛒 Магазин</h2>
+            <h2>🧠 Брейнроты</h2>
 
-            <div class="shop-grid">
-
-                <div class="card">
-                    <div class="img">🧂</div>
-                    <div>Garama And Madundung</div>
-                    <div class="price">50 🧠</div>
-                    <button class="buy"
-                            onclick="buy('Garama And Madundung',50)">
-                        Купить
-                    </button>
-                </div>
-
-                <div class="card">
-                    <div class="img">💳</div>
-                    <div>Cash Or Card</div>
-                    <div class="price">60 🧠</div>
-                    <button class="buy"
-                            onclick="buy('Cash Or Card',60)">
-                        Купить
-                    </button>
-                </div>
-
-                <div class="card">
-                    <div class="img">🚢</div>
-                    <div>Capitano Moby</div>
-                    <div class="price">110 🧠</div>
-                    <button class="buy"
-                            onclick="buy('Capitano Moby',110)">
-                        Купить
-                    </button>
-                </div>
-
-                <div class="card">
-                    <div class="img">🐉</div>
-                    <div>Dragon Cannelloni</div>
-                    <div class="price">1670 🧠</div>
-                    <button class="buy"
-                            onclick="buy('Dragon Cannelloni',1670)">
-                        Купить
-                    </button>
-                </div>
-
-            </div>
+            <div
+                class="shop-grid"
+                id="shopGrid"
+            ></div>
 
         </div>
 
@@ -1048,54 +975,16 @@ body:after{
 
     <!-- INVENTORY -->
 
-    <div id="inventory" class="screen">
+    <div
+        id="inventory"
+        class="screen"
+    >
 
         <div class="section">
 
             <h2>🎒 Инвентарь</h2>
 
             <div id="inventoryList"></div>
-
-            <button class="action"
-                    onclick="toggleAdmin()">
-                👑 Админ-панель
-            </button>
-
-            <div id="admin" class="admin">
-
-                <input
-                    id="pass"
-                    class="field"
-                    type="password"
-                    placeholder="Пароль">
-
-                <button class="action"
-                        onclick="loginAdmin()">
-                    Войти
-                </button>
-
-                <div id="adminContent"
-                     style="display:none">
-
-                    <input
-                        id="give"
-                        class="field"
-                        type="number"
-                        placeholder="Количество мозгов">
-
-                    <button class="action"
-                            onclick="giveBrains()">
-                        🧠 Выдать
-                    </button>
-
-                    <button class="action green"
-                            onclick="add1000()">
-                        +1000 🧠
-                    </button>
-
-                </div>
-
-            </div>
 
         </div>
 
@@ -1104,85 +993,102 @@ body:after{
 
     <!-- UPGRADE -->
 
-    <div id="upgrade" class="screen">
+    <div
+        id="upgrade"
+        class="screen"
+    >
 
-        <div class="section upgrade-wrap">
+        <div class="section">
 
-            <h2>⚡ Апгрейд</h2>
-
-            <p class="msg">
-                Выбери шанс улучшения
-            </p>
-
-
-            <!-- КРУГ -->
+            <h2>⚡ Upgrade</h2>
 
             <div
+                class="upgrade-circle"
                 id="upgradeCircle"
-                class="upgrade-circle">
+            >
 
                 <div
+                    class="upgrade-percent"
                     id="upgradePercent"
-                    class="upgrade-center">
+                >
                     50%
                 </div>
 
             </div>
 
+            <div class="chances">
 
-            <!-- ПРОЦЕНТЫ -->
-
-            <div class="percent-grid">
-
-                <button
-                    class="percent-btn"
-                    onclick="selectUpgrade(75,this)">
-                    75%
-                </button>
-
-                <button
-                    class="percent-btn"
-                    onclick="selectUpgrade(50,this)">
-                    50%
-                </button>
-
-                <button
-                    class="percent-btn"
-                    onclick="selectUpgrade(30,this)">
-                    30%
-                </button>
-
-                <button
-                    class="percent-btn"
-                    onclick="selectUpgrade(20,this)">
-                    20%
-                </button>
-
-                <button
-                    class="percent-btn"
-                    onclick="selectUpgrade(10,this)">
-                    10%
-                </button>
-
-                <button
-                    class="percent-btn"
-                    onclick="selectUpgrade(5,this)">
+                <div
+                    class="chance"
+                    onclick="selectChance(this,5)"
+                >
                     5%
-                </button>
+                </div>
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,10)"
+                >
+                    10%
+                </div>
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,20)"
+                >
+                    20%
+                </div>
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,30)"
+                >
+                    30%
+                </div>
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,50)"
+                >
+                    50%
+                </div>
+
+                <div
+                    class="chance active"
+                    onclick="selectChance(this,75)"
+                >
+                    75%
+                </div>
 
             </div>
 
+            <input
+                id="upgradeAmount"
+                type="number"
+                min="1"
+                placeholder="Сколько поставить"
+                style="
+                width:100%;
+                padding:13px;
+                margin-top:12px;
+                border-radius:14px;
+                border:1px solid #203962;
+                background:#071126;
+                color:white;
+                "
+            >
 
             <button
-                class="action green"
-                onclick="runUpgrade()">
-                ⚡ Запустить апгрейд
+                class="action"
+                onclick="upgrade()"
+            >
+                ⚡ Запустить Upgrade
             </button>
 
             <div
-                id="upgradeResult"
-                class="upgrade-result">
-            </div>
+                class="msg"
+                id="upgradeMsg"
+            ></div>
 
         </div>
 
@@ -1191,31 +1097,31 @@ body:after{
 
     <!-- MINES -->
 
-    <div id="mines" class="screen">
+    <div
+        id="mines"
+        class="screen"
+    >
 
         <div class="section">
 
-            <h2>💣 Мины</h2>
-
-            <p class="msg">
-                Найди безопасные клетки
-            </p>
+            <h2>💣 Mines</h2>
 
             <div
+                class="mines"
                 id="minesGrid"
-                class="mines">
-            </div>
+            ></div>
 
             <button
                 class="action"
-                onclick="newMinesGame()">
-                🔄 Новая игра
+                onclick="startMines()"
+            >
+                🎮 Новая игра
             </button>
 
             <div
-                id="mineResult"
-                class="msg">
-            </div>
+                class="msg"
+                id="minesMsg"
+            ></div>
 
         </div>
 
@@ -1224,66 +1130,94 @@ body:after{
 
     <!-- DICE -->
 
-    <div id="dice" class="screen">
+    <div
+        id="dice"
+        class="screen"
+    >
 
         <div class="section">
 
             <h2>🎲 Color Dice</h2>
 
-            <p class="msg">
-                Выбери цвет
-            </p>
-
             <div class="colors">
 
-                <div class="color"
-                     onclick="chooseColor('Red',this)">
+                <div
+                    class="color"
+                    onclick="selectColor(this,'red')"
+                >
                     <div class="ball red"></div>
-                    Red
+                    Красный
                 </div>
 
-                <div class="color"
-                     onclick="chooseColor('Orange',this)">
+                <div
+                    class="color"
+                    onclick="selectColor(this,'orange')"
+                >
                     <div class="ball orange"></div>
-                    Orange
+                    Оранжевый
                 </div>
 
-                <div class="color"
-                     onclick="chooseColor('Yellow',this)">
+                <div
+                    class="color"
+                    onclick="selectColor(this,'yellow')"
+                >
                     <div class="ball yellow"></div>
-                    Yellow
+                    Жёлтый
                 </div>
 
-                <div class="color"
-                     onclick="chooseColor('Green',this)">
+                <div
+                    class="color"
+                    onclick="selectColor(this,'green')"
+                >
                     <div class="ball green"></div>
-                    Green
+                    Зелёный
                 </div>
 
-                <div class="color"
-                     onclick="chooseColor('Blue',this)">
+                <div
+                    class="color"
+                    onclick="selectColor(this,'blue')"
+                >
                     <div class="ball blue"></div>
-                    Blue
+                    Синий
                 </div>
 
-                <div class="color"
-                     onclick="chooseColor('Purple',this)">
+                <div
+                    class="color"
+                    onclick="selectColor(this,'purple')"
+                >
                     <div class="ball purple"></div>
-                    Purple
+                    Фиолетовый
                 </div>
 
             </div>
+
+            <input
+                id="diceAmount"
+                type="number"
+                min="1"
+                placeholder="Ставка"
+                style="
+                width:100%;
+                padding:13px;
+                margin-top:12px;
+                border-radius:14px;
+                border:1px solid #203962;
+                background:#071126;
+                color:white;
+                "
+            >
 
             <button
                 class="action"
-                onclick="rollDice()">
-                🎲 Бросить кубик
+                onclick="rollDice()"
+            >
+                🎲 Бросить
             </button>
 
             <div
-                id="diceResult"
-                class="dice-result">
-            </div>
+                class="msg"
+                id="diceMsg"
+            ></div>
 
         </div>
 
@@ -1292,7 +1226,10 @@ body:after{
 
     <!-- SLOTS -->
 
-    <div id="slots" class="screen">
+    <div
+        id="slots"
+        class="screen"
+    >
 
         <div class="section">
 
@@ -1300,22 +1237,40 @@ body:after{
 
             <div class="reels">
 
-                <div class="reel" id="r1">🍒</div>
-                <div class="reel" id="r2">⭐</div>
-                <div class="reel" id="r3">💎</div>
+                <div
+                    class="reel"
+                    id="r1"
+                >
+                    🍒
+                </div>
+
+                <div
+                    class="reel"
+                    id="r2"
+                >
+                    ⭐
+                </div>
+
+                <div
+                    class="reel"
+                    id="r3"
+                >
+                    💎
+                </div>
 
             </div>
 
             <button
                 class="action"
-                onclick="spin()">
+                onclick="spin()"
+            >
                 🎰 Крутить
             </button>
 
             <div
                 class="msg"
-                id="slotMsg">
-            </div>
+                id="slotMsg"
+            ></div>
 
         </div>
 
@@ -1326,110 +1281,123 @@ body:after{
 
 <script>
 
-/* =========================
-   TELEGRAM MINI APP
-========================= */
+const tg = window.Telegram.WebApp;
 
-const tg =
-    window.Telegram &&
-    window.Telegram.WebApp
-        ? window.Telegram.WebApp
-        : null;
+tg.ready();
+tg.expand();
 
-if(tg){
-    tg.ready();
-    tg.expand();
+const initData = tg.initData;
+
+const API_HEADERS = {
+
+    "Content-Type":
+    "application/json",
+
+    "X-Telegram-Init-Data":
+    initData
+
+};
+
+
+/* =====================================================
+   API
+===================================================== */
+
+async function api(
+    url,
+    options={}
+){
+
+    const response =
+        await fetch(
+            url,
+            {
+                ...options,
+                headers:{
+                    ...API_HEADERS,
+                    ...(options.headers || {})
+                }
+            }
+        );
+
+    const data =
+        await response.json();
+
+    if(!response.ok){
+
+        throw new Error(
+            data.error ||
+            "Ошибка сервера"
+        );
+
+    }
+
+    return data;
+
 }
 
 
-/* =========================
-   TABS
-========================= */
+/* =====================================================
+   PLAYER
+===================================================== */
 
-const tabs =
-    document.querySelectorAll(".tab");
+let balance = 0;
 
-const screens =
-    document.querySelectorAll(".screen");
+let inventory = [];
 
-tabs.forEach(tab => {
 
-    tab.addEventListener("click", () => {
+async function loadPlayer(){
 
-        tabs.forEach(t =>
-            t.classList.remove("active")
-        );
+    try{
 
-        screens.forEach(s =>
-            s.classList.remove("active")
-        );
-
-        tab.classList.add("active");
-
-        const screen =
-            document.getElementById(
-                tab.dataset.screen
+        const data =
+            await api(
+                "/api/player"
             );
 
-        screen.classList.add("active");
+        balance =
+            data.balance;
 
-        if(tg){
-            tg.HapticFeedback.impactOccurred("light");
-        }
+        inventory =
+            data.inventory || [];
 
-    });
+        render();
 
-});
+        document
+            .getElementById("loading")
+            .classList
+            .add("hide");
 
+    }catch(error){
 
-/* =========================
-   DATA
-========================= */
+        console.error(error);
 
-let balance =
-    Number(
-        localStorage.getItem("balance")
-        || 100
-    );
+        alert(
+            "Не удалось подключиться к Telegram."
+        );
 
-let inventory =
-    JSON.parse(
-        localStorage.getItem("inventory")
-        || "[]"
-    );
-
-
-function save(){
-
-    localStorage.setItem(
-        "balance",
-        balance
-    );
-
-    localStorage.setItem(
-        "inventory",
-        JSON.stringify(inventory)
-    );
+    }
 
 }
 
 
-/* =========================
+/* =====================================================
    RENDER
-========================= */
+===================================================== */
 
 function render(){
 
-    document.getElementById(
-        "balance"
-    ).textContent = balance;
+    document
+        .getElementById("balance")
+        .textContent =
+        balance;
 
     const list =
         document.getElementById(
             "inventoryList"
         );
 
-    if(inventory.length === 0){
+    if(!inventory.length){
 
         list.innerHTML =
             '<div class="msg">Инвентарь пуст</div>';
@@ -1437,483 +1405,553 @@ function render(){
     }else{
 
         list.innerHTML =
-            inventory.map(
-                (item,index) => `
-                    <div class="inventory-item">
-                        🧠 ${item}
+            inventory
+            .map(
+                item => `
+                <div class="inventory-item">
 
-                        <button
-                            class="action"
-                            onclick="withdrawItem(${index})">
-                            📤 Вывести
-                        </button>
+                    🧠 ${item.name}
+
+                    <div
+                        style="
+                        color:#ffd83d;
+                        margin-top:5px;
+                        "
+                    >
+                        ${item.price} 🧠
                     </div>
+
+                </div>
                 `
-            ).join("");
+            )
+            .join("");
 
     }
-
-    save();
 
 }
 
 
-/* =========================
+/* =====================================================
    SHOP
-========================= */
+===================================================== */
 
-function buy(name,price){
+const ITEMS = {
 
-    if(balance < price){
+    "La Secret Combinasion":45,
+    "Garama And Madundung":50,
+    "Burguro And Fryuro":63,
+    "Cash Or Card":60,
+    "Popcuru And Fizzuru":95,
+    "Celestial Pegasus":150,
+    "Capitano Moby":110,
+    "Fragola La La La":75,
+    "Cerberus":160,
+    "Fortunu And Cashuru":185,
+    "Cookie And Milki":195,
+    "Spooky And Pumpky":200,
+    "Reinito Sleighito":180,
+    "Foxini Lanterini":350,
+    "La Casa Boo":550,
+    "Dragon Cannelloni":1670,
+    "Hydra Dragon Cannelloni":1780,
+    "Dragon Aquanini":3500,
+    "Dragon Gingerini":3000,
+    "Skibidi Toilet":7500,
+    "Meowl":13000,
+    "Strawbery Elephant":21000,
+    "Jhon Pork":8000,
+    "Antonio":4500
 
-        alert(
-            "❌ Недостаточно мозгов"
-        );
-
-        return;
-    }
-
-    balance -= price;
-
-    inventory.push(name);
-
-    render();
-
-    alert(
-        "✅ Куплено!\n\n" + name
-    );
-
-}
-
-
-/* =========================
-   WITHDRAW
-========================= */
-
-function withdrawItem(index){
-
-    const item =
-        inventory[index];
-
-    alert(
-        "📤 Заявка на вывод\n\n" +
-        item +
-        "\n\nАдминистратор обработает заявку."
-    );
-
-}
+};
 
 
-/* =========================
-   DAILY BONUS
-========================= */
+function renderShop(){
 
-function dailyBonus(){
-
-    const last =
-        Number(
-            localStorage.getItem("daily")
-            || 0
-        );
-
-    if(Date.now() - last < 86400000){
-
-        alert(
-            "🎁 Бонус уже получен.\nПриходи завтра!"
-        );
-
-        return;
-    }
-
-    balance += 3;
-
-    localStorage.setItem(
-        "daily",
-        Date.now()
-    );
-
-    render();
-
-    alert(
-        "🎉 Ты получил +3 🧠"
-    );
-
-}
-
-
-/* =========================
-   ADMIN
-========================= */
-
-function toggleAdmin(){
-
-    document
-        .getElementById("admin")
-        .classList.toggle("show");
-
-}
-
-
-function loginAdmin(){
-
-    const pass =
+    const grid =
         document.getElementById(
-            "pass"
-        ).value;
-
-    if(pass === "pasha2026"){
-
-        document.getElementById(
-            "adminContent"
-        ).style.display = "block";
-
-        alert(
-            "👑 Админ-панель открыта"
+            "shopGrid"
         );
 
-    }else{
+    grid.innerHTML =
+        Object.entries(ITEMS)
+        .map(
+            ([name,price]) => {
 
-        alert(
-            "❌ Неверный пароль"
-        );
+                return `
+                <div class="card">
 
-    }
+                    <div class="img">
+                        🧠
+                    </div>
+
+                    <div>
+                        ${name}
+                    </div>
+
+                    <div class="price">
+                        ${price} 🧠
+                    </div>
+
+                    <button
+                        class="buy"
+                        onclick="buy('${name.replace(/'/g,"\\'")}')"
+                    >
+                        Купить
+                    </button>
+
+                </div>
+                `;
+
+            }
+        )
+        .join("");
 
 }
 
 
-function giveBrains(){
+async function buy(name){
 
-    const amount =
-        Number(
-            document.getElementById(
-                "give"
-            ).value || 0
-        );
+    try{
 
-    if(amount <= 0){
+        const data =
+            await api(
+                "/api/buy",
+                {
+                    method:"POST",
 
-        alert(
-            "Введите количество"
-        );
+                    body:
+                    JSON.stringify({
+                        name:name
+                    })
+                }
+            );
 
-        return;
-    }
+        if(!data.ok){
 
-    balance += amount;
+            alert(data.message);
 
-    render();
-
-}
-
-
-function add1000(){
-
-    balance += 1000;
-
-    render();
-
-}
-
-
-/* =========================
-   UPGRADE
-========================= */
-
-let selectedUpgrade = 50;
-
-
-function selectUpgrade(percent,button){
-
-    selectedUpgrade = percent;
-
-    document
-        .querySelectorAll(".percent-btn")
-        .forEach(btn =>
-            btn.classList.remove("active")
-        );
-
-    button.classList.add("active");
-
-    updateUpgradeCircle();
-
-}
-
-
-function updateUpgradeCircle(){
-
-    const circle =
-        document.getElementById(
-            "upgradeCircle"
-        );
-
-    const text =
-        document.getElementById(
-            "upgradePercent"
-        );
-
-    const degrees =
-        selectedUpgrade * 3.6;
-
-    circle.style.background =
-        `conic-gradient(
-            #00ff88 0deg ${degrees}deg,
-            #020307 ${degrees}deg 360deg
-        )`;
-
-    text.textContent =
-        selectedUpgrade + "%";
-
-}
-
-
-function runUpgrade(){
-
-    const circle =
-        document.getElementById(
-            "upgradeCircle"
-        );
-
-    const result =
-        document.getElementById(
-            "upgradeResult"
-        );
-
-    circle.classList.remove(
-        "spinning"
-    );
-
-    void circle.offsetWidth;
-
-    circle.classList.add(
-        "spinning"
-    );
-
-    result.textContent =
-        "⚡ Проверяем шанс...";
-
-    setTimeout(() => {
-
-        const random =
-            Math.random() * 100;
-
-        if(random < selectedUpgrade){
-
-            result.style.color =
-                "#00ff95";
-
-            result.textContent =
-                "🎉 УСПЕХ! Апгрейд пройден!";
-
-        }else{
-
-            result.style.color =
-                "#ff426b";
-
-            result.textContent =
-                "❌ Не повезло. Попробуй ещё раз.";
+            return;
 
         }
 
-    },800);
+        balance =
+            data.balance;
+
+        await loadPlayer();
+
+        alert(
+            "✅ Куплено: " + name
+        );
+
+    }catch(error){
+
+        alert(
+            error.message
+        );
+
+    }
 
 }
 
 
-/* =========================
+/* =====================================================
+   DAILY
+===================================================== */
+
+async function dailyBonus(){
+
+    try{
+
+        const data =
+            await api(
+                "/api/daily",
+                {
+                    method:"POST"
+                }
+            );
+
+        if(!data.ok){
+
+            alert(
+                data.message
+            );
+
+            return;
+
+        }
+
+        await loadPlayer();
+
+        alert(
+            "🎁 +3 🧠"
+        );
+
+    }catch(error){
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   UPGRADE
+===================================================== */
+
+let selectedChance = 75;
+
+
+function selectChance(
+    element,
+    chance
+){
+
+    document
+        .querySelectorAll(".chance")
+        .forEach(
+            x =>
+            x.classList
+            .remove("active")
+        );
+
+    element.classList
+        .add("active");
+
+    selectedChance =
+        chance;
+
+    updateUpgradeCircle(
+        chance
+    );
+
+}
+
+
+function updateUpgradeCircle(
+    percent
+){
+
+    const degrees =
+        percent * 3.6;
+
+    document
+        .getElementById(
+            "upgradeCircle"
+        )
+        .style
+        .background =
+        `
+        conic-gradient(
+            #00ff91 0deg,
+            #00ff91 ${degrees}deg,
+            #02050a ${degrees}deg,
+            #02050a 360deg
+        )
+        `;
+
+    document
+        .getElementById(
+            "upgradePercent"
+        )
+        .textContent =
+        percent + "%";
+
+}
+
+
+async function upgrade(){
+
+    const amount =
+        Number(
+            document
+            .getElementById(
+                "upgradeAmount"
+            )
+            .value
+        );
+
+    const msg =
+        document
+        .getElementById(
+            "upgradeMsg"
+        );
+
+    if(!amount || amount <= 0){
+
+        msg.textContent =
+            "❌ Введи ставку.";
+
+        return;
+
+    }
+
+    msg.textContent =
+        "⚡ Проверяем...";
+
+    try{
+
+        const data =
+            await api(
+                "/api/upgrade",
+                {
+                    method:"POST",
+
+                    body:
+                    JSON.stringify({
+                        chance:
+                        selectedChance,
+
+                        amount:
+                        amount
+                    })
+                }
+            );
+
+        if(!data.ok){
+
+            msg.textContent =
+                data.message;
+
+            return;
+
+        }
+
+        balance =
+            data.balance;
+
+        if(data.success){
+
+            msg.textContent =
+                "🟢 УСПЕХ! +"
+                +
+                amount
+                +
+                " 🧠";
+
+        }else{
+
+            msg.textContent =
+                "🔴 Неудача.";
+
+        }
+
+        await loadPlayer();
+
+    }catch(error){
+
+        msg.textContent =
+            error.message;
+
+    }
+
+}
+
+
+/* =====================================================
    MINES
-========================= */
+===================================================== */
 
-let mineBombs = [];
-let mineGameOver = false;
+let mineGame = false;
+
+let mines = [];
 
 
-function newMinesGame(){
+function createMines(){
 
     const grid =
         document.getElementById(
             "minesGrid"
         );
 
-    const result =
-        document.getElementById(
-            "mineResult"
-        );
-
     grid.innerHTML = "";
 
-    result.textContent = "";
+    mines = [];
 
-    mineGameOver = false;
+    const bomb =
+        Math.floor(
+            Math.random() * 25
+        );
 
-    mineBombs = [];
-
-    while(mineBombs.length < 5){
-
-        const n =
-            Math.floor(
-                Math.random() * 25
-            );
-
-        if(!mineBombs.includes(n)){
-            mineBombs.push(n);
-        }
-
-    }
-
-
-    for(let i=0;i<25;i++){
+    for(
+        let i=0;
+        i<25;
+        i++
+    ){
 
         const cell =
             document.createElement(
                 "div"
             );
 
-        cell.className = "mine";
+        cell.className =
+            "mine";
 
-        cell.textContent = "◇";
+        cell.textContent =
+            "◇";
 
         cell.onclick =
-            () => openMine(cell,i);
+            () => openMine(
+                cell,
+                i,
+                bomb
+            );
 
-        grid.appendChild(cell);
-
-    }
-
-}
-
-
-function openMine(cell,index){
-
-    if(mineGameOver){
-        return;
-    }
-
-    if(cell.classList.contains("open")){
-        return;
-    }
-
-    cell.classList.add("open");
-
-    if(mineBombs.includes(index)){
-
-        cell.classList.add("bomb");
-
-        cell.textContent = "💣";
-
-        mineGameOver = true;
-
-        document.getElementById(
-            "mineResult"
-        ).textContent =
-            "💥 Мина! Игра окончена.";
-
-    }else{
-
-        cell.classList.add("safe");
-
-        cell.textContent = "💎";
-
-        document.getElementById(
-            "mineResult"
-        ).textContent =
-            "✅ Безопасно!";
-
-    }
-
-}
-
-
-newMinesGame();
-
-
-/* =========================
-   COLOR DICE
-========================= */
-
-let selectedColor = null;
-
-
-function chooseColor(color,element){
-
-    selectedColor = color;
-
-    document
-        .querySelectorAll(".color")
-        .forEach(x =>
-            x.classList.remove("selected")
+        grid.appendChild(
+            cell
         );
 
-    element.classList.add(
-        "selected"
-    );
+    }
 
-    document.getElementById(
-        "diceResult"
-    ).textContent =
-        "Выбран: " + color;
+}
+
+
+function startMines(){
+
+    mineGame = true;
+
+    document
+        .getElementById(
+            "minesMsg"
+        )
+        .textContent =
+        "Выбирай клетки.";
+
+    createMines();
+
+}
+
+
+function openMine(
+    cell,
+    index,
+    bomb
+){
+
+    if(!mineGame)
+        return;
+
+    if(index === bomb){
+
+        cell.textContent =
+            "💣";
+
+        cell.classList
+            .add("bomb");
+
+        mineGame =
+            false;
+
+        document
+            .getElementById(
+                "minesMsg"
+            )
+            .textContent =
+            "💥 Мина!";
+
+        return;
+
+    }
+
+    cell.textContent =
+        "💎";
+
+    cell.classList
+        .add("open");
+
+}
+
+
+/* =====================================================
+   DICE
+===================================================== */
+
+let selectedColor = "";
+
+
+function selectColor(
+    element,
+    color
+){
+
+    document
+        .querySelectorAll(
+            ".color"
+        )
+        .forEach(
+            x =>
+            x.classList
+            .remove("selected")
+        );
+
+    element
+        .classList
+        .add("selected");
+
+    selectedColor =
+        color;
 
 }
 
 
 function rollDice(){
 
+    const colors = [
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "blue",
+        "purple"
+    ];
+
     if(!selectedColor){
 
-        document.getElementById(
-            "diceResult"
-        ).textContent =
-            "❗ Сначала выбери цвет";
+        alert(
+            "Выбери цвет."
+        );
 
         return;
-    }
 
-    const colors = [
-        "Red",
-        "Orange",
-        "Yellow",
-        "Green",
-        "Blue",
-        "Purple"
-    ];
+    }
 
     const result =
         colors[
             Math.floor(
-                Math.random() * colors.length
+                Math.random()
+                *
+                colors.length
             )
         ];
 
-    setTimeout(() => {
+    const msg =
+        document
+        .getElementById(
+            "diceMsg"
+        );
 
-        if(result === selectedColor){
+    if(result === selectedColor){
 
-            document.getElementById(
-                "diceResult"
-            ).innerHTML =
-                "🎉 Выпал <b>" +
-                result +
-                "</b> — УГАДАЛ!";
+        msg.textContent =
+            "🎉 Выпал твой цвет!";
 
-        }else{
+    }else{
 
-            document.getElementById(
-                "diceResult"
-            ).innerHTML =
-                "🎲 Выпал <b>" +
-                result +
-                "</b> — не угадал.";
+        msg.textContent =
+            "❌ Выпал другой цвет: "
+            +
+            result;
 
-        }
-
-    },400);
+    }
 
 }
 
 
-/* =========================
+/* =====================================================
    SLOTS
-========================= */
+===================================================== */
 
 function spin(){
 
@@ -1922,8 +1960,7 @@ function spin(){
         "🍋",
         "🍉",
         "⭐",
-        "💎",
-        "7️⃣"
+        "💎"
     ];
 
     const reels = [
@@ -1932,107 +1969,98 @@ function spin(){
         document.getElementById("r3")
     ];
 
-    const msg =
-        document.getElementById(
-            "slotMsg"
-        );
-
     reels.forEach(
-        reel =>
-            reel.classList.add(
-                "spin-animation"
-            )
+        reel => {
+
+            reel.classList
+                .remove("spin");
+
+            void reel.offsetWidth;
+
+            reel.classList
+                .add("spin");
+
+            reel.textContent =
+                symbols[
+                    Math.floor(
+                        Math.random()
+                        *
+                        symbols.length
+                    )
+                ];
+
+        }
     );
 
-    msg.textContent =
-        "🎰 Крутим...";
-
-    let counter = 0;
-
-    const interval =
-        setInterval(() => {
-
-            reels.forEach(
-                reel => {
-
-                    reel.textContent =
-                        symbols[
-                            Math.floor(
-                                Math.random()
-                                * symbols.length
-                            )
-                        ];
-
-                }
-            );
-
-            counter++;
-
-            if(counter >= 15){
-
-                clearInterval(interval);
-
-                reels.forEach(
-                    reel =>
-                        reel.classList.remove(
-                            "spin-animation"
-                        )
-                );
-
-                const a =
-                    symbols[
-                        Math.floor(
-                            Math.random()
-                            * symbols.length
-                        )
-                    ];
-
-                const b =
-                    symbols[
-                        Math.floor(
-                            Math.random()
-                            * symbols.length
-                        )
-                    ];
-
-                const c =
-                    symbols[
-                        Math.floor(
-                            Math.random()
-                            * symbols.length
-                        )
-                    ];
-
-                reels[0].textContent = a;
-                reels[1].textContent = b;
-                reels[2].textContent = c;
-
-                if(a === b && b === c){
-
-                    msg.textContent =
-                        "🎉 ТРИ ОДИНАКОВЫХ!";
-
-                }else{
-
-                    msg.textContent =
-                        "Попробуй ещё раз.";
-
-                }
-
-            }
-
-        },70);
+    document
+        .getElementById(
+            "slotMsg"
+        )
+        .textContent =
+        "🎰 Готово!";
 
 }
 
 
-/* =========================
+/* =====================================================
+   TABS
+===================================================== */
+
+document
+.querySelectorAll(".tab")
+.forEach(
+    tab => {
+
+        tab.addEventListener(
+            "click",
+            () => {
+
+                document
+                .querySelectorAll(
+                    ".tab"
+                )
+                .forEach(
+                    x =>
+                    x.classList
+                    .remove("active")
+                );
+
+                document
+                .querySelectorAll(
+                    ".screen"
+                )
+                .forEach(
+                    x =>
+                    x.classList
+                    .remove("active")
+                );
+
+                tab.classList
+                    .add("active");
+
+                document
+                    .getElementById(
+                        tab.dataset.screen
+                    )
+                    .classList
+                    .add("active");
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
    START
-========================= */
+===================================================== */
 
-render();
+renderShop();
 
-updateUpgradeCircle();
+updateUpgradeCircle(75);
+
+loadPlayer();
 
 </script>
 
