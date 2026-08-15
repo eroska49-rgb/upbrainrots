@@ -2102,4 +2102,328 @@ function createMines(){
         i++
     ){
 
-        const
+        const cell =
+            document.createElement("div");
+
+        cell.className =
+            "mine";
+
+        cell.textContent =
+            "◇";
+
+        cell.onclick =
+            () =>
+            openMine(
+                cell,
+                i
+            );
+
+        grid.appendChild(
+            cell
+        );
+
+    }
+
+}
+
+
+function startMines(){
+
+    document
+        .getElementById("minesMsg")
+        .textContent =
+        "Выбирай клетки.";
+
+    createMines();
+
+}
+
+
+async function openMine(
+    cell,
+    index
+){
+
+    if(!mineGameActive)
+        return;
+
+    if(
+        cell.classList
+            .contains("open")
+    )
+        return;
+
+    const amount =
+        1;
+
+    if(index === mineBomb){
+
+        cell.textContent =
+            "💣";
+
+        cell.classList
+            .add("bomb");
+
+        mineGameActive =
+            false;
+
+        try{
+
+            await playGame(
+                amount,
+                "lose",
+                0
+            );
+
+        }catch(error){
+
+            console.error(error);
+
+        }
+
+        document
+            .getElementById("minesMsg")
+            .textContent =
+            "💥 Мина!";
+
+        return;
+
+    }
+
+    cell.textContent =
+        "💎";
+
+    cell.classList
+        .add("open");
+
+    document
+        .getElementById("minesMsg")
+        .textContent =
+        "💎 Безопасно!";
+
+}
+
+
+/* =====================================================
+   UPGRADE
+===================================================== */
+
+let selectedChance =
+    75;
+
+
+function selectChance(
+    element,
+    chance
+){
+
+    document
+        .querySelectorAll(".chance")
+        .forEach(
+            x =>
+            x.classList.remove("active")
+        );
+
+    element
+        .classList
+        .add("active");
+
+    selectedChance =
+        chance;
+
+    updateUpgradeCircle(
+        chance
+    );
+
+}
+
+
+function updateUpgradeCircle(
+    percent
+){
+
+    const degrees =
+        percent * 3.6;
+
+    document
+        .getElementById("upgradeCircle")
+        .style
+        .background =
+        `
+        conic-gradient(
+            #00ff91 0deg,
+            #00ff91 ${degrees}deg,
+            #02050a ${degrees}deg,
+            #02050a 360deg
+        )
+        `;
+
+    document
+        .getElementById("upgradePercent")
+        .textContent =
+        percent + "%";
+
+}
+
+
+async function upgrade(){
+
+    const amount =
+        Number(
+            document
+                .getElementById("upgradeAmount")
+                .value
+        );
+
+    const msg =
+        document
+            .getElementById("upgradeMsg");
+
+    if(!amount){
+
+        msg.textContent =
+            "❌ Введи ставку.";
+
+        return;
+
+    }
+
+    const success =
+        Math.random()
+        <
+        selectedChance / 100;
+
+    try{
+
+        await playGame(
+            amount,
+            success
+                ? "win"
+                : "lose",
+            success
+                ? amount * 2
+                : 0
+        );
+
+        msg.textContent =
+            success
+            ? "🟢 УСПЕХ! +" + amount + " 🧠"
+            : "🔴 Неудача.";
+
+    }catch(error){
+
+        msg.textContent =
+            "❌ " + error.message;
+
+    }
+
+}
+
+
+/* =====================================================
+   SLOTS
+===================================================== */
+
+async function spin(){
+
+    const amount =
+        Number(
+            document
+                .getElementById("slotsAmount")
+                .value
+        );
+
+    const msg =
+        document
+            .getElementById("slotMsg");
+
+    if(!amount){
+
+        msg.textContent =
+            "❌ Введи ставку.";
+
+        return;
+
+    }
+
+    const symbols = [
+        "🍒",
+        "🍋",
+        "🍉",
+        "⭐",
+        "💎"
+    ];
+
+    const reels = [
+        document.getElementById("r1"),
+        document.getElementById("r2"),
+        document.getElementById("r3")
+    ];
+
+    const result =
+        reels.map(
+            reel => {
+
+                reel.classList.remove("spin");
+
+                void reel.offsetWidth;
+
+                reel.classList.add("spin");
+
+                const symbol =
+                    symbols[
+                        Math.floor(
+                            Math.random()
+                            *
+                            symbols.length
+                        )
+                    ];
+
+                reel.textContent =
+                    symbol;
+
+                return symbol;
+
+            }
+        );
+
+    const win =
+        result[0] === result[1]
+        &&
+        result[1] === result[2];
+
+    try{
+
+        await playGame(
+            amount,
+            win ? "win" : "lose",
+            win ? amount * 5 : 0
+        );
+
+        msg.textContent =
+            win
+            ? "🎉 JACKPOT! x5"
+            : "❌ Попробуй ещё.";
+
+    }catch(error){
+
+        msg.textContent =
+            "❌ " + error.message;
+
+    }
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+updateUpgradeCircle(75);
+
+loadPlayer();
+
+</script>
+
+</body>
+</html>
