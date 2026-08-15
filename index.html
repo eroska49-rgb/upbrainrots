@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -21,76 +19,124 @@
     -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html,body{
     margin:0;
     padding:0;
     min-height:100%;
 }
 
 body{
+    background:
+        radial-gradient(circle at 20% 20%,rgba(0,255,255,.12),transparent 30%),
+        radial-gradient(circle at 80% 80%,rgba(0,80,255,.18),transparent 35%),
+        #030611;
 
     color:#eef7ff;
-
-    font-family:
-        Arial,
-        sans-serif;
-
+    font-family:Arial,sans-serif;
     overflow-x:hidden;
 
-    background-color:#030611;
-
     background-image:
-
-        linear-gradient(
-            rgba(0,230,255,.035) 1px,
-            transparent 1px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(0,230,255,.035) 1px,
-            transparent 1px
-        );
+        linear-gradient(rgba(0,230,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,230,255,.035) 1px,transparent 1px);
 
     background-size:35px 35px;
 }
 
 body:before,
 body:after{
-
     content:"";
-
     position:fixed;
-
     width:260px;
     height:260px;
-
     border-radius:50%;
-
     filter:blur(70px);
-
     opacity:.45;
-
     pointer-events:none;
-
     z-index:-1;
 }
 
 body:before{
-
     background:#00eaff;
-
     left:-170px;
     top:20%;
 }
 
 body:after{
-
     background:#0066ff;
-
     right:-170px;
     bottom:15%;
+}
+
+.app{
+    max-width:480px;
+    margin:auto;
+    padding:12px 12px 30px;
+}
+
+/* HEADER */
+
+.top{
+    position:relative;
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(13,26,55,.96),
+            rgba(5,12,30,.96)
+        );
+
+    border:1px solid rgba(0,220,255,.25);
+    border-radius:28px;
+    padding:20px;
+
+    box-shadow:
+        0 0 30px rgba(0,180,255,.12),
+        inset 0 0 30px rgba(0,180,255,.04);
+}
+
+.logo{
+    text-align:center;
+    font-size:25px;
+    font-weight:1000;
+    letter-spacing:3px;
+
+    text-shadow:
+        0 0 8px #00eaff,
+        0 0 25px #0066ff;
+}
+
+.balance{
+    text-align:center;
+    font-size:32px;
+    font-weight:1000;
+    color:#ffd83d;
+    margin-top:8px;
+
+    text-shadow:
+        0 0 12px rgba(255,216,61,.5);
+}
+
+.bonus{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:14px;
+    margin-top:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00eaff,
+            #0066ff
+        );
+
+    color:white;
+    font-size:15px;
+    font-weight:900;
+
+    box-shadow:
+        0 0 18px rgba(0,190,255,.25);
 }
 
 button{
@@ -101,251 +147,22 @@ button:active{
     transform:scale(.96);
 }
 
-
-/* =====================================================
-   LOADING
-===================================================== */
-
-.loading{
-
-    position:fixed;
-
-    inset:0;
-
-    background:#030611;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    z-index:1000;
-
-    transition:.3s;
-}
-
-.loading.hide{
-
-    opacity:0;
-
-    pointer-events:none;
-}
-
-.loader{
-
-    text-align:center;
-
-    color:#00eaff;
-
-    font-weight:1000;
-
-    text-shadow:
-        0 0 15px #00eaff;
-}
-
-.loader-circle{
-
-    width:50px;
-    height:50px;
-
-    border-radius:50%;
-
-    border:4px solid #12304c;
-
-    border-top-color:#00eaff;
-
-    animation:
-        load 1s linear infinite;
-
-    margin:auto auto 15px;
-}
-
-@keyframes load{
-
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-
-/* =====================================================
-   APP
-===================================================== */
-
-.app{
-
-    width:100%;
-
-    max-width:520px;
-
-    margin:auto;
-
-    padding:
-        10px
-        10px
-        30px;
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.top{
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(13,26,55,.97),
-            rgba(5,12,30,.97)
-        );
-
-    border:
-        1px solid
-        rgba(0,220,255,.25);
-
-    border-radius:26px;
-
-    padding:18px;
-
-    box-shadow:
-
-        0 0 30px
-        rgba(0,180,255,.12),
-
-        inset 0 0 30px
-        rgba(0,180,255,.04);
-}
-
-.logo{
-
-    text-align:center;
-
-    font-size:24px;
-
-    font-weight:1000;
-
-    letter-spacing:3px;
-
-    color:#fff;
-
-    text-shadow:
-        0 0 8px #00eaff,
-        0 0 25px #0066ff;
-}
-
-.balance-title{
-
-    text-align:center;
-
-    margin-top:10px;
-
-    color:#91a8cf;
-
-    font-size:12px;
-
-    font-weight:800;
-
-    text-transform:uppercase;
-}
-
-.balance{
-
-    text-align:center;
-
-    font-size:32px;
-
-    font-weight:1000;
-
-    color:#ffd83d;
-
-    margin-top:2px;
-
-    text-shadow:
-        0 0 12px
-        rgba(255,216,61,.5);
-}
-
-
-/* =====================================================
-   WELCOME
-===================================================== */
-
-.welcome{
-
-    margin-top:12px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(12,27,55,.97),
-            rgba(5,12,28,.97)
-        );
-
-    border:
-        1px solid
-        rgba(0,220,255,.2);
-
-    border-radius:22px;
-
-    padding:18px;
-
-    text-align:center;
-}
-
-.welcome-title{
-
-    font-size:22px;
-
-    font-weight:1000;
-
-    color:white;
-}
-
-.welcome-text{
-
-    color:#91a8cf;
-
-    font-size:13px;
-
-    line-height:1.5;
-
-    margin-top:7px;
-}
-
-.welcome.hide{
-
-    display:none;
-}
-
-
-/* =====================================================
-   TABS
-===================================================== */
+/* TABS */
 
 .tabs{
-
     display:flex;
-
     gap:8px;
-
     overflow-x:auto;
-
-    padding:
-        12px
-        2px;
+    padding:12px 2px;
 
     scrollbar-width:none;
 
     position:sticky;
-
     top:0;
-
     z-index:20;
+
+    background:rgba(3,6,17,.92);
+    backdrop-filter:blur(12px);
 }
 
 .tabs::-webkit-scrollbar{
@@ -353,40 +170,27 @@ button:active{
 }
 
 .tab{
+    flex:0 0 auto;
 
-    flex:
-        0 0 auto;
-
-    padding:
-        11px
-        14px;
+    padding:12px 14px;
 
     border-radius:16px;
 
     background:#0b142b;
-
-    border:
-        1px solid
-        #20345c;
+    border:1px solid #20345c;
 
     color:#91a8cf;
-
-    font-weight:900;
-
-    font-size:13px;
+    font-weight:800;
 
     transition:.2s;
 }
 
 .tab.active{
-
     color:#fff;
-
     border-color:#00eaff;
 
     box-shadow:
-        0 0 14px
-        rgba(0,220,255,.25);
+        0 0 14px rgba(0,220,255,.25);
 
     background:
         linear-gradient(
@@ -396,17 +200,13 @@ button:active{
         );
 }
 
-
-/* =====================================================
-   SCREENS
-===================================================== */
+/* SCREENS */
 
 .screen{
     display:none;
 }
 
 .screen.active{
-
     display:block;
 
     animation:
@@ -414,7 +214,6 @@ button:active{
 }
 
 @keyframes screenIn{
-
     from{
         opacity:0;
         transform:translateY(8px);
@@ -426,13 +225,9 @@ button:active{
     }
 }
 
-
-/* =====================================================
-   SECTION
-===================================================== */
+/* SECTIONS */
 
 .section{
-
     background:
         linear-gradient(
             145deg,
@@ -440,75 +235,65 @@ button:active{
             rgba(5,12,27,.97)
         );
 
-    border:
-        1px solid
-        #1b3158;
-
+    border:1px solid #1b3158;
     border-radius:24px;
 
     padding:16px;
-
     margin-bottom:14px;
 
     box-shadow:
-        0 10px 35px
-        rgba(0,0,0,.2);
+        0 10px 35px rgba(0,0,0,.2);
 }
 
-.section h2{
-
-    margin:
-        0
-        0
-        14px;
-
-    font-size:21px;
+h2{
+    margin-top:0;
 }
 
+/* WELCOME */
 
-/* =====================================================
-   SHOP
-===================================================== */
+.welcome{
+    text-align:center;
+    padding:35px 15px;
+}
+
+.welcome-icon{
+    font-size:70px;
+    margin-bottom:15px;
+
+    filter:
+        drop-shadow(0 0 15px #00eaff);
+}
+
+.welcome-title{
+    font-size:27px;
+    font-weight:1000;
+
+    text-shadow:
+        0 0 10px #00eaff;
+}
+
+.welcome-text{
+    color:#91a8cf;
+    line-height:1.6;
+}
+
+/* SHOP */
 
 .shop-grid{
-
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns:1fr 1fr;
     gap:10px;
 }
 
 .card{
-
     background:#0c1730;
-
-    border:
-        1px solid
-        #203962;
-
+    border:1px solid #203962;
     border-radius:20px;
-
     padding:12px;
-
-    transition:.2s;
-}
-
-.card:hover{
-
-    transform:translateY(-2px);
-
-    border-color:#00dfff;
-
-    box-shadow:
-        0 0 15px
-        rgba(0,220,255,.15);
 }
 
 .img{
-
-    height:75px;
+    height:80px;
 
     border-radius:16px;
 
@@ -521,49 +306,29 @@ button:active{
         #081126;
 
     display:grid;
-
     place-items:center;
 
-    font-size:34px;
-
-    margin-bottom:8px;
-}
-
-.item-name{
-
-    min-height:38px;
-
-    font-size:13px;
-
-    font-weight:800;
+    font-size:36px;
 }
 
 .price{
-
-    margin-top:7px;
-
+    margin-top:8px;
     color:#ffd83d;
-
-    font-size:17px;
-
+    font-size:18px;
     font-weight:1000;
 }
 
 .buy,
 .action{
-
     width:100%;
-
     padding:12px;
 
     border:0;
-
     border-radius:14px;
 
     margin-top:10px;
 
     color:white;
-
     font-weight:900;
 
     background:
@@ -574,223 +339,143 @@ button:active{
         );
 
     box-shadow:
-        0 0 12px
-        rgba(0,190,255,.18);
+        0 0 12px rgba(0,190,255,.18);
 }
 
-
-/* =====================================================
-   INVENTORY
-===================================================== */
+/* INVENTORY */
 
 .inventory-item{
-
     background:#0b1730;
-
-    border:
-        1px solid
-        #203962;
-
+    border:1px solid #203962;
     border-radius:17px;
-
     padding:12px;
-
     margin-top:9px;
 }
 
+/* UPGRADE */
 
-/* =====================================================
-   UPGRADE
-===================================================== */
-
-.upgrade-subtitle{
-
+.upgrade-box{
     text-align:center;
-
-    color:#91a8cf;
-
-    font-size:13px;
-
-    margin-top:-8px;
-
-    margin-bottom:10px;
 }
 
 .upgrade-circle{
-
     width:250px;
     height:250px;
 
     border-radius:50%;
 
-    margin:22px auto;
+    margin:25px auto;
 
     position:relative;
 
     display:grid;
-
     place-items:center;
+
+    /*
+       ЗЕЛЕНАЯ ЧАСТЬ =
+       выбранный шанс
+
+       КРАСНАЯ ЧАСТЬ =
+       оставшийся шанс
+    */
 
     background:
         conic-gradient(
-            #00ff91 0deg 270deg,
-            #ff1744 270deg 360deg
+            #00ff66 0deg,
+            #00ff66 270deg,
+            #ff1744 270deg,
+            #ff1744 360deg
         );
 
     box-shadow:
-        0 0 30px
-        rgba(0,255,145,.35),
-
-        0 0 70px
-        rgba(0,255,145,.15);
+        0 0 40px rgba(0,255,100,.25),
+        0 0 25px rgba(255,23,68,.15);
 
     transition:
         background .35s ease,
-        box-shadow .35s ease;
+        transform .25s ease;
 }
 
 .upgrade-circle:before{
-
     content:"";
 
     position:absolute;
 
-    width:208px;
-    height:208px;
+    width:218px;
+    height:218px;
 
     border-radius:50%;
 
-    background:
-        radial-gradient(
-            circle at 50% 35%,
-            #101d38,
-            #050914 70%
-        );
+    background:#050914;
 
     box-shadow:
-        inset 0 0 35px
-        rgba(0,0,0,.8),
-
-        0 0 15px
-        rgba(0,0,0,.5);
-}
-
-.upgrade-circle-inner{
-
-    position:relative;
-
-    z-index:2;
-
-    text-align:center;
+        inset 0 0 35px rgba(0,0,0,.9);
 }
 
 .upgrade-percent{
+    position:relative;
+    z-index:2;
 
-    font-size:42px;
-
+    font-size:40px;
     font-weight:1000;
 
-    color:#fff;
+    color:white;
 
     text-shadow:
-        0 0 8px #00ff91,
-        0 0 20px
-        rgba(0,255,145,.7);
+        0 0 15px #00ff66;
 }
 
 .upgrade-label{
-
-    margin-top:4px;
-
     color:#91a8cf;
-
-    font-size:10px;
-
-    font-weight:900;
-
-    letter-spacing:1px;
+    margin-top:-10px;
 }
 
-.chances{
+/* CHANCES */
 
+.chances{
     display:grid;
 
     grid-template-columns:
         repeat(4,1fr);
 
     gap:8px;
+
+    margin-top:20px;
 }
 
 .chance{
+    padding:13px 5px;
 
-    border:
-        1px solid
-        #203962;
+    text-align:center;
 
-    border-radius:15px;
+    border-radius:14px;
+
+    border:1px solid #203962;
 
     background:#0b1730;
 
     color:#91a8cf;
 
-    padding:11px 5px;
-
-    font-family:Arial,sans-serif;
-
-    cursor:pointer;
+    font-weight:1000;
 
     transition:.2s;
 }
 
-.chance b{
-
-    display:block;
-
-    color:#fff;
-
-    font-size:17px;
-}
-
-.chance span{
-
-    display:block;
-
-    margin-top:3px;
-
-    font-size:9px;
-
-    color:#7188ac;
-}
-
 .chance.active{
+    color:#00ff66;
 
-    border-color:#00ff91;
+    border-color:#00ff66;
 
     background:
-        linear-gradient(
-            145deg,
-            rgba(0,255,145,.15),
-            rgba(0,100,80,.08)
-        );
+        rgba(0,255,100,.08);
 
     box-shadow:
-        0 0 15px
-        rgba(0,255,145,.2);
-
-    transform:translateY(-2px);
+        0 0 15px rgba(0,255,100,.25);
 }
 
-.chance.active b{
-    color:#00ff91;
-}
-
-
-/* =====================================================
-   INPUT
-===================================================== */
+/* INPUT */
 
 .game-input{
-
     width:100%;
 
     padding:14px;
@@ -799,39 +484,24 @@ button:active{
 
     border-radius:14px;
 
-    border:
-        1px solid
-        #203962;
-
-    outline:none;
+    border:1px solid #203962;
 
     background:#071126;
 
     color:white;
 
     font-size:16px;
+
+    outline:none;
 }
 
 .game-input:focus{
-
     border-color:#00eaff;
-
-    box-shadow:
-        0 0 12px
-        rgba(0,220,255,.15);
 }
 
-.game-input::placeholder{
-    color:#60789f;
-}
-
-
-/* =====================================================
-   MINES
-===================================================== */
+/* MINES */
 
 .mines{
-
     display:grid;
 
     grid-template-columns:
@@ -841,28 +511,21 @@ button:active{
 }
 
 .mine{
-
     aspect-ratio:1;
 
-    border:
-        1px solid
-        #203962;
+    border:1px solid #203962;
 
     border-radius:14px;
 
     background:#0b1730;
 
     display:grid;
-
     place-items:center;
 
     font-size:22px;
-
-    transition:.2s;
 }
 
 .mine.open{
-
     background:
         radial-gradient(
             circle,
@@ -874,7 +537,6 @@ button:active{
 }
 
 .mine.bomb{
-
     background:
         radial-gradient(
             circle,
@@ -885,13 +547,9 @@ button:active{
     border-color:#ff1744;
 }
 
-
-/* =====================================================
-   DICE
-===================================================== */
+/* DICE */
 
 .colors{
-
     display:grid;
 
     grid-template-columns:
@@ -901,7 +559,6 @@ button:active{
 }
 
 .color{
-
     padding:12px;
 
     text-align:center;
@@ -910,33 +567,27 @@ button:active{
 
     background:#0b1730;
 
-    border:
-        1px solid
-        #203962;
+    border:1px solid #203962;
 
     transition:.2s;
 }
 
 .color.selected{
-
     border-color:#00eaff;
 
     box-shadow:
-        0 0 18px
-        rgba(0,220,255,.3);
+        0 0 18px rgba(0,220,255,.3);
 
     transform:scale(1.03);
 }
 
 .ball{
-
     width:50px;
     height:50px;
 
     border-radius:50%;
 
-    margin:
-        0 auto 8px;
+    margin:0 auto 8px;
 }
 
 .red{
@@ -969,48 +620,36 @@ button:active{
     box-shadow:0 0 18px #a020f0;
 }
 
-
-/* =====================================================
-   SLOTS
-===================================================== */
+/* SLOTS */
 
 .reels{
-
     display:flex;
-
     justify-content:center;
-
     gap:9px;
-
     margin:20px 0;
 }
 
 .reel{
-
     width:76px;
     height:76px;
 
     display:grid;
-
     place-items:center;
 
     border-radius:18px;
 
     background:#f5f8ff;
-
     color:#111;
 
     font-size:40px;
 }
 
 .spin{
-
     animation:
         reelSpin .45s ease;
 }
 
 @keyframes reelSpin{
-
     0%{
         transform:translateY(-15px);
         opacity:.4;
@@ -1022,72 +661,85 @@ button:active{
     }
 }
 
-
-/* =====================================================
-   MESSAGE
-===================================================== */
+/* MESSAGE */
 
 .msg{
-
     text-align:center;
-
     margin-top:12px;
-
     color:#91a8cf;
-
     min-height:20px;
-
-    line-height:1.4;
 }
 
+.success{
+    color:#00ff66;
+    font-weight:900;
+}
 
-/* =====================================================
-   MOBILE
-===================================================== */
+.error{
+    color:#ff4264;
+    font-weight:900;
+}
 
-@media(max-width:380px){
+/* LOADING */
 
-    .upgrade-circle{
+.loading{
+    position:fixed;
+    inset:0;
 
-        width:220px;
-        height:220px;
-    }
+    background:#030611;
 
-    .upgrade-circle:before{
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-        width:183px;
-        height:183px;
-    }
+    z-index:100;
 
-    .upgrade-percent{
-        font-size:36px;
-    }
+    transition:.3s;
+}
 
-    .chance{
-        padding:9px 3px;
-    }
+.loading.hide{
+    opacity:0;
+    pointer-events:none;
+}
 
-    .chance b{
-        font-size:15px;
+.loader{
+    text-align:center;
+
+    color:#00eaff;
+
+    font-weight:1000;
+
+    text-shadow:
+        0 0 15px #00eaff;
+}
+
+.loader-circle{
+    width:50px;
+    height:50px;
+
+    border-radius:50%;
+
+    border:4px solid #12304c;
+    border-top-color:#00eaff;
+
+    animation:
+        load 1s linear infinite;
+
+    margin:auto auto 15px;
+}
+
+@keyframes load{
+    to{
+        transform:rotate(360deg);
     }
 }
 
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =====================================================
-     LOADING
-===================================================== -->
-
-<div
-    class="loading"
-    id="loading"
->
+<div class="loading" id="loading">
 
     <div class="loader">
 
@@ -1102,10 +754,7 @@ button:active{
 
 <div class="app">
 
-
-    <!-- =================================================
-         HEADER
-    ================================================= -->
+    <!-- HEADER -->
 
     <div class="top">
 
@@ -1113,102 +762,126 @@ button:active{
             🧠 UPBRAINROTS
         </div>
 
-        <div class="balance-title">
-            ТВОЙ БАЛАНС
-        </div>
-
         <div class="balance">
             <span id="balance">0</span> 🧠
         </div>
 
-    </div>
-
-
-    <!-- =================================================
-         WELCOME
-    ================================================= -->
-
-    <div
-        class="welcome"
-        id="welcome"
-    >
-
-        <div class="welcome-title">
-            👋 Добро пожаловать!
-        </div>
-
-        <div class="welcome-text">
-            Выбирай игру сверху и начинай играть.
-            <br>
-            Удачи в UPBRAINROTS! 🧠
-        </div>
+        <button
+            class="bonus"
+            onclick="dailyBonus()"
+        >
+            🎁 Получить 3 мозга
+        </button>
 
     </div>
 
 
-    <!-- =================================================
-         TABS
-    ================================================= -->
+    <!-- GAME TABS -->
 
     <div class="tabs">
 
-        <button
+        <div
             class="tab active"
+            data-screen="welcome"
+        >
+            🏠
+        </div>
+
+        <div
+            class="tab"
             data-screen="shop"
         >
             🛒 Магазин
-        </button>
+        </div>
 
-        <button
+        <div
+            class="tab"
+            data-screen="inventory"
+        >
+            🎒
+        </div>
+
+        <div
             class="tab"
             data-screen="upgrade"
         >
-            ⚡ Апгрейд
-        </button>
+            ⚡ Upgrade
+        </div>
 
-        <button
+        <div
             class="tab"
             data-screen="mines"
         >
-            💣 Мины
-        </button>
+            💣 Mines
+        </div>
 
-        <button
+        <div
             class="tab"
             data-screen="dice"
         >
             🎲 Dice
-        </button>
+        </div>
 
-        <button
+        <div
             class="tab"
             data-screen="slots"
         >
-            🎰 Слоты
-        </button>
-
-        <button
-            class="tab"
-            data-screen="inventory"
-        >
-            🎒 Инвентарь
-        </button>
+            🎰 Slots
+        </div>
 
     </div>
 
 
-    <!-- =================================================
-         SHOP
-    ================================================= -->
+    <!-- WELCOME -->
+
+    <div
+        id="welcome"
+        class="screen active"
+    >
+
+        <div class="section welcome">
+
+            <div class="welcome-icon">
+                🧠
+            </div>
+
+            <div class="welcome-title">
+                Добро пожаловать!
+            </div>
+
+            <div class="welcome-text">
+
+                Это мини-приложение
+                <b>UPBRAINROTS</b>.
+
+                <br><br>
+
+                Выбирай игру во вкладках
+                сверху и начинай играть.
+
+                <br><br>
+
+                Удачи! ⚡
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SHOP -->
 
     <div
         id="shop"
-        class="screen active"
+        class="screen"
     >
 
         <div class="section">
 
-            <h2>🧠 Брейнроты</h2>
+            <h2>
+                🧠 Брейнроты
+            </h2>
 
             <div
                 class="shop-grid"
@@ -1220,9 +893,7 @@ button:active{
     </div>
 
 
-    <!-- =================================================
-         INVENTORY
-    ================================================= -->
+    <!-- INVENTORY -->
 
     <div
         id="inventory"
@@ -1231,30 +902,34 @@ button:active{
 
         <div class="section">
 
-            <h2>🎒 Инвентарь</h2>
+            <h2>
+                🎒 Инвентарь
+            </h2>
 
-            <div id="inventoryList"></div>
+            <div
+                id="inventoryList"
+            ></div>
 
         </div>
 
     </div>
 
 
-    <!-- =================================================
-         UPGRADE
-    ================================================= -->
+    <!-- UPGRADE -->
 
     <div
         id="upgrade"
         class="screen"
     >
 
-        <div class="section">
+        <div class="section upgrade-box">
 
-            <h2>⚡ Апгрейд</h2>
+            <h2>
+                ⚡ UPGRADER
+            </h2>
 
-            <div class="upgrade-subtitle">
-                Поставь мозги и выбери шанс на победу
+            <div class="upgrade-label">
+                Выбери шанс выигрыша
             </div>
 
 
@@ -1263,19 +938,11 @@ button:active{
                 id="upgradeCircle"
             >
 
-                <div class="upgrade-circle-inner">
-
-                    <div
-                        class="upgrade-percent"
-                        id="upgradePercent"
-                    >
-                        75%
-                    </div>
-
-                    <div class="upgrade-label">
-                        ШАНС ПОБЕДЫ
-                    </div>
-
+                <div
+                    class="upgrade-percent"
+                    id="upgradePercent"
+                >
+                    75%
                 </div>
 
             </div>
@@ -1283,48 +950,43 @@ button:active{
 
             <div class="chances">
 
-                <button
-                    class="chance"
-                    onclick="selectChance(this,15)"
-                >
-                    <b>15%</b>
-                    <span>Риск</span>
-                </button>
-
-                <button
-                    class="chance"
-                    onclick="selectChance(this,35)"
-                >
-                    <b>35%</b>
-                    <span>Риск</span>
-                </button>
-
-                <button
-                    class="chance"
-                    onclick="selectChance(this,50)"
-                >
-                    <b>50%</b>
-                    <span>Баланс</span>
-                </button>
-
-                <button
+                <div
                     class="chance active"
                     onclick="selectChance(this,75)"
                 >
-                    <b>75%</b>
-                    <span>Безопасно</span>
-                </button>
+                    75%
+                </div>
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,50)"
+                >
+                    50%
+                </div>
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,35)"
+                >
+                    35%
+                </div>
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,15)"
+                >
+                    15%
+                </div>
 
             </div>
 
 
             <input
                 id="upgradeAmount"
+                class="game-input"
                 type="number"
                 min="1"
-                inputmode="numeric"
-                placeholder="🧠 Сколько поставить"
-                class="game-input"
+                placeholder="Сколько поставить мозгов?"
             >
 
 
@@ -1332,7 +994,7 @@ button:active{
                 class="action"
                 onclick="upgrade()"
             >
-                ⚡ ЗАПУСТИТЬ АПГРЕЙД
+                ⚡ ИСПЫТАТЬ УДАЧУ
             </button>
 
 
@@ -1346,9 +1008,7 @@ button:active{
     </div>
 
 
-    <!-- =================================================
-         MINES
-    ================================================= -->
+    <!-- MINES -->
 
     <div
         id="mines"
@@ -1357,7 +1017,9 @@ button:active{
 
         <div class="section">
 
-            <h2>💣 Мины</h2>
+            <h2>
+                💣 Mines
+            </h2>
 
             <div
                 class="mines"
@@ -1381,9 +1043,7 @@ button:active{
     </div>
 
 
-    <!-- =================================================
-         DICE
-    ================================================= -->
+    <!-- DICE -->
 
     <div
         id="dice"
@@ -1392,7 +1052,9 @@ button:active{
 
         <div class="section">
 
-            <h2>🎲 Color Dice</h2>
+            <h2>
+                🎲 Color Dice
+            </h2>
 
             <div class="colors">
 
@@ -1446,16 +1108,13 @@ button:active{
 
             </div>
 
-
             <input
                 id="diceAmount"
+                class="game-input"
                 type="number"
                 min="1"
-                inputmode="numeric"
-                placeholder="🧠 Ставка"
-                class="game-input"
+                placeholder="Ставка"
             >
-
 
             <button
                 class="action"
@@ -1463,7 +1122,6 @@ button:active{
             >
                 🎲 Бросить
             </button>
-
 
             <div
                 class="msg"
@@ -1475,9 +1133,7 @@ button:active{
     </div>
 
 
-    <!-- =================================================
-         SLOTS
-    ================================================= -->
+    <!-- SLOTS -->
 
     <div
         id="slots"
@@ -1486,7 +1142,9 @@ button:active{
 
         <div class="section">
 
-            <h2>🎰 Слоты</h2>
+            <h2>
+                🎰 Слоты
+            </h2>
 
             <div class="reels">
 
@@ -1513,14 +1171,12 @@ button:active{
 
             </div>
 
-
             <button
                 class="action"
                 onclick="spin()"
             >
                 🎰 Крутить
             </button>
-
 
             <div
                 class="msg"
@@ -1530,7 +1186,6 @@ button:active{
         </div>
 
     </div>
-
 
 </div>
 
@@ -1547,28 +1202,8 @@ const tg =
 tg.ready();
 tg.expand();
 
-
-/*
-   ВАЖНО:
-
-   Если index.html лежит на GitHub Pages,
-   здесь должен быть публичный HTTPS адрес
-   твоего Python API.
-
-   НЕ ставь сюда:
-   localhost
-   127.0.0.1
-   http://127.0.0.1:8080
-*/
-
-
-const API_URL = "";
-
-
-/* Telegram initData */
-
 const initData =
-    tg.initData || "";
+    tg.initData;
 
 
 const API_HEADERS = {
@@ -1587,24 +1222,22 @@ const API_HEADERS = {
 ===================================================== */
 
 async function api(
-    path,
-    options = {}
+    url,
+    options={}
 ){
 
     const response =
         await fetch(
-            API_URL + path,
+            url,
             {
                 ...options,
 
                 headers:{
                     ...API_HEADERS,
-
                     ...(options.headers || {})
                 }
             }
         );
-
 
     let data;
 
@@ -1621,19 +1254,18 @@ async function api(
 
     }
 
-
     if(!response.ok){
 
         throw new Error(
-            data.message ||
             data.error ||
-            "Ошибка сервера."
+            data.message ||
+            "Ошибка сервера"
         );
 
     }
 
-
     return data;
+
 }
 
 
@@ -1650,112 +1282,54 @@ async function loadPlayer(){
 
     try{
 
+        /*
+         * ВАЖНО:
+         *
+         * Здесь используется /api/user,
+         * потому что именно этот endpoint
+         * есть в твоём Python-коде.
+         */
+
         const data =
             await api(
                 "/api/user"
             );
 
-
         if(!data.ok){
 
             throw new Error(
                 data.error ||
-                "Telegram не подтвердил пользователя."
+                "Не удалось загрузить игрока."
             );
 
         }
 
-
         balance =
             Number(data.balance || 0);
 
-
         render();
-
 
         document
             .getElementById("loading")
             .classList
             .add("hide");
-
 
     }catch(error){
 
-        console.error(
-            "PLAYER ERROR:",
-            error
-        );
-
+        console.error(error);
 
         document
             .getElementById("loading")
             .classList
             .add("hide");
 
-
-        showWelcomeError(
-            error.message
+        alert(
+            "Не удалось подключиться к серверу Telegram Mini App.\n\n"
+            + error.message
         );
 
     }
 
-}
-
-
-/* =====================================================
-   ERROR
-===================================================== */
-
-function showWelcomeError(
-    text
-){
-
-    const welcome =
-        document.getElementById(
-            "welcome"
-        );
-
-
-    welcome.classList.remove(
-        "hide"
-    );
-
-
-    welcome.innerHTML =
-        `
-        <div
-            class="welcome-title"
-        >
-            ⚠️ Ошибка подключения
-        </div>
-
-        <div
-            class="welcome-text"
-        >
-            ${escapeHtml(text)}
-            <br><br>
-            Проверь адрес API в переменной
-            <b>API_URL</b>.
-        </div>
-        `;
-
-}
-
-
-/* =====================================================
-   SAFE HTML
-===================================================== */
-
-function escapeHtml(
-    text
-){
-
-    return String(text)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
 }
 
 
@@ -1770,21 +1344,20 @@ function render(){
         .textContent =
         balance;
 
-
     const list =
         document.getElementById(
             "inventoryList"
         );
 
+    /*
+     * Пока API инвентаря нет,
+     * показываем пустой инвентарь.
+     */
 
     if(!inventory.length){
 
         list.innerHTML =
-            `
-            <div class="msg">
-                Инвентарь пуст
-            </div>
-            `;
+            '<div class="msg">Инвентарь пуст</div>';
 
     }else{
 
@@ -1792,12 +1365,9 @@ function render(){
             inventory
                 .map(
                     item => `
-                    <div
-                        class="inventory-item"
-                    >
+                    <div class="inventory-item">
 
-                        🧠
-                        ${escapeHtml(item.name)}
+                        🧠 ${item.name}
 
                         <div
                             style="
@@ -1805,8 +1375,7 @@ function render(){
                             margin-top:5px;
                             "
                         >
-                            ${item.price}
-                            🧠
+                            ${item.price} 🧠
                         </div>
 
                     </div>
@@ -1825,31 +1394,13 @@ function render(){
 
 const ITEMS = {
 
-    "La Secret Combinasion":45,
     "Garama And Madundung":50,
-    "Burguro And Fryuro":63,
-    "Cash Or Card":60,
-    "Popcuru And Fizzuru":95,
-    "Celestial Pegasus":150,
     "Capitano Moby":110,
-    "Fragola La La La":75,
-    "Cerberus":160,
-    "Fortunu And Cashuru":185,
-    "Cookie And Milki":195,
-    "Spooky And Pumpky":200,
-    "Reinito Sleighito":180,
-    "Foxini Lanterini":350,
-    "La Casa Boo":550,
-    "Dragon Cannelloni":1670,
-    "Hydra Dragon Cannelloni":1780,
-    "Dragon Aquanini":3500,
-    "Dragon Gingerini":3000,
+    "Foxini Lanterini":400,
+    "Dragon Cannelloni":1750,
     "Skibidi Toilet":7500,
     "Meowl":13000,
-    "Strawbery Elephant":21000,
-    "Jhon Pork":8000,
-    "Antonio":4500
-
+    "Strawbery Elephant":22000
 };
 
 
@@ -1860,11 +1411,15 @@ function renderShop(){
             "shopGrid"
         );
 
-
     grid.innerHTML =
         Object.entries(ITEMS)
             .map(
                 ([name,price]) => {
+
+                    const safeName =
+                        name
+                            .replace(/\\/g,"\\\\")
+                            .replace(/'/g,"\\'");
 
                     return `
                     <div class="card">
@@ -1873,10 +1428,8 @@ function renderShop(){
                             🧠
                         </div>
 
-                        <div
-                            class="item-name"
-                        >
-                            ${escapeHtml(name)}
+                        <div>
+                            ${name}
                         </div>
 
                         <div class="price">
@@ -1885,7 +1438,7 @@ function renderShop(){
 
                         <button
                             class="buy"
-                            onclick='buy(${JSON.stringify(name)})'
+                            onclick="buy('${safeName}')"
                         >
                             Купить
                         </button>
@@ -1917,35 +1470,76 @@ async function buy(name){
                 }
             );
 
-
         if(!data.ok){
 
             alert(
                 data.message ||
-                "Не удалось купить."
+                "Покупка невозможна."
             );
 
             return;
 
         }
 
-
         balance =
-            Number(data.balance);
+            data.balance;
 
-
-        await loadPlayer();
-
+        render();
 
         alert(
             "✅ Куплено: " + name
         );
 
+    }catch(error){
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DAILY BONUS
+===================================================== */
+
+async function dailyBonus(){
+
+    try{
+
+        const data =
+            await api(
+                "/api/daily",
+                {
+                    method:"POST"
+                }
+            );
+
+        if(!data.ok){
+
+            alert(
+                data.message ||
+                "Бонус недоступен."
+            );
+
+            return;
+
+        }
+
+        balance =
+            data.balance;
+
+        render();
+
+        alert(
+            "🎁 +3 🧠"
+        );
 
     }catch(error){
 
         alert(
-            "❌ " +
             error.message
         );
 
@@ -1961,67 +1555,49 @@ async function buy(name){
 let selectedChance = 75;
 
 
-function selectChance(
-    element,
-    chance
-){
+/*
+ * Обновляем круг.
+ *
+ * Например 75:
+ *
+ * 🟢 75% = 270 градусов
+ * 🔴 25% = 90 градусов
+ *
+ * 50:
+ *
+ * 🟢 180
+ * 🔴 180
+ *
+ * 35:
+ *
+ * 🟢 126
+ * 🔴 234
+ *
+ * 15:
+ *
+ * 🟢 54
+ * 🔴 306
+ */
 
-    document
-        .querySelectorAll(".chance")
-        .forEach(
-            button => {
+function updateUpgradeCircle(percent){
 
-                button
-                    .classList
-                    .remove("active");
-
-            }
-        );
-
-
-    element
-        .classList
-        .add("active");
-
-
-    selectedChance =
-        chance;
-
-
-    updateUpgradeCircle(
-        chance
-    );
-
-}
-
-
-function updateUpgradeCircle(
-    percent
-){
-
-    const greenDegrees =
+    const degrees =
         percent * 3.6;
-
 
     const circle =
         document.getElementById(
             "upgradeCircle"
         );
 
-
     circle.style.background =
         `
         conic-gradient(
-            #00ff91
-            0deg
-            ${greenDegrees}deg,
-
-            #ff1744
-            ${greenDegrees}deg
-            360deg
+            #00ff66 0deg,
+            #00ff66 ${degrees}deg,
+            #ff1744 ${degrees}deg,
+            #ff1744 360deg
         )
         `;
-
 
     document
         .getElementById(
@@ -2030,44 +1606,53 @@ function updateUpgradeCircle(
         .textContent =
         percent + "%";
 
+}
 
-    if(percent >= 75){
 
-        circle.style.boxShadow =
-            `
-            0 0 30px
-            rgba(0,255,145,.35),
+function selectChance(
+    element,
+    chance
+){
 
-            0 0 70px
-            rgba(0,255,145,.15)
-            `;
+    document
+        .querySelectorAll(
+            ".chance"
+        )
+        .forEach(
+            x =>
+                x.classList
+                    .remove("active")
+        );
 
-    }else if(percent >= 50){
+    element
+        .classList
+        .add("active");
 
-        circle.style.boxShadow =
-            `
-            0 0 30px
-            rgba(255,180,0,.25),
+    selectedChance =
+        chance;
 
-            0 0 70px
-            rgba(255,23,68,.12)
-            `;
-
-    }else{
-
-        circle.style.boxShadow =
-            `
-            0 0 25px
-            rgba(255,23,68,.3),
-
-            0 0 60px
-            rgba(255,23,68,.15)
-            `;
-
-    }
+    updateUpgradeCircle(
+        chance
+    );
 
 }
 
+
+/*
+ * Игра Upgrade.
+ *
+ * Ставка:
+ * amount
+ *
+ * Шанс:
+ * 75 / 50 / 35 / 15
+ *
+ * При успехе:
+ * ставка * 2
+ *
+ * При проигрыше:
+ * ставка сгорает.
+ */
 
 async function upgrade(){
 
@@ -2076,12 +1661,10 @@ async function upgrade(){
             "upgradeAmount"
         );
 
-
     const msg =
         document.getElementById(
             "upgradeMsg"
         );
-
 
     const amount =
         Number(input.value);
@@ -2089,18 +1672,11 @@ async function upgrade(){
 
     if(!amount || amount <= 0){
 
-        msg.textContent =
-            "❌ Введи ставку.";
-
-        return;
-
-    }
-
-
-    if(!Number.isInteger(amount)){
+        msg.className =
+            "msg error";
 
         msg.textContent =
-            "❌ Ставка должна быть целым числом.";
+            "❌ Введи сумму ставки.";
 
         return;
 
@@ -2108,6 +1684,9 @@ async function upgrade(){
 
 
     if(amount > balance){
+
+        msg.className =
+            "msg error";
 
         msg.textContent =
             "❌ Недостаточно мозгов.";
@@ -2117,26 +1696,57 @@ async function upgrade(){
     }
 
 
+    msg.className =
+        "msg";
+
     msg.textContent =
-        "⚡ Апгрейд запускается...";
+        "⚡ Испытываем удачу...";
 
 
     try{
 
+        /*
+         * Передаём результат на сервер.
+         *
+         * Сервер должен сам определить
+         * выигрыш/проигрыш.
+         */
+
         const data =
             await api(
-                "/api/upgrade",
+                "/api/game",
                 {
                     method:"POST",
 
                     body:
                         JSON.stringify({
 
+                            game:
+                                "upgrade",
+
                             amount:
                                 amount,
 
                             chance:
-                                selectedChance
+                                selectedChance,
+
+                            /*
+                             * Для текущего API
+                             * result пока передаётся
+                             * клиентом.
+                             *
+                             * Ниже мы генерируем
+                             * результат.
+                             */
+
+                            result:
+                                Math.random() * 100
+                                < selectedChance
+                                    ? "win"
+                                    : "lose",
+
+                            win_amount:
+                                amount * 2
 
                         })
                 }
@@ -2145,12 +1755,22 @@ async function upgrade(){
 
         if(!data.ok){
 
+            msg.className =
+                "msg error";
+
             msg.textContent =
-                "❌ " +
-                (
-                    data.message ||
-                    "Ошибка"
-                );
+                data.error ||
+                data.message ||
+                "Ошибка игры.";
+
+            if(data.balance !== undefined){
+
+                balance =
+                    Number(data.balance);
+
+                render();
+
+            }
 
             return;
 
@@ -2158,57 +1778,57 @@ async function upgrade(){
 
 
         balance =
-            Number(data.balance);
+            Number(
+                data.balance
+            );
 
 
-        document
-            .getElementById(
-                "balance"
-            )
-            .textContent =
-            balance;
+        if(data.result === "win"){
 
+            msg.className =
+                "msg success";
 
-        if(data.success){
+            msg.textContent =
+                "🟢 ПОБЕДА! +"
+                +
+                data.win
+                +
+                " 🧠";
 
-            msg.innerHTML =
-                `
-                <span
-                    style="
-                    color:#00ff91;
-                    font-weight:1000;
-                    "
-                >
-                    🟢 ПОБЕДА!<br>
-                    +${amount} 🧠
-                </span>
-                `;
+            tg.HapticFeedback
+                ?.notificationOccurred(
+                    "success"
+                );
 
         }else{
 
-            msg.innerHTML =
-                `
-                <span
-                    style="
-                    color:#ff1744;
-                    font-weight:1000;
-                    "
-                >
-                    🔴 ПРОИГРЫШ<br>
-                    -${amount} 🧠
-                </span>
-                `;
+            msg.className =
+                "msg error";
+
+            msg.textContent =
+                "🔴 ПРОИГРЫШ! -"
+                +
+                amount
+                +
+                " 🧠";
+
+            tg.HapticFeedback
+                ?.notificationOccurred(
+                    "error"
+                );
 
         }
 
 
         input.value = "";
 
+        render();
+
 
     }catch(error){
 
-        console.error(error);
-
+        msg.className =
+            "msg error";
 
         msg.textContent =
             "❌ " +
@@ -2224,7 +1844,6 @@ async function upgrade(){
 ===================================================== */
 
 let mineGame = false;
-
 let mines = [];
 
 
@@ -2235,11 +1854,9 @@ function createMines(){
             "minesGrid"
         );
 
-
     grid.innerHTML = "";
 
     mines = [];
-
 
     const bomb =
         Math.floor(
@@ -2258,22 +1875,19 @@ function createMines(){
                 "div"
             );
 
-
         cell.className =
             "mine";
-
 
         cell.textContent =
             "◇";
 
-
         cell.onclick =
-            () => openMine(
-                cell,
-                i,
-                bomb
-            );
-
+            () =>
+                openMine(
+                    cell,
+                    i,
+                    bomb
+                );
 
         grid.appendChild(
             cell
@@ -2288,14 +1902,12 @@ function startMines(){
 
     mineGame = true;
 
-
     document
         .getElementById(
             "minesMsg"
         )
         .textContent =
         "Выбирай клетки.";
-
 
     createMines();
 
@@ -2312,27 +1924,16 @@ function openMine(
         return;
 
 
-    if(
-        cell.classList.contains("open") ||
-        cell.classList.contains("bomb")
-    ){
-        return;
-    }
-
-
     if(index === bomb){
 
         cell.textContent =
             "💣";
 
-
         cell.classList
             .add("bomb");
 
-
         mineGame =
             false;
-
 
         document
             .getElementById(
@@ -2341,7 +1942,6 @@ function openMine(
             .textContent =
             "💥 Мина!";
 
-
         return;
 
     }
@@ -2349,7 +1949,6 @@ function openMine(
 
     cell.textContent =
         "💎";
-
 
     cell.classList
         .add("open");
@@ -2379,11 +1978,9 @@ function selectColor(
                     .remove("selected")
         );
 
-
     element
         .classList
         .add("selected");
-
 
     selectedColor =
         color;
@@ -2394,14 +1991,12 @@ function selectColor(
 function rollDice(){
 
     const colors = [
-
         "red",
         "orange",
         "yellow",
         "green",
         "blue",
         "purple"
-
     ];
 
 
@@ -2434,10 +2029,16 @@ function rollDice(){
 
     if(result === selectedColor){
 
+        msg.className =
+            "msg success";
+
         msg.textContent =
             "🎉 Выпал твой цвет!";
 
     }else{
+
+        msg.className =
+            "msg error";
 
         msg.textContent =
             "❌ Выпал другой цвет: "
@@ -2456,13 +2057,11 @@ function rollDice(){
 function spin(){
 
     const symbols = [
-
         "🍒",
         "🍋",
         "🍉",
         "⭐",
         "💎"
-
     ];
 
 
@@ -2481,13 +2080,10 @@ function spin(){
             reel.classList
                 .remove("spin");
 
-
             void reel.offsetWidth;
-
 
             reel.classList
                 .add("spin");
-
 
             reel.textContent =
                 symbols[
@@ -2526,7 +2122,9 @@ document
                 () => {
 
                     document
-                        .querySelectorAll(".tab")
+                        .querySelectorAll(
+                            ".tab"
+                        )
                         .forEach(
                             x =>
                                 x.classList
@@ -2535,7 +2133,9 @@ document
 
 
                     document
-                        .querySelectorAll(".screen")
+                        .querySelectorAll(
+                            ".screen"
+                        )
                         .forEach(
                             x =>
                                 x.classList
@@ -2543,24 +2143,22 @@ document
                         );
 
 
-                    tab
+                    tab.classList
+                        .add("active");
+
+
+                    document
+                        .getElementById(
+                            tab.dataset.screen
+                        )
                         .classList
                         .add("active");
 
 
-                    const screen =
-                        document.getElementById(
-                            tab.dataset.screen
-                        );
-
-
-                    if(screen){
-
-                        screen
-                            .classList
-                            .add("active");
-
-                    }
+                    window.scrollTo({
+                        top:0,
+                        behavior:"smooth"
+                    });
 
                 }
             );
@@ -2582,5 +2180,4 @@ loadPlayer();
 </script>
 
 </body>
-
 </html>
