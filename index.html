@@ -5,8 +5,8 @@
 <meta charset="UTF-8">
 
 <meta
-name="viewport"
-content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
+    name="viewport"
+    content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
 >
 
 <title>UPBRAINROTS</title>
@@ -20,7 +20,8 @@ content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no
     -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
     margin:0;
     padding:0;
     min-height:100%;
@@ -29,28 +30,37 @@ html,body{
 body{
 
     background:
-    radial-gradient(
-        circle at 20% 20%,
-        rgba(0,255,255,.12),
-        transparent 30%
-    ),
-    radial-gradient(
-        circle at 80% 80%,
-        rgba(0,80,255,.18),
-        transparent 35%
-    ),
-    #030611;
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(0,234,255,.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(0,80,255,.16),
+            transparent 35%
+        ),
+        #030611;
 
     color:#eef7ff;
 
-    font-family:
-    Arial,
-    sans-serif;
+    font-family:Arial,sans-serif;
 
     overflow-x:hidden;
-}
 
-/* НЕОНОВЫЕ БОКОВЫЕ ЭФФЕКТЫ */
+    background-image:
+        linear-gradient(
+            rgba(0,230,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,230,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:35px 35px;
+}
 
 body:before,
 body:after{
@@ -64,68 +74,53 @@ body:after{
 
     border-radius:50%;
 
-    filter:blur(70px);
+    filter:blur(80px);
 
-    opacity:.45;
+    opacity:.35;
 
     pointer-events:none;
 
     z-index:-1;
-
 }
 
 body:before{
-
     background:#00eaff;
-
     left:-170px;
     top:20%;
-
 }
 
 body:after{
-
     background:#0066ff;
-
     right:-170px;
     bottom:15%;
-
 }
 
-/* GRID */
+button{
+    cursor:pointer;
+    -webkit-user-select:none;
+    user-select:none;
+}
 
-body{
-
-    background-image:
-
-    linear-gradient(
-        rgba(0,230,255,.035) 1px,
-        transparent 1px
-    ),
-
-    linear-gradient(
-        90deg,
-        rgba(0,230,255,.035) 1px,
-        transparent 1px
-    );
-
-    background-size:35px 35px;
-
+button:active{
+    transform:scale(.97);
 }
 
 /* APP */
 
 .app{
 
-    max-width:480px;
+    width:100%;
+    max-width:520px;
 
     margin:auto;
 
-    padding:12px 12px 30px;
-
+    padding:
+        10px
+        10px
+        35px;
 }
 
-/* TOP */
+/* HEADER */
 
 .top{
 
@@ -134,42 +129,21 @@ body{
     overflow:hidden;
 
     background:
-    linear-gradient(
-        145deg,
-        rgba(13,26,55,.96),
-        rgba(5,12,30,.96)
-    );
+        linear-gradient(
+            145deg,
+            rgba(13,26,55,.97),
+            rgba(5,12,30,.97)
+        );
 
     border:1px solid rgba(0,220,255,.25);
 
-    border-radius:28px;
+    border-radius:26px;
 
-    padding:20px;
+    padding:18px;
 
     box-shadow:
-    0 0 30px rgba(0,180,255,.12),
-    inset 0 0 30px rgba(0,180,255,.04);
-
-}
-
-.top:after{
-
-    content:"";
-
-    position:absolute;
-
-    width:180px;
-    height:180px;
-
-    background:#00eaff;
-
-    filter:blur(100px);
-
-    opacity:.12;
-
-    right:-100px;
-    top:-100px;
-
+        0 0 30px rgba(0,180,255,.12),
+        inset 0 0 30px rgba(0,180,255,.04);
 }
 
 .logo{
@@ -182,78 +156,129 @@ body{
 
     letter-spacing:3px;
 
-    color:#fff;
+    color:white;
 
     text-shadow:
-    0 0 8px #00eaff,
-    0 0 25px #0066ff;
+        0 0 8px #00eaff,
+        0 0 25px #0066ff;
+}
 
+.player{
+
+    text-align:center;
+
+    margin-top:5px;
+
+    color:#91a8cf;
+
+    font-size:13px;
 }
 
 .balance{
 
     text-align:center;
 
-    font-size:34px;
-
-    font-weight:1000;
+    margin-top:8px;
 
     color:#ffd83d;
 
-    margin-top:8px;
+    font-size:29px;
+
+    font-weight:1000;
 
     text-shadow:
-    0 0 12px rgba(255,216,61,.5);
-
+        0 0 12px rgba(255,216,61,.5);
 }
 
-.bonus{
+/* WELCOME */
+
+.welcome{
+
+    margin-top:14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12,25,50,.97),
+            rgba(5,12,27,.97)
+        );
+
+    border:
+        1px solid
+        rgba(0,220,255,.2);
+
+    border-radius:24px;
+
+    padding:22px;
+
+    text-align:center;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.25);
+}
+
+.welcome-icon{
+
+    font-size:55px;
+
+    margin-bottom:8px;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(0,234,255,.5)
+        );
+}
+
+.welcome h1{
+
+    margin:5px 0 10px;
+
+    font-size:25px;
+}
+
+.welcome p{
+
+    color:#91a8cf;
+
+    line-height:1.5;
+
+    margin:8px 0;
+}
+
+.welcome-button{
 
     width:100%;
+
+    margin-top:15px;
 
     border:0;
 
     border-radius:16px;
 
-    padding:14px;
-
-    margin-top:14px;
-
-    background:
-    linear-gradient(
-        135deg,
-        #00eaff,
-        #0066ff
-    );
+    padding:15px;
 
     color:white;
 
-    font-size:15px;
+    font-size:16px;
 
-    font-weight:900;
+    font-weight:1000;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00eaff,
+            #0066ff
+        );
 
     box-shadow:
-    0 0 18px rgba(0,190,255,.25);
-
-    transition:.15s;
-
+        0 0 20px
+        rgba(0,190,255,.25);
 }
 
-button{
+/* GAME TABS */
 
-    cursor:pointer;
-
-}
-
-button:active{
-
-    transform:scale(.96);
-
-}
-
-/* TABS */
-
-.tabs{
+.game-tabs{
 
     display:flex;
 
@@ -261,25 +286,39 @@ button:active{
 
     overflow-x:auto;
 
-    padding:12px 2px;
+    padding:
+        12px
+        1px
+        10px;
 
     scrollbar-width:none;
 
+    position:sticky;
+
+    top:0;
+
+    z-index:20;
+
+    background:
+        linear-gradient(
+            #030611,
+            rgba(3,6,17,.88)
+        );
 }
 
-.tabs::-webkit-scrollbar{
-
+.game-tabs::-webkit-scrollbar{
     display:none;
-
 }
 
-.tab{
+.game-tab{
 
     flex:0 0 auto;
 
-    padding:12px 14px;
+    padding:
+        11px
+        14px;
 
-    border-radius:16px;
+    border-radius:15px;
 
     background:#0b142b;
 
@@ -287,36 +326,35 @@ button:active{
 
     color:#91a8cf;
 
-    font-weight:800;
+    font-weight:900;
+
+    white-space:nowrap;
 
     transition:.2s;
-
 }
 
-.tab.active{
+.game-tab.active{
 
-    color:#fff;
+    color:white;
 
     border-color:#00eaff;
 
-    box-shadow:
-    0 0 14px rgba(0,220,255,.25);
-
     background:
-    linear-gradient(
-        135deg,
-        #0d2940,
-        #0b1833
-    );
+        linear-gradient(
+            135deg,
+            #0d2940,
+            #0b1833
+        );
 
+    box-shadow:
+        0 0 15px
+        rgba(0,220,255,.25);
 }
 
-/* SCREENS */
+/* GAME SCREENS */
 
 .screen{
-
     display:none;
-
 }
 
 .screen.active{
@@ -324,126 +362,110 @@ button:active{
     display:block;
 
     animation:
-    screenIn .25s ease;
-
+        screenIn
+        .2s
+        ease;
 }
 
 @keyframes screenIn{
 
     from{
         opacity:0;
-        transform:translateY(8px);
+        transform:translateY(7px);
     }
 
     to{
         opacity:1;
         transform:translateY(0);
     }
-
 }
-
-/* SECTION */
 
 .section{
 
     background:
-    linear-gradient(
-        145deg,
-        rgba(12,22,45,.97),
-        rgba(5,12,27,.97)
-    );
+        linear-gradient(
+            145deg,
+            rgba(12,22,45,.97),
+            rgba(5,12,27,.97)
+        );
 
     border:1px solid #1b3158;
 
     border-radius:24px;
 
-    padding:16px;
+    padding:17px;
 
     margin-bottom:14px;
 
     box-shadow:
-    0 10px 35px rgba(0,0,0,.2);
-
+        0 10px 35px
+        rgba(0,0,0,.2);
 }
 
-/* SHOP */
+.section h2{
 
-.shop-grid{
+    margin-top:0;
 
-    display:grid;
-
-    grid-template-columns:
-    1fr 1fr;
-
-    gap:10px;
-
+    text-align:center;
 }
 
-.card{
+/* GAME HOME */
 
-    background:#0c1730;
+.game-home{
+
+    text-align:center;
+
+    padding:30px 15px;
+}
+
+.game-icon{
+
+    font-size:60px;
+
+    margin-bottom:10px;
+}
+
+.game-home p{
+
+    color:#91a8cf;
+
+    line-height:1.5;
+}
+
+/* INPUT */
+
+input{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:12px;
+
+    border-radius:14px;
 
     border:1px solid #203962;
 
-    border-radius:20px;
+    background:#071126;
 
-    padding:12px;
+    color:white;
 
-    transition:.2s;
+    outline:none;
 
+    font-size:15px;
 }
 
-.card:hover{
-
-    transform:translateY(-2px);
-
-    border-color:#00dfff;
-
-    box-shadow:
-    0 0 15px rgba(0,220,255,.15);
-
+input:focus{
+    border-color:#00eaff;
 }
 
-.img{
+/* BUTTON */
 
-    height:80px;
-
-    border-radius:16px;
-
-    background:
-    radial-gradient(
-        circle,
-        rgba(0,220,255,.12),
-        transparent 60%
-    ),
-    #081126;
-
-    display:grid;
-
-    place-items:center;
-
-    font-size:36px;
-
-}
-
-.price{
-
-    margin-top:8px;
-
-    color:#ffd83d;
-
-    font-size:18px;
-
-    font-weight:1000;
-
-}
-
-.buy,
 .action{
 
     width:100%;
 
-    padding:12px;
+    padding:14px;
 
     border:0;
 
@@ -453,142 +475,31 @@ button:active{
 
     color:white;
 
-    font-weight:900;
-
-    background:
-    linear-gradient(
-        135deg,
-        #00dfff,
-        #0066ff
-    );
-
-    box-shadow:
-    0 0 12px rgba(0,190,255,.18);
-
-}
-
-/* INVENTORY */
-
-.inventory-item{
-
-    background:#0b1730;
-
-    border:1px solid #203962;
-
-    border-radius:17px;
-
-    padding:12px;
-
-    margin-top:9px;
-
-}
-
-/* UPGRADE */
-
-.upgrade-circle{
-
-    width:240px;
-
-    height:240px;
-
-    border-radius:50%;
-
-    margin:20px auto;
-
-    position:relative;
-
-    display:grid;
-
-    place-items:center;
-
-    background:
-
-    conic-gradient(
-        #00ff91 0deg,
-        #00ff91 180deg,
-        #02050a 180deg,
-        #02050a 360deg
-    );
-
-    box-shadow:
-    0 0 35px rgba(0,255,145,.2);
-
-}
-
-.upgrade-circle:after{
-
-    content:"";
-
-    position:absolute;
-
-    width:205px;
-
-    height:205px;
-
-    border-radius:50%;
-
-    background:#050914;
-
-    box-shadow:
-    inset 0 0 30px rgba(0,0,0,.8);
-
-}
-
-.upgrade-percent{
-
-    position:relative;
-
-    z-index:2;
-
-    font-size:38px;
-
     font-weight:1000;
 
-    color:white;
+    font-size:15px;
 
-    text-shadow:
-    0 0 12px #00ff91;
+    background:
+        linear-gradient(
+            135deg,
+            #00dfff,
+            #0066ff
+        );
 
+    box-shadow:
+        0 0 12px
+        rgba(0,190,255,.18);
 }
 
-.chances{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-    gap:8px;
-
-}
-
-.chance{
-
-    padding:12px;
+.msg{
 
     text-align:center;
 
-    border-radius:14px;
-
-    border:1px solid #203962;
-
-    background:#0b1730;
+    margin-top:12px;
 
     color:#91a8cf;
 
-    font-weight:900;
-
-}
-
-.chance.active{
-
-    color:#00ff91;
-
-    border-color:#00ff91;
-
-    box-shadow:
-    0 0 14px rgba(0,255,145,.2);
-
+    min-height:22px;
 }
 
 /* MINES */
@@ -598,10 +509,9 @@ button:active{
     display:grid;
 
     grid-template-columns:
-    repeat(5,1fr);
+        repeat(5,1fr);
 
     gap:8px;
-
 }
 
 .mine{
@@ -619,35 +529,30 @@ button:active{
     place-items:center;
 
     font-size:22px;
-
-    transition:.2s;
-
 }
 
 .mine.open{
 
     background:
-    radial-gradient(
-        circle,
-        rgba(0,255,145,.2),
-        #07162a
-    );
+        radial-gradient(
+            circle,
+            rgba(0,255,145,.2),
+            #07162a
+        );
 
     border-color:#00ff91;
-
 }
 
 .mine.bomb{
 
     background:
-    radial-gradient(
-        circle,
-        rgba(255,20,70,.3),
-        #250811
-    );
+        radial-gradient(
+            circle,
+            rgba(255,20,70,.3),
+            #250811
+        );
 
     border-color:#ff1744;
-
 }
 
 /* DICE */
@@ -657,10 +562,9 @@ button:active{
     display:grid;
 
     grid-template-columns:
-    repeat(3,1fr);
+        repeat(3,1fr);
 
-    gap:10px;
-
+    gap:9px;
 }
 
 .color{
@@ -674,9 +578,6 @@ button:active{
     background:#0b1730;
 
     border:1px solid #203962;
-
-    transition:.2s;
-
 }
 
 .color.selected{
@@ -684,51 +585,48 @@ button:active{
     border-color:#00eaff;
 
     box-shadow:
-    0 0 18px rgba(0,220,255,.3);
-
-    transform:scale(1.03);
-
+        0 0 18px
+        rgba(0,220,255,.3);
 }
 
 .ball{
 
-    width:50px;
-    height:50px;
+    width:45px;
+    height:45px;
 
     border-radius:50%;
 
-    margin:0 auto 8px;
-
+    margin:0 auto 7px;
 }
 
 .red{
     background:#ff1744;
-    box-shadow:0 0 18px #ff1744;
+    box-shadow:0 0 15px #ff1744;
 }
 
 .orange{
     background:#ff8a00;
-    box-shadow:0 0 18px #ff8a00;
+    box-shadow:0 0 15px #ff8a00;
 }
 
 .yellow{
     background:#ffd600;
-    box-shadow:0 0 18px #ffd600;
+    box-shadow:0 0 15px #ffd600;
 }
 
 .green{
     background:#00ff3c;
-    box-shadow:0 0 18px #00ff3c;
+    box-shadow:0 0 15px #00ff3c;
 }
 
 .blue{
     background:#0066ff;
-    box-shadow:0 0 18px #0066ff;
+    box-shadow:0 0 15px #0066ff;
 }
 
 .purple{
     background:#a020f0;
-    box-shadow:0 0 18px #a020f0;
+    box-shadow:0 0 15px #a020f0;
 }
 
 /* SLOTS */
@@ -742,7 +640,6 @@ button:active{
     gap:9px;
 
     margin:20px 0;
-
 }
 
 .reel{
@@ -751,6 +648,7 @@ button:active{
     height:76px;
 
     display:grid;
+
     place-items:center;
 
     border-radius:18px;
@@ -760,41 +658,207 @@ button:active{
     color:#111;
 
     font-size:40px;
-
 }
 
 .spin{
 
     animation:
-    reelSpin .45s ease;
-
+        reelSpin
+        .45s
+        ease;
 }
 
 @keyframes reelSpin{
 
-    0%{
+    from{
         transform:translateY(-15px);
         opacity:.4;
     }
 
-    100%{
+    to{
         transform:translateY(0);
         opacity:1;
     }
-
 }
 
-/* MESSAGE */
+/* COIN */
 
-.msg{
+.coin{
+
+    width:150px;
+    height:150px;
+
+    margin:25px auto;
+
+    border-radius:50%;
+
+    display:grid;
+    place-items:center;
+
+    font-size:70px;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff38b,
+            #ffd000 35%,
+            #a66b00
+        );
+
+    box-shadow:
+        0 0 35px
+        rgba(255,210,0,.35);
+}
+
+/* ROULETTE */
+
+.roulette{
+
+    width:220px;
+    height:220px;
+
+    margin:20px auto;
+
+    border-radius:50%;
+
+    display:grid;
+
+    place-items:center;
+
+    font-size:70px;
+
+    background:
+        conic-gradient(
+            #ff1744,
+            #111,
+            #ff1744,
+            #111,
+            #ff1744,
+            #111,
+            #ff1744,
+            #111
+        );
+
+    border:8px solid #172846;
+
+    box-shadow:
+        0 0 30px
+        rgba(255,30,70,.25);
+}
+
+/* JACKPOT */
+
+.jackpot-box{
 
     text-align:center;
 
-    margin-top:12px;
+    padding:25px;
+
+    border-radius:20px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,234,255,.1),
+            transparent
+        ),
+        #081126;
+}
+
+.jackpot-number{
+
+    font-size:40px;
+
+    font-weight:1000;
+
+    color:#ffd83d;
+
+    margin:15px 0;
+}
+
+/* UPGRADE */
+
+.upgrade-circle{
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    margin:20px auto;
+
+    display:grid;
+
+    place-items:center;
+
+    background:
+        conic-gradient(
+            #00ff91 0deg,
+            #00ff91 270deg,
+            #02050a 270deg,
+            #02050a 360deg
+        );
+
+    position:relative;
+}
+
+.upgrade-circle:after{
+
+    content:"";
+
+    position:absolute;
+
+    width:185px;
+    height:185px;
+
+    border-radius:50%;
+
+    background:#050914;
+}
+
+.upgrade-percent{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:36px;
+
+    font-weight:1000;
+}
+
+.chances{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:8px;
+}
+
+.chance{
+
+    padding:11px;
+
+    text-align:center;
+
+    border-radius:14px;
+
+    border:1px solid #203962;
+
+    background:#0b1730;
 
     color:#91a8cf;
 
-    min-height:20px;
+    font-weight:900;
+}
+
+.chance.active{
+
+    color:#00ff91;
+
+    border-color:#00ff91;
 
 }
 
@@ -817,7 +881,6 @@ button:active{
     z-index:100;
 
     transition:.3s;
-
 }
 
 .loading.hide{
@@ -825,7 +888,6 @@ button:active{
     opacity:0;
 
     pointer-events:none;
-
 }
 
 .loader{
@@ -835,9 +897,6 @@ button:active{
     color:#00eaff;
 
     font-weight:1000;
-
-    text-shadow:0 0 15px #00eaff;
-
 }
 
 .loader-circle{
@@ -852,10 +911,15 @@ button:active{
     border-top-color:#00eaff;
 
     animation:
-    load 1s linear infinite;
+        load
+        1s
+        linear
+        infinite;
 
-    margin:auto auto 15px;
-
+    margin:
+        auto
+        auto
+        15px;
 }
 
 @keyframes load{
@@ -863,7 +927,10 @@ button:active{
     to{
         transform:rotate(360deg);
     }
+}
 
+.hidden{
+    display:none!important;
 }
 
 </style>
@@ -878,13 +945,16 @@ button:active{
 
         <div class="loader-circle"></div>
 
-        Загрузка UPBRAINROTS...
+        Подключение к UPBRAINROTS...
 
     </div>
 
 </div>
 
+
 <div class="app">
+
+    <!-- HEADER -->
 
     <div class="top">
 
@@ -892,58 +962,106 @@ button:active{
             🧠 UPBRAINROTS
         </div>
 
+        <div
+            class="player"
+            id="playerName"
+        >
+            Игрок
+        </div>
+
         <div class="balance">
             <span id="balance">0</span> 🧠
         </div>
 
+    </div>
+
+
+    <!-- ПРИВЕТСТВИЕ -->
+
+    <div
+        id="welcome"
+        class="welcome"
+    >
+
+        <div class="welcome-icon">
+            🧠
+        </div>
+
+        <h1>
+            Добро пожаловать в UPBRAINROTS!
+        </h1>
+
+        <p>
+            Здесь ты можешь играть,
+            выигрывать мозги и собирать
+            свою коллекцию.
+        </p>
+
+        <p>
+            Выбери игру в меню сверху 👆
+        </p>
+
         <button
-            class="bonus"
-            onclick="dailyBonus()"
+            class="welcome-button"
+            onclick="openGames()"
         >
-            🎁 Получить 3 мозга
+            🎮 Открыть игры
         </button>
 
     </div>
 
-    <div class="tabs">
+
+    <!-- ВКЛАДКИ ИГР -->
+
+    <div
+        class="game-tabs hidden"
+        id="gameTabs"
+    >
 
         <div
-            class="tab active"
-            data-screen="shop"
+            class="game-tab"
+            data-screen="coin"
         >
-            🛒 Магазин
+            🪙 Монетка
         </div>
 
         <div
-            class="tab"
-            data-screen="inventory"
+            class="game-tab"
+            data-screen="roulette"
         >
-            🎒 Инвентарь
+            🎡 Рулетка
         </div>
 
         <div
-            class="tab"
-            data-screen="upgrade"
+            class="game-tab"
+            data-screen="jackpot"
         >
-            ⚡ Апгрейд
+            🌀 Jackpot
         </div>
 
         <div
-            class="tab"
-            data-screen="mines"
-        >
-            💣 Мины
-        </div>
-
-        <div
-            class="tab"
+            class="game-tab"
             data-screen="dice"
         >
             🎲 Dice
         </div>
 
         <div
-            class="tab"
+            class="game-tab"
+            data-screen="mines"
+        >
+            💣 Мины
+        </div>
+
+        <div
+            class="game-tab"
+            data-screen="upgrade"
+        >
+            ⚡ Upgrade
+        </div>
+
+        <div
+            class="game-tab"
             data-screen="slots"
         >
             🎰 Слоты
@@ -952,142 +1070,41 @@ button:active{
     </div>
 
 
-    <!-- SHOP -->
+    <!-- COIN -->
 
     <div
-        id="shop"
-        class="screen active"
-    >
-
-        <div class="section">
-
-            <h2>🧠 Брейнроты</h2>
-
-            <div
-                class="shop-grid"
-                id="shopGrid"
-            ></div>
-
-        </div>
-
-    </div>
-
-
-    <!-- INVENTORY -->
-
-    <div
-        id="inventory"
+        id="coin"
         class="screen"
     >
 
         <div class="section">
 
-            <h2>🎒 Инвентарь</h2>
-
-            <div id="inventoryList"></div>
-
-        </div>
-
-    </div>
-
-
-    <!-- UPGRADE -->
-
-    <div
-        id="upgrade"
-        class="screen"
-    >
-
-        <div class="section">
-
-            <h2>⚡ Upgrade</h2>
+            <h2>🪙 Монетка</h2>
 
             <div
-                class="upgrade-circle"
-                id="upgradeCircle"
+                class="coin"
+                id="coinVisual"
             >
-
-                <div
-                    class="upgrade-percent"
-                    id="upgradePercent"
-                >
-                    50%
-                </div>
-
-            </div>
-
-            <div class="chances">
-
-                <div
-                    class="chance"
-                    onclick="selectChance(this,5)"
-                >
-                    5%
-                </div>
-
-                <div
-                    class="chance"
-                    onclick="selectChance(this,10)"
-                >
-                    10%
-                </div>
-
-                <div
-                    class="chance"
-                    onclick="selectChance(this,20)"
-                >
-                    20%
-                </div>
-
-                <div
-                    class="chance"
-                    onclick="selectChance(this,30)"
-                >
-                    30%
-                </div>
-
-                <div
-                    class="chance"
-                    onclick="selectChance(this,50)"
-                >
-                    50%
-                </div>
-
-                <div
-                    class="chance active"
-                    onclick="selectChance(this,75)"
-                >
-                    75%
-                </div>
-
+                🪙
             </div>
 
             <input
-                id="upgradeAmount"
+                id="coinAmount"
                 type="number"
                 min="1"
-                placeholder="Сколько поставить"
-                style="
-                width:100%;
-                padding:13px;
-                margin-top:12px;
-                border-radius:14px;
-                border:1px solid #203962;
-                background:#071126;
-                color:white;
-                "
+                placeholder="Ставка"
             >
 
             <button
                 class="action"
-                onclick="upgrade()"
+                onclick="coinGame()"
             >
-                ⚡ Запустить Upgrade
+                🪙 Подбросить
             </button>
 
             <div
                 class="msg"
-                id="upgradeMsg"
+                id="coinMsg"
             ></div>
 
         </div>
@@ -1095,32 +1112,88 @@ button:active{
     </div>
 
 
-    <!-- MINES -->
+    <!-- ROULETTE -->
 
     <div
-        id="mines"
+        id="roulette"
         class="screen"
     >
 
         <div class="section">
 
-            <h2>💣 Mines</h2>
+            <h2>🎡 Рулетка 1v1</h2>
 
-            <div
-                class="mines"
-                id="minesGrid"
-            ></div>
+            <div class="roulette">
+                🎡
+            </div>
+
+            <input
+                id="rouletteAmount"
+                type="number"
+                min="1"
+                placeholder="Ставка"
+            >
 
             <button
                 class="action"
-                onclick="startMines()"
+                onclick="rouletteGame()"
             >
-                🎮 Новая игра
+                🎡 Крутить
             </button>
 
             <div
                 class="msg"
-                id="minesMsg"
+                id="rouletteMsg"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JACKPOT -->
+
+    <div
+        id="jackpot"
+        class="screen"
+    >
+
+        <div class="section">
+
+            <h2>🌀 Jackpot</h2>
+
+            <div class="jackpot-box">
+
+                <div>
+                    Текущий Jackpot
+                </div>
+
+                <div
+                    class="jackpot-number"
+                    id="jackpotNumber"
+                >
+                    0 🧠
+                </div>
+
+                <input
+                    id="jackpotAmount"
+                    type="number"
+                    min="1"
+                    placeholder="Ставка"
+                >
+
+                <button
+                    class="action"
+                    onclick="jackpotGame()"
+                >
+                    🌀 Войти в Jackpot
+                </button>
+
+            </div>
+
+            <div
+                class="msg"
+                id="jackpotMsg"
             ></div>
 
         </div>
@@ -1196,15 +1269,6 @@ button:active{
                 type="number"
                 min="1"
                 placeholder="Ставка"
-                style="
-                width:100%;
-                padding:13px;
-                margin-top:12px;
-                border-radius:14px;
-                border:1px solid #203962;
-                background:#071126;
-                color:white;
-                "
             >
 
             <button
@@ -1217,6 +1281,134 @@ button:active{
             <div
                 class="msg"
                 id="diceMsg"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MINES -->
+
+    <div
+        id="mines"
+        class="screen"
+    >
+
+        <div class="section">
+
+            <h2>💣 Mines</h2>
+
+            <div
+                class="mines"
+                id="minesGrid"
+            ></div>
+
+            <button
+                class="action"
+                onclick="startMines()"
+            >
+                🎮 Новая игра
+            </button>
+
+            <div
+                class="msg"
+                id="minesMsg"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- UPGRADE -->
+
+    <div
+        id="upgrade"
+        class="screen"
+    >
+
+        <div class="section">
+
+            <h2>⚡ Upgrade</h2>
+
+            <div
+                class="upgrade-circle"
+                id="upgradeCircle"
+            >
+
+                <div
+                    class="upgrade-percent"
+                    id="upgradePercent"
+                >
+                    75%
+                </div>
+
+            </div>
+
+            <div class="chances">
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,5)"
+                >
+                    5%
+                </div>
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,10)"
+                >
+                    10%
+                </div>
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,20)"
+                >
+                    20%
+                </div>
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,30)"
+                >
+                    30%
+                </div>
+
+                <div
+                    class="chance"
+                    onclick="selectChance(this,50)"
+                >
+                    50%
+                </div>
+
+                <div
+                    class="chance active"
+                    onclick="selectChance(this,75)"
+                >
+                    75%
+                </div>
+
+            </div>
+
+            <input
+                id="upgradeAmount"
+                type="number"
+                min="1"
+                placeholder="Сколько поставить"
+            >
+
+            <button
+                class="action"
+                onclick="upgrade()"
+            >
+                ⚡ Запустить Upgrade
+            </button>
+
+            <div
+                class="msg"
+                id="upgradeMsg"
             ></div>
 
         </div>
@@ -1260,6 +1452,13 @@ button:active{
 
             </div>
 
+            <input
+                id="slotsAmount"
+                type="number"
+                min="1"
+                placeholder="Ставка"
+            >
+
             <button
                 class="action"
                 onclick="spin()"
@@ -1281,6 +1480,10 @@ button:active{
 
 <script>
 
+/* =====================================================
+   TELEGRAM
+===================================================== */
+
 const tg = window.Telegram.WebApp;
 
 tg.ready();
@@ -1288,13 +1491,33 @@ tg.expand();
 
 const initData = tg.initData;
 
+
+/*
+ВАЖНО:
+
+Если API работает не на том же домене,
+что и GitHub Pages, здесь нужно указать
+публичный HTTPS-адрес API.
+
+Например:
+
+const API_URL = "https://api.example.com";
+
+НЕ:
+
+http://127.0.0.1:8080
+*/
+
+const API_URL = "https://YOUR-API-DOMAIN.com";
+
+
 const API_HEADERS = {
 
     "Content-Type":
-    "application/json",
+        "application/json",
 
     "X-Telegram-Init-Data":
-    initData
+        initData
 
 };
 
@@ -1304,15 +1527,16 @@ const API_HEADERS = {
 ===================================================== */
 
 async function api(
-    url,
+    path,
     options={}
 ){
 
     const response =
         await fetch(
-            url,
+            API_URL + path,
             {
                 ...options,
+
                 headers:{
                     ...API_HEADERS,
                     ...(options.headers || {})
@@ -1320,14 +1544,27 @@ async function api(
             }
         );
 
-    const data =
-        await response.json();
+    let data;
+
+    try{
+
+        data =
+            await response.json();
+
+    }catch{
+
+        throw new Error(
+            "Сервер вернул неправильный ответ."
+        );
+
+    }
 
     if(!response.ok){
 
         throw new Error(
             data.error ||
-            "Ошибка сервера"
+            data.message ||
+            "Ошибка сервера."
         );
 
     }
@@ -1343,7 +1580,7 @@ async function api(
 
 let balance = 0;
 
-let inventory = [];
+let playerName = "";
 
 
 async function loadPlayer(){
@@ -1352,16 +1589,34 @@ async function loadPlayer(){
 
         const data =
             await api(
-                "/api/player"
+                "/api/user"
             );
 
+        if(!data.ok){
+
+            throw new Error(
+                data.error ||
+                "Не удалось загрузить игрока."
+            );
+
+        }
+
         balance =
-            data.balance;
+            Number(data.balance || 0);
 
-        inventory =
-            data.inventory || [];
+        playerName =
+            data.username ||
+            "Игрок";
 
-        render();
+        document
+            .getElementById("balance")
+            .textContent =
+            balance;
+
+        document
+            .getElementById("playerName")
+            .textContent =
+            "@" + playerName;
 
         document
             .getElementById("loading")
@@ -1372,8 +1627,14 @@ async function loadPlayer(){
 
         console.error(error);
 
+        document
+            .getElementById("loading")
+            .classList
+            .add("hide");
+
         alert(
-            "Не удалось подключиться к Telegram."
+            "❌ Не удалось подключиться к серверу.\n\n" +
+            error.message
         );
 
     }
@@ -1382,368 +1643,209 @@ async function loadPlayer(){
 
 
 /* =====================================================
-   RENDER
+   WELCOME
 ===================================================== */
 
-function render(){
+function openGames(){
+
+    document
+        .getElementById("welcome")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("gameTabs")
+        .classList
+        .remove("hidden");
+
+    openScreen("coin");
+
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+function openScreen(screen){
+
+    document
+        .querySelectorAll(".game-tab")
+        .forEach(
+            tab => {
+
+                tab.classList
+                    .toggle(
+                        "active",
+                        tab.dataset.screen === screen
+                    );
+
+            }
+        );
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(
+            item => {
+
+                item.classList
+                    .toggle(
+                        "active",
+                        item.id === screen
+                    );
+
+            }
+        );
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+document
+    .querySelectorAll(".game-tab")
+    .forEach(
+        tab => {
+
+            tab.addEventListener(
+                "click",
+                () => {
+
+                    openScreen(
+                        tab.dataset.screen
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   GAME RESULT
+===================================================== */
+
+async function playGame(
+    amount,
+    result="lose",
+    winAmount=0
+){
+
+    amount =
+        Number(amount);
+
+    if(
+        !amount ||
+        amount <= 0
+    ){
+
+        throw new Error(
+            "Введите корректную ставку."
+        );
+
+    }
+
+    const data =
+        await api(
+            "/api/game",
+            {
+                method:"POST",
+
+                body:
+                JSON.stringify({
+
+                    amount:
+                        amount,
+
+                    result:
+                        result,
+
+                    win_amount:
+                        winAmount
+
+                })
+            }
+        );
+
+    if(!data.ok){
+
+        throw new Error(
+            data.error ||
+            data.message ||
+            "Игра не выполнена."
+        );
+
+    }
+
+    balance =
+        Number(data.balance || 0);
 
     document
         .getElementById("balance")
         .textContent =
         balance;
 
-    const list =
-        document.getElementById(
-            "inventoryList"
-        );
-
-    if(!inventory.length){
-
-        list.innerHTML =
-            '<div class="msg">Инвентарь пуст</div>';
-
-    }else{
-
-        list.innerHTML =
-            inventory
-            .map(
-                item => `
-                <div class="inventory-item">
-
-                    🧠 ${item.name}
-
-                    <div
-                        style="
-                        color:#ffd83d;
-                        margin-top:5px;
-                        "
-                    >
-                        ${item.price} 🧠
-                    </div>
-
-                </div>
-                `
-            )
-            .join("");
-
-    }
+    return data;
 
 }
 
 
 /* =====================================================
-   SHOP
+   COIN
 ===================================================== */
 
-const ITEMS = {
-
-    "La Secret Combinasion":45,
-    "Garama And Madundung":50,
-    "Burguro And Fryuro":63,
-    "Cash Or Card":60,
-    "Popcuru And Fizzuru":95,
-    "Celestial Pegasus":150,
-    "Capitano Moby":110,
-    "Fragola La La La":75,
-    "Cerberus":160,
-    "Fortunu And Cashuru":185,
-    "Cookie And Milki":195,
-    "Spooky And Pumpky":200,
-    "Reinito Sleighito":180,
-    "Foxini Lanterini":350,
-    "La Casa Boo":550,
-    "Dragon Cannelloni":1670,
-    "Hydra Dragon Cannelloni":1780,
-    "Dragon Aquanini":3500,
-    "Dragon Gingerini":3000,
-    "Skibidi Toilet":7500,
-    "Meowl":13000,
-    "Strawbery Elephant":21000,
-    "Jhon Pork":8000,
-    "Antonio":4500
-
-};
-
-
-function renderShop(){
-
-    const grid =
-        document.getElementById(
-            "shopGrid"
-        );
-
-    grid.innerHTML =
-        Object.entries(ITEMS)
-        .map(
-            ([name,price]) => {
-
-                return `
-                <div class="card">
-
-                    <div class="img">
-                        🧠
-                    </div>
-
-                    <div>
-                        ${name}
-                    </div>
-
-                    <div class="price">
-                        ${price} 🧠
-                    </div>
-
-                    <button
-                        class="buy"
-                        onclick="buy('${name.replace(/'/g,"\\'")}')"
-                    >
-                        Купить
-                    </button>
-
-                </div>
-                `;
-
-            }
-        )
-        .join("");
-
-}
-
-
-async function buy(name){
-
-    try{
-
-        const data =
-            await api(
-                "/api/buy",
-                {
-                    method:"POST",
-
-                    body:
-                    JSON.stringify({
-                        name:name
-                    })
-                }
-            );
-
-        if(!data.ok){
-
-            alert(data.message);
-
-            return;
-
-        }
-
-        balance =
-            data.balance;
-
-        await loadPlayer();
-
-        alert(
-            "✅ Куплено: " + name
-        );
-
-    }catch(error){
-
-        alert(
-            error.message
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   DAILY
-===================================================== */
-
-async function dailyBonus(){
-
-    try{
-
-        const data =
-            await api(
-                "/api/daily",
-                {
-                    method:"POST"
-                }
-            );
-
-        if(!data.ok){
-
-            alert(
-                data.message
-            );
-
-            return;
-
-        }
-
-        await loadPlayer();
-
-        alert(
-            "🎁 +3 🧠"
-        );
-
-    }catch(error){
-
-        alert(
-            error.message
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   UPGRADE
-===================================================== */
-
-let selectedChance = 75;
-
-
-function selectChance(
-    element,
-    chance
-){
-
-    document
-        .querySelectorAll(".chance")
-        .forEach(
-            x =>
-            x.classList
-            .remove("active")
-        );
-
-    element.classList
-        .add("active");
-
-    selectedChance =
-        chance;
-
-    updateUpgradeCircle(
-        chance
-    );
-
-}
-
-
-function updateUpgradeCircle(
-    percent
-){
-
-    const degrees =
-        percent * 3.6;
-
-    document
-        .getElementById(
-            "upgradeCircle"
-        )
-        .style
-        .background =
-        `
-        conic-gradient(
-            #00ff91 0deg,
-            #00ff91 ${degrees}deg,
-            #02050a ${degrees}deg,
-            #02050a 360deg
-        )
-        `;
-
-    document
-        .getElementById(
-            "upgradePercent"
-        )
-        .textContent =
-        percent + "%";
-
-}
-
-
-async function upgrade(){
+async function coinGame(){
 
     const amount =
         Number(
             document
-            .getElementById(
-                "upgradeAmount"
-            )
-            .value
+                .getElementById("coinAmount")
+                .value
         );
 
     const msg =
         document
-        .getElementById(
-            "upgradeMsg"
-        );
+            .getElementById("coinMsg");
 
-    if(!amount || amount <= 0){
+    if(!amount){
 
         msg.textContent =
-            "❌ Введи ставку.";
+            "❌ Введите ставку.";
 
         return;
 
     }
 
-    msg.textContent =
-        "⚡ Проверяем...";
+    const win =
+        Math.random() < .5;
 
     try{
 
         const data =
-            await api(
-                "/api/upgrade",
-                {
-                    method:"POST",
-
-                    body:
-                    JSON.stringify({
-                        chance:
-                        selectedChance,
-
-                        amount:
-                        amount
-                    })
-                }
+            await playGame(
+                amount,
+                win ? "win" : "lose",
+                win ? amount * 2 : 0
             );
 
-        if(!data.ok){
+        document
+            .getElementById("coinVisual")
+            .textContent =
+            win ? "🟡" : "⚫";
 
-            msg.textContent =
-                data.message;
-
-            return;
-
-        }
-
-        balance =
-            data.balance;
-
-        if(data.success){
-
-            msg.textContent =
-                "🟢 УСПЕХ! +"
-                +
-                amount
-                +
-                " 🧠";
-
-        }else{
-
-            msg.textContent =
-                "🔴 Неудача.";
-
-        }
-
-        await loadPlayer();
+        msg.textContent =
+            win
+            ? "🎉 Орёл! Ты выиграл."
+            : "❌ Решка. Ты проиграл.";
 
     }catch(error){
 
         msg.textContent =
-            error.message;
+            "❌ " + error.message;
 
     }
 
@@ -1751,115 +1853,116 @@ async function upgrade(){
 
 
 /* =====================================================
-   MINES
+   ROULETTE
 ===================================================== */
 
-let mineGame = false;
+async function rouletteGame(){
 
-let mines = [];
-
-
-function createMines(){
-
-    const grid =
-        document.getElementById(
-            "minesGrid"
+    const amount =
+        Number(
+            document
+                .getElementById("rouletteAmount")
+                .value
         );
 
-    grid.innerHTML = "";
+    const msg =
+        document
+            .getElementById("rouletteMsg");
 
-    mines = [];
+    if(!amount){
 
-    const bomb =
-        Math.floor(
-            Math.random() * 25
+        msg.textContent =
+            "❌ Введите ставку.";
+
+        return;
+
+    }
+
+    const win =
+        Math.random() < .5;
+
+    try{
+
+        await playGame(
+            amount,
+            win ? "win" : "lose",
+            win ? amount * 2 : 0
         );
 
-    for(
-        let i=0;
-        i<25;
-        i++
-    ){
+        msg.textContent =
+            win
+            ? "🎉 Победа в рулетке!"
+            : "❌ Рулетка проиграна.";
 
-        const cell =
-            document.createElement(
-                "div"
-            );
+    }catch(error){
 
-        cell.className =
-            "mine";
-
-        cell.textContent =
-            "◇";
-
-        cell.onclick =
-            () => openMine(
-                cell,
-                i,
-                bomb
-            );
-
-        grid.appendChild(
-            cell
-        );
+        msg.textContent =
+            "❌ " + error.message;
 
     }
 
 }
 
 
-function startMines(){
+/* =====================================================
+   JACKPOT
+===================================================== */
 
-    mineGame = true;
-
-    document
-        .getElementById(
-            "minesMsg"
-        )
-        .textContent =
-        "Выбирай клетки.";
-
-    createMines();
-
-}
+let jackpot =
+    0;
 
 
-function openMine(
-    cell,
-    index,
-    bomb
-){
+async function jackpotGame(){
 
-    if(!mineGame)
+    const amount =
+        Number(
+            document
+                .getElementById("jackpotAmount")
+                .value
+        );
+
+    const msg =
+        document
+            .getElementById("jackpotMsg");
+
+    if(!amount){
+
+        msg.textContent =
+            "❌ Введите ставку.";
+
         return;
 
-    if(index === bomb){
+    }
 
-        cell.textContent =
-            "💣";
+    const win =
+        Math.random() < .1;
 
-        cell.classList
-            .add("bomb");
+    try{
 
-        mineGame =
-            false;
+        await playGame(
+            amount,
+            win ? "win" : "lose",
+            win ? amount * 5 : 0
+        );
+
+        jackpot += amount;
 
         document
-            .getElementById(
-                "minesMsg"
-            )
+            .getElementById("jackpotNumber")
             .textContent =
-            "💥 Мина!";
+            jackpot + " 🧠";
 
-        return;
+        msg.textContent =
+            win
+            ? "🏆 JACKPOT! Большой выигрыш!"
+            : "❌ Не повезло.";
+
+    }catch(error){
+
+        msg.textContent =
+            "❌ " + error.message;
 
     }
-
-    cell.textContent =
-        "💎";
-
-    cell.classList
-        .add("open");
 
 }
 
@@ -1877,13 +1980,10 @@ function selectColor(
 ){
 
     document
-        .querySelectorAll(
-            ".color"
-        )
+        .querySelectorAll(".color")
         .forEach(
             x =>
-            x.classList
-            .remove("selected")
+            x.classList.remove("selected")
         );
 
     element
@@ -1896,7 +1996,18 @@ function selectColor(
 }
 
 
-function rollDice(){
+async function rollDice(){
+
+    const amount =
+        Number(
+            document
+                .getElementById("diceAmount")
+                .value
+        );
+
+    const msg =
+        document
+            .getElementById("diceMsg");
 
     const colors = [
         "red",
@@ -1909,9 +2020,17 @@ function rollDice(){
 
     if(!selectedColor){
 
-        alert(
-            "Выбери цвет."
-        );
+        msg.textContent =
+            "❌ Выбери цвет.";
+
+        return;
+
+    }
+
+    if(!amount){
+
+        msg.textContent =
+            "❌ Введи ставку.";
 
         return;
 
@@ -1926,143 +2045,61 @@ function rollDice(){
             )
         ];
 
-    const msg =
+    const win =
+        result === selectedColor;
+
+    try{
+
+        await playGame(
+            amount,
+            win ? "win" : "lose",
+            win ? amount * 5 : 0
+        );
+
+        msg.textContent =
+            win
+            ? "🎉 Выпал твой цвет!"
+            : "❌ Выпал " + result + ".";
+
+    }catch(error){
+
+        msg.textContent =
+            "❌ " + error.message;
+
+    }
+
+}
+
+
+/* =====================================================
+   MINES
+===================================================== */
+
+let mineGameActive = false;
+
+let mineBomb = -1;
+
+
+function createMines(){
+
+    const grid =
         document
-        .getElementById(
-            "diceMsg"
+            .getElementById("minesGrid");
+
+    grid.innerHTML = "";
+
+    mineBomb =
+        Math.floor(
+            Math.random() * 25
         );
 
-    if(result === selectedColor){
+    mineGameActive =
+        true;
 
-        msg.textContent =
-            "🎉 Выпал твой цвет!";
+    for(
+        let i=0;
+        i<25;
+        i++
+    ){
 
-    }else{
-
-        msg.textContent =
-            "❌ Выпал другой цвет: "
-            +
-            result;
-
-    }
-
-}
-
-
-/* =====================================================
-   SLOTS
-===================================================== */
-
-function spin(){
-
-    const symbols = [
-        "🍒",
-        "🍋",
-        "🍉",
-        "⭐",
-        "💎"
-    ];
-
-    const reels = [
-        document.getElementById("r1"),
-        document.getElementById("r2"),
-        document.getElementById("r3")
-    ];
-
-    reels.forEach(
-        reel => {
-
-            reel.classList
-                .remove("spin");
-
-            void reel.offsetWidth;
-
-            reel.classList
-                .add("spin");
-
-            reel.textContent =
-                symbols[
-                    Math.floor(
-                        Math.random()
-                        *
-                        symbols.length
-                    )
-                ];
-
-        }
-    );
-
-    document
-        .getElementById(
-            "slotMsg"
-        )
-        .textContent =
-        "🎰 Готово!";
-
-}
-
-
-/* =====================================================
-   TABS
-===================================================== */
-
-document
-.querySelectorAll(".tab")
-.forEach(
-    tab => {
-
-        tab.addEventListener(
-            "click",
-            () => {
-
-                document
-                .querySelectorAll(
-                    ".tab"
-                )
-                .forEach(
-                    x =>
-                    x.classList
-                    .remove("active")
-                );
-
-                document
-                .querySelectorAll(
-                    ".screen"
-                )
-                .forEach(
-                    x =>
-                    x.classList
-                    .remove("active")
-                );
-
-                tab.classList
-                    .add("active");
-
-                document
-                    .getElementById(
-                        tab.dataset.screen
-                    )
-                    .classList
-                    .add("active");
-
-            }
-        );
-
-    }
-);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-renderShop();
-
-updateUpgradeCircle(75);
-
-loadPlayer();
-
-</script>
-
-</body>
-</html>
+        const
