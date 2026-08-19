@@ -1,1701 +1,382 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
->
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>UPBRAINROTS</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
-
-html,
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;min-height:100%}
 body{
-    margin:0;
-    padding:0;
-    min-height:100%;
-}
-
-body{
-
     background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(0,234,255,.12),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 85% 80%,
-            rgba(0,80,255,.18),
-            transparent 35%
-        ),
-        #030611;
-
+    radial-gradient(circle at 15% 20%,rgba(0,234,255,.12),transparent 30%),
+    radial-gradient(circle at 85% 80%,rgba(0,80,255,.18),transparent 35%),
+    #030611;
     color:#eef7ff;
-
-    font-family:
-        Arial,
-        sans-serif;
-
+    font-family:Arial,sans-serif;
     overflow-x:hidden;
-
     background-image:
-
-        linear-gradient(
-            rgba(0,230,255,.035) 1px,
-            transparent 1px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(0,230,255,.035) 1px,
-            transparent 1px
-        );
-
+    linear-gradient(rgba(0,230,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,230,255,.035) 1px,transparent 1px);
     background-size:35px 35px;
 }
-
-
-button{
-    cursor:pointer;
-}
-
-button:active{
-    transform:scale(.97);
-}
-
-
-/* =====================================================
-   APP
-===================================================== */
-
-.app{
-
-    max-width:500px;
-
-    margin:auto;
-
-    padding:
-        10px
-        10px
-        35px;
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
+button{cursor:pointer}
+button:active{transform:scale(.97)}
+.app{max-width:500px;margin:auto;padding:10px 10px 35px}
 
 .top{
-
-    position:sticky;
-
-    top:8px;
-
-    z-index:20;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(13,26,55,.97),
-            rgba(5,12,30,.97)
-        );
-
-    border:
-        1px solid
-        rgba(0,220,255,.25);
-
-    border-radius:24px;
-
-    padding:16px;
-
-    box-shadow:
-        0 0 30px
-        rgba(0,180,255,.12);
-
-    backdrop-filter:
-        blur(15px);
+    position:sticky;top:8px;z-index:20;
+    background:linear-gradient(145deg,rgba(13,26,55,.97),rgba(5,12,30,.97));
+    border:1px solid rgba(0,220,255,.25);
+    border-radius:24px;padding:16px;
+    box-shadow:0 0 30px rgba(0,180,255,.12);
+    backdrop-filter:blur(15px)
 }
+.logo{text-align:center;font-size:24px;font-weight:1000;letter-spacing:3px;text-shadow:0 0 8px #00eaff,0 0 25px #0066ff}
+.balance{text-align:center;font-size:30px;font-weight:1000;color:#ffd83d;margin-top:6px;text-shadow:0 0 12px rgba(255,216,61,.5)}
 
-.logo{
-
-    text-align:center;
-
-    font-size:24px;
-
-    font-weight:1000;
-
-    letter-spacing:3px;
-
-    text-shadow:
-        0 0 8px #00eaff,
-        0 0 25px #0066ff;
+.bonus,.buy,.action{
+    width:100%;border:0;border-radius:14px;padding:12px;margin-top:12px;
+    background:linear-gradient(135deg,#00eaff,#0066ff);
+    color:white;font-weight:900
 }
-
-.balance{
-
-    text-align:center;
-
-    font-size:30px;
-
-    font-weight:1000;
-
-    color:#ffd83d;
-
-    margin-top:6px;
-
-    text-shadow:
-        0 0 12px
-        rgba(255,216,61,.5);
-}
-
-
-/* =====================================================
-   DAILY
-===================================================== */
-
-.bonus{
-
-    width:100%;
-
-    border:0;
-
-    border-radius:14px;
-
-    padding:12px;
-
-    margin-top:12px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #00eaff,
-            #0066ff
-        );
-
-    color:white;
-
-    font-size:14px;
-
-    font-weight:900;
-}
-
-
-/* =====================================================
-   TABS
-===================================================== */
 
 .tabs{
-
-    display:flex;
-
-    gap:7px;
-
-    overflow-x:auto;
-
-    padding:
-        12px
-        0;
-
-    scrollbar-width:none;
-
-    position:sticky;
-
-    top:140px;
-
-    z-index:15;
-
-    background:
-        rgba(3,6,17,.92);
-
-    backdrop-filter:
-        blur(12px);
+    display:flex;gap:7px;overflow-x:auto;padding:12px 0;
+    scrollbar-width:none;position:sticky;top:140px;z-index:15;
+    background:rgba(3,6,17,.92);backdrop-filter:blur(12px)
 }
-
-.tabs::-webkit-scrollbar{
-    display:none;
-}
-
+.tabs::-webkit-scrollbar{display:none}
 .tab{
-
-    flex:
-        0 0 auto;
-
-    padding:
-        11px
-        13px;
-
-    border-radius:14px;
-
-    background:#0b142b;
-
-    border:
-        1px solid
-        #20345c;
-
-    color:#91a8cf;
-
-    font-weight:900;
-
-    font-size:13px;
+    flex:0 0 auto;padding:11px 13px;border-radius:14px;
+    background:#0b142b;border:1px solid #20345c;
+    color:#91a8cf;font-weight:900;font-size:13px
 }
+.tab.active{color:white;border-color:#00eaff;background:linear-gradient(135deg,#0d2940,#0b1833);box-shadow:0 0 14px rgba(0,220,255,.25)}
 
-.tab.active{
-
-    color:white;
-
-    border-color:#00eaff;
-
-    background:
-        linear-gradient(
-            135deg,
-            #0d2940,
-            #0b1833
-        );
-
-    box-shadow:
-        0 0 14px
-        rgba(0,220,255,.25);
-}
-
-
-/* =====================================================
-   SCREENS
-===================================================== */
-
-.screen{
-    display:none;
-}
-
-.screen.active{
-
-    display:block;
-
-    animation:
-        screenIn
-        .2s
-        ease;
-}
-
-@keyframes screenIn{
-
-    from{
-        opacity:0;
-        transform:translateY(7px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-
-/* =====================================================
-   SECTION
-===================================================== */
+.screen{display:none}
+.screen.active{display:block;animation:screenIn .2s ease}
+@keyframes screenIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 
 .section{
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(12,22,45,.97),
-            rgba(5,12,27,.97)
-        );
-
-    border:
-        1px solid
-        #1b3158;
-
-    border-radius:22px;
-
-    padding:15px;
-
-    margin-bottom:14px;
+    background:linear-gradient(145deg,rgba(12,22,45,.97),rgba(5,12,27,.97));
+    border:1px solid #1b3158;border-radius:22px;padding:15px;margin-bottom:14px
 }
+.section h2{margin-top:0}
 
-.section h2{
-    margin-top:0;
-}
+.shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.card{background:#0c1730;border:1px solid #203962;border-radius:17px;padding:10px}
+.img{height:70px;border-radius:13px;background:radial-gradient(circle,rgba(0,220,255,.12),transparent 60%),#081126;display:grid;place-items:center;font-size:34px;margin-bottom:8px}
+.price{color:#ffd83d;font-size:17px;font-weight:1000;margin-top:6px}
 
-
-/* =====================================================
-   SHOP
-===================================================== */
-
-.shop-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:9px;
-}
-
-.card{
-
-    background:#0c1730;
-
-    border:
-        1px solid
-        #203962;
-
-    border-radius:17px;
-
-    padding:10px;
-}
-
-.img{
-
-    height:70px;
-
-    border-radius:13px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0,220,255,.12),
-            transparent 60%
-        ),
-        #081126;
-
-    display:grid;
-
-    place-items:center;
-
-    font-size:34px;
-
-    margin-bottom:8px;
-}
-
-.price{
-
-    color:#ffd83d;
-
-    font-size:17px;
-
-    font-weight:1000;
-
-    margin-top:6px;
-}
-
-.buy,
-.action{
-
-    width:100%;
-
-    padding:12px;
-
-    border:0;
-
-    border-radius:13px;
-
-    margin-top:9px;
-
-    color:white;
-
-    font-weight:900;
-
-    background:
-        linear-gradient(
-            135deg,
-            #00dfff,
-            #0066ff
-        );
-}
-
-
-/* =====================================================
-   INVENTORY
-===================================================== */
-
-.inventory-item{
-
-    background:#0b1730;
-
-    border:
-        1px solid
-        #203962;
-
-    border-radius:15px;
-
-    padding:12px;
-
-    margin-top:8px;
-}
-
-
-/* =====================================================
-   UPGRADE
-===================================================== */
+.inventory-item{background:#0b1730;border:1px solid #203962;border-radius:15px;padding:12px;margin-top:8px}
 
 .upgrade-circle{
-
-    width:240px;
-
-    height:240px;
-
-    border-radius:50%;
-
-    margin:
-        20px
-        auto;
-
-    position:relative;
-
-    display:grid;
-
-    place-items:center;
-
-    background:
-        conic-gradient(
-            #00ff91 0deg,
-            #00ff91 270deg,
-            #ff1744 270deg,
-            #ff1744 360deg
-        );
-
-    box-shadow:
-        0 0 35px
-        rgba(0,255,145,.2);
+    width:240px;height:240px;border-radius:50%;margin:20px auto;
+    position:relative;display:grid;place-items:center;
+    background:conic-gradient(#00ff91 0deg,#00ff91 270deg,#ff1744 270deg,#ff1744 360deg);
+    box-shadow:0 0 35px rgba(0,255,145,.2)
 }
-
 .upgrade-circle:after{
-
-    content:"";
-
-    position:absolute;
-
-    width:202px;
-
-    height:202px;
-
-    border-radius:50%;
-
-    background:#050914;
-
-    box-shadow:
-        inset 0 0 30px
-        rgba(0,0,0,.8);
+    content:"";position:absolute;width:202px;height:202px;border-radius:50%;
+    background:#050914;box-shadow:inset 0 0 30px rgba(0,0,0,.8)
 }
-
-.upgrade-percent{
-
-    position:relative;
-
-    z-index:2;
-
-    font-size:38px;
-
-    font-weight:1000;
-
-    color:white;
-
-    text-shadow:
-        0 0 12px
-        #00ff91;
-}
-
-.chances{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:8px;
-}
-
-.chance{
-
-    padding:12px 5px;
-
-    text-align:center;
-
-    border-radius:13px;
-
-    border:
-        1px solid
-        #203962;
-
-    background:#0b1730;
-
-    color:#91a8cf;
-
-    font-weight:900;
-}
-
-.chance.active{
-
-    color:#00ff91;
-
-    border-color:#00ff91;
-
-    box-shadow:
-        0 0 14px
-        rgba(0,255,145,.2);
-}
-
-input{
-
-    width:100%;
-
-    padding:13px;
-
-    margin-top:12px;
-
-    border-radius:13px;
-
-    border:
-        1px solid
-        #203962;
-
-    background:#071126;
-
-    color:white;
-
-    outline:none;
-}
-
-input:focus{
-    border-color:#00eaff;
-}
-
-
-/* =====================================================
-   MINES
-===================================================== */
-
-.mines{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(5,1fr);
-
-    gap:7px;
-}
-
-.mine{
-
-    aspect-ratio:1;
-
-    border:
-        1px solid
-        #203962;
-
-    border-radius:12px;
-
-    background:#0b1730;
-
-    display:grid;
-
-    place-items:center;
-
-    font-size:20px;
-}
-
-.mine.open{
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0,255,145,.2),
-            #07162a
-        );
-
-    border-color:#00ff91;
-}
-
-.mine.bomb{
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,20,70,.3),
-            #250811
-        );
-
-    border-color:#ff1744;
-}
-
-
-/* =====================================================
-   DICE
-===================================================== */
-
-.colors{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:8px;
-}
-
-.color{
-
-    padding:10px 5px;
-
-    text-align:center;
-
-    border-radius:15px;
-
-    background:#0b1730;
-
-    border:
-        1px solid
-        #203962;
-}
-
-.color.selected{
-
-    border-color:#00eaff;
-
-    box-shadow:
-        0 0 18px
-        rgba(0,220,255,.3);
-}
-
-.ball{
-
-    width:45px;
-
-    height:45px;
-
-    border-radius:50%;
-
-    margin:
-        0
-        auto
-        7px;
-}
-
-.red{
-    background:#ff1744;
-    box-shadow:0 0 18px #ff1744;
-}
-
-.orange{
-    background:#ff8a00;
-    box-shadow:0 0 18px #ff8a00;
-}
-
-.yellow{
-    background:#ffd600;
-    box-shadow:0 0 18px #ffd600;
-}
-
-.green{
-    background:#00ff3c;
-    box-shadow:0 0 18px #00ff3c;
-}
-
-.blue{
-    background:#0066ff;
-    box-shadow:0 0 18px #0066ff;
-}
-
-.purple{
-    background:#a020f0;
-    box-shadow:0 0 18px #a020f0;
-}
-
-
-/* =====================================================
-   SLOTS
-===================================================== */
-
-.reels{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:8px;
-
-    margin:20px 0;
-}
-
-.reel{
-
-    width:72px;
-
-    height:72px;
-
-    display:grid;
-
-    place-items:center;
-
-    border-radius:17px;
-
-    background:#f5f8ff;
-
-    color:#111;
-
-    font-size:38px;
-}
-
-.spin{
-
-    animation:
-        reelSpin
-        .4s
-        ease;
-}
-
-@keyframes reelSpin{
-
-    0%{
-        transform:translateY(-15px);
-        opacity:.3;
-    }
-
-    100%{
-        transform:translateY(0);
-        opacity:1;
-    }
-}
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-.msg{
-
-    text-align:center;
-
-    margin-top:12px;
-
-    color:#91a8cf;
-
-    min-height:20px;
-
-    line-height:1.5;
-}
-
-
-/* =====================================================
-   LOADING
-===================================================== */
+.upgrade-percent{position:relative;z-index:2;font-size:38px;font-weight:1000;color:white;text-shadow:0 0 12px #00ff91}
+
+.chances{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.chance{padding:12px 5px;text-align:center;border-radius:13px;border:1px solid #203962;background:#0b1730;color:#91a8cf;font-weight:900}
+.chance.active{color:#00ff91;border-color:#00ff91;box-shadow:0 0 14px rgba(0,255,145,.2)}
+
+input{width:100%;padding:13px;margin-top:12px;border-radius:13px;border:1px solid #203962;background:#071126;color:white;outline:none}
+input:focus{border-color:#00eaff}
+
+.mines{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:12px}
+.mine{aspect-ratio:1;border:1px solid #203962;border-radius:12px;background:#0b1730;display:grid;place-items:center;font-size:20px}
+.mine.open{background:radial-gradient(circle,rgba(0,255,145,.2),#07162a);border-color:#00ff91}
+.mine.bomb{background:radial-gradient(circle,rgba(255,20,70,.3),#250811);border-color:#ff1744}
+
+.colors{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.color{padding:10px 5px;text-align:center;border-radius:15px;background:#0b1730;border:1px solid #203962}
+.color.selected{border-color:#00eaff;box-shadow:0 0 18px rgba(0,220,255,.3)}
+.ball{width:45px;height:45px;border-radius:50%;margin:0 auto 7px}
+.red{background:#ff1744;box-shadow:0 0 18px #ff1744}
+.orange{background:#ff8a00;box-shadow:0 0 18px #ff8a00}
+.yellow{background:#ffd600;box-shadow:0 0 18px #ffd600}
+.green{background:#00ff3c;box-shadow:0 0 18px #00ff3c}
+.blue{background:#0066ff;box-shadow:0 0 18px #0066ff}
+.purple{background:#a020f0;box-shadow:0 0 18px #a020f0}
+
+.reels{display:flex;justify-content:center;gap:8px;margin:20px 0}
+.reel{width:72px;height:72px;display:grid;place-items:center;border-radius:17px;background:#f5f8ff;color:#111;font-size:38px}
+.spin{animation:reelSpin .4s ease}
+@keyframes reelSpin{0%{transform:translateY(-15px);opacity:.3}100%{transform:translateY(0);opacity:1}}
+
+.msg{text-align:center;margin-top:12px;color:#91a8cf;min-height:20px;line-height:1.5}
+.welcome{text-align:center;padding:25px 10px}
+.welcome-icon{font-size:60px;margin-bottom:10px}
+.welcome h1{font-size:25px;margin:8px 0}
+.welcome p{color:#91a8cf;line-height:1.5}
 
 .loading{
-
-    position:fixed;
-
-    inset:0;
-
-    background:#030611;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    z-index:100;
+    position:fixed;inset:0;background:#030611;display:flex;
+    align-items:center;justify-content:center;z-index:100
 }
-
-.loading.hide{
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:.3s;
-}
-
-.loader{
-
-    text-align:center;
-
-    color:#00eaff;
-
-    font-weight:1000;
-
-    text-shadow:
-        0 0 15px
-        #00eaff;
-}
-
+.loader{text-align:center;color:#00eaff;font-weight:1000}
 .loader-circle{
-
-    width:50px;
-
-    height:50px;
-
-    border-radius:50%;
-
-    border:
-        4px solid
-        #12304c;
-
-    border-top-color:#00eaff;
-
-    animation:
-        load
-        1s
-        linear
-        infinite;
-
-    margin:
-        auto
-        auto
-        15px;
+    width:50px;height:50px;border-radius:50%;border:4px solid #12304c;
+    border-top-color:#00eaff;animation:load 1s linear infinite;margin:auto auto 15px
 }
-
-@keyframes load{
-
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-
-/* =====================================================
-   WELCOME
-===================================================== */
-
-.welcome{
-
-    text-align:center;
-
-    padding:25px 10px;
-}
-
-.welcome-icon{
-
-    font-size:60px;
-
-    margin-bottom:10px;
-}
-
-.welcome h1{
-
-    font-size:25px;
-
-    margin:8px 0;
-}
-
-.welcome p{
-
-    color:#91a8cf;
-
-    line-height:1.5;
-}
-
+@keyframes load{to{transform:rotate(360deg)}}
+.loading.hide{opacity:0;pointer-events:none;transition:.3s}
 </style>
-
 </head>
-
 
 <body>
 
-
-<div
-    class="loading"
-    id="loading"
->
-
+<div class="loading" id="loading">
     <div class="loader">
-
         <div class="loader-circle"></div>
-
         Загрузка UPBRAINROTS...
-
     </div>
-
 </div>
-
 
 <div class="app">
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <div class="top">
-
-    <div class="logo">
-        🧠 UPBRAINROTS
-    </div>
-
-    <div class="balance">
-
-        <span id="balance">
-            0
-        </span>
-
-        🧠
-
-    </div>
-
-    <button
-        class="bonus"
-        onclick="dailyBonus()"
-    >
-        🎁 Получить ежедневный бонус +3
-    </button>
-
+    <div class="logo">🧠 UPBRAINROTS</div>
+    <div class="balance"><span id="balance">0</span> 🧠</div>
+    <button class="bonus" onclick="dailyBonus()">🎁 Получить ежедневный бонус +3</button>
 </div>
-
-
-<!-- =====================================================
-     GAME TABS
-===================================================== -->
 
 <div class="tabs">
-
-    <div
-        class="tab active"
-        data-screen="welcome"
-    >
-        🏠 Главная
-    </div>
-
-    <div
-        class="tab"
-        data-screen="upgrade"
-    >
-        ⚡ Upgrade
-    </div>
-
-    <div
-        class="tab"
-        data-screen="mines"
-    >
-        💣 Mines
-    </div>
-
-    <div
-        class="tab"
-        data-screen="dice"
-    >
-        🎲 Dice
-    </div>
-
-    <div
-        class="tab"
-        data-screen="slots"
-    >
-        🎰 Slots
-    </div>
-
-    <div
-        class="tab"
-        data-screen="shop"
-    >
-        🛒 Магазин
-    </div>
-
-    <div
-        class="tab"
-        data-screen="inventory"
-    >
-        🎒 Инвентарь
-    </div>
-
+    <div class="tab active" data-screen="welcome">🏠 Главная</div>
+    <div class="tab" data-screen="upgrade">⚡ Upgrade</div>
+    <div class="tab" data-screen="mines">💣 Mines</div>
+    <div class="tab" data-screen="dice">🎲 Dice</div>
+    <div class="tab" data-screen="slots">🎰 Slots</div>
+    <div class="tab" data-screen="shop">🛒 Магазин</div>
+    <div class="tab" data-screen="inventory">🎒 Инвентарь</div>
 </div>
 
-
-<!-- =====================================================
-     WELCOME
-===================================================== -->
-
-<div
-    id="welcome"
-    class="screen active"
->
-
+<div id="welcome" class="screen active">
     <div class="section">
-
         <div class="welcome">
-
-            <div class="welcome-icon">
-                🧠
-            </div>
-
-            <h1>
-                Добро пожаловать в UPBRAINROTS
-            </h1>
-
-            <p>
-                Выбирай игру сверху и начинай играть.
-            </p>
-
-            <p>
-                Здесь доступны Upgrade,
-                Mines, Color Dice, Slots
-                и магазин брейнротов.
-            </p>
-
+            <div class="welcome-icon">🧠</div>
+            <h1>Добро пожаловать в UPBRAINROTS</h1>
+            <p>Выбирай игру сверху и начинай играть.</p>
+            <p>Upgrade, Mines, Color Dice, Slots и магазин брейнротов.</p>
         </div>
-
     </div>
-
 </div>
 
-
-<!-- =====================================================
-     UPGRADE
-===================================================== -->
-
-<div
-    id="upgrade"
-    class="screen"
->
-
+<div id="upgrade" class="screen">
     <div class="section">
+        <h2>⚡ Upgrade</h2>
+        <p class="msg">Выбери шанс выигрыша.</p>
 
-        <h2>
-            ⚡ Upgrade
-        </h2>
-
-        <p class="msg">
-            Выбери шанс выигрыша.
-        </p>
-
-        <div
-            class="upgrade-circle"
-            id="upgradeCircle"
-        >
-
-            <div
-                class="upgrade-percent"
-                id="upgradePercent"
-            >
-                75%
-            </div>
-
+        <div class="upgrade-circle" id="upgradeCircle">
+            <div class="upgrade-percent" id="upgradePercent">75%</div>
         </div>
-
 
         <div class="chances">
-
-            <div
-                class="chance active"
-                onclick="selectChance(this,75)"
-            >
-                75%
-            </div>
-
-            <div
-                class="chance"
-                onclick="selectChance(this,50)"
-            >
-                50%
-            </div>
-
-            <div
-                class="chance"
-                onclick="selectChance(this,35)"
-            >
-                35%
-            </div>
-
-            <div
-                class="chance"
-                onclick="selectChance(this,15)"
-            >
-                15%
-            </div>
-
+            <div class="chance active" onclick="selectChance(this,75)">75%</div>
+            <div class="chance" onclick="selectChance(this,50)">50%</div>
+            <div class="chance" onclick="selectChance(this,35)">35%</div>
+            <div class="chance" onclick="selectChance(this,15)">15%</div>
         </div>
 
-
-        <input
-            id="upgradeAmount"
-            type="number"
-            min="1"
-            placeholder="Ставка в мозгах"
-        >
-
-
-        <button
-            class="action"
-            onclick="upgrade()"
-        >
-            ⚡ Запустить Upgrade
-        </button>
-
-
-        <div
-            class="msg"
-            id="upgradeMsg"
-        ></div>
-
+        <input id="upgradeAmount" type="number" min="1" placeholder="Ставка в мозгах">
+        <button class="action" onclick="upgrade()">⚡ Запустить Upgrade</button>
+        <div class="msg" id="upgradeMsg"></div>
     </div>
-
 </div>
 
-
-<!-- =====================================================
-     MINES
-===================================================== -->
-
-<div
-    id="mines"
-    class="screen"
->
-
+<div id="mines" class="screen">
     <div class="section">
-
-        <h2>
-            💣 Mines
-        </h2>
-
-        <input
-            id="minesAmount"
-            type="number"
-            min="1"
-            placeholder="Ставка"
-        >
-
-        <div
-            class="mines"
-            id="minesGrid"
-        ></div>
-
-        <button
-            class="action"
-            onclick="startMines()"
-        >
-            🎮 Новая игра
-        </button>
-
-        <div
-            class="msg"
-            id="minesMsg"
-        ></div>
-
+        <h2>💣 Mines</h2>
+        <input id="minesAmount" type="number" min="1" placeholder="Ставка">
+        <div class="mines" id="minesGrid"></div>
+        <button class="action" onclick="startMines()">🎮 Новая игра</button>
+        <div class="msg" id="minesMsg"></div>
     </div>
-
 </div>
 
-
-<!-- =====================================================
-     DICE
-===================================================== -->
-
-<div
-    id="dice"
-    class="screen"
->
-
+<div id="dice" class="screen">
     <div class="section">
-
-        <h2>
-            🎲 Color Dice
-        </h2>
-
+        <h2>🎲 Color Dice</h2>
 
         <div class="colors">
-
-            <div
-                class="color"
-                onclick="selectColor(this,'red')"
-            >
-                <div class="ball red"></div>
-                Красный
-            </div>
-
-            <div
-                class="color"
-                onclick="selectColor(this,'orange')"
-            >
-                <div class="ball orange"></div>
-                Оранжевый
-            </div>
-
-            <div
-                class="color"
-                onclick="selectColor(this,'yellow')"
-            >
-                <div class="ball yellow"></div>
-                Жёлтый
-            </div>
-
-            <div
-                class="color"
-                onclick="selectColor(this,'green')"
-            >
-                <div class="ball green"></div>
-                Зелёный
-            </div>
-
-            <div
-                class="color"
-                onclick="selectColor(this,'blue')"
-            >
-                <div class="ball blue"></div>
-                Синий
-            </div>
-
-            <div
-                class="color"
-                onclick="selectColor(this,'purple')"
-            >
-                <div class="ball purple"></div>
-                Фиолетовый
-            </div>
-
+            <div class="color" onclick="selectColor(this,'red')"><div class="ball red"></div>Красный</div>
+            <div class="color" onclick="selectColor(this,'orange')"><div class="ball orange"></div>Оранжевый</div>
+            <div class="color" onclick="selectColor(this,'yellow')"><div class="ball yellow"></div>Жёлтый</div>
+            <div class="color" onclick="selectColor(this,'green')"><div class="ball green"></div>Зелёный</div>
+            <div class="color" onclick="selectColor(this,'blue')"><div class="ball blue"></div>Синий</div>
+            <div class="color" onclick="selectColor(this,'purple')"><div class="ball purple"></div>Фиолетовый</div>
         </div>
 
-
-        <input
-            id="diceAmount"
-            type="number"
-            min="1"
-            placeholder="Ставка"
-        >
-
-
-        <button
-            class="action"
-            onclick="rollDice()"
-        >
-            🎲 Бросить
-        </button>
-
-
-        <div
-            class="msg"
-            id="diceMsg"
-        ></div>
-
+        <input id="diceAmount" type="number" min="1" placeholder="Ставка">
+        <button class="action" onclick="rollDice()">🎲 Бросить</button>
+        <div class="msg" id="diceMsg"></div>
     </div>
-
 </div>
 
-
-<!-- =====================================================
-     SLOTS
-===================================================== -->
-
-<div
-    id="slots"
-    class="screen"
->
-
+<div id="slots" class="screen">
     <div class="section">
-
-        <h2>
-            🎰 Слоты
-        </h2>
-
-
-        <input
-            id="slotsAmount"
-            type="number"
-            min="1"
-            placeholder="Ставка"
-        >
-
+        <h2>🎰 Слоты</h2>
+        <input id="slotsAmount" type="number" min="1" placeholder="Ставка">
 
         <div class="reels">
-
-            <div
-                class="reel"
-                id="r1"
-            >
-                🍒
-            </div>
-
-            <div
-                class="reel"
-                id="r2"
-            >
-                ⭐
-            </div>
-
-            <div
-                class="reel"
-                id="r3"
-            >
-                💎
-            </div>
-
+            <div class="reel" id="r1">🍒</div>
+            <div class="reel" id="r2">⭐</div>
+            <div class="reel" id="r3">💎</div>
         </div>
 
-
-        <button
-            class="action"
-            onclick="spin()"
-        >
-            🎰 Крутить
-        </button>
-
-
-        <div
-            class="msg"
-            id="slotMsg"
-        ></div>
-
+        <button class="action" onclick="spin()">🎰 Крутить</button>
+        <div class="msg" id="slotMsg"></div>
     </div>
-
 </div>
 
-
-<!-- =====================================================
-     SHOP
-===================================================== -->
-
-<div
-    id="shop"
-    class="screen"
->
-
+<div id="shop" class="screen">
     <div class="section">
-
-        <h2>
-            🛒 Магазин
-        </h2>
-
-        <div
-            class="shop-grid"
-            id="shopGrid"
-        ></div>
-
+        <h2>🛒 Магазин</h2>
+        <div class="shop-grid" id="shopGrid"></div>
     </div>
-
 </div>
 
-
-<!-- =====================================================
-     INVENTORY
-===================================================== -->
-
-<div
-    id="inventory"
-    class="screen"
->
-
+<div id="inventory" class="screen">
     <div class="section">
-
-        <h2>
-            🎒 Инвентарь
-        </h2>
-
-        <div
-            id="inventoryList"
-        ></div>
-
+        <h2>🎒 Инвентарь</h2>
+        <div id="inventoryList"></div>
     </div>
-
 </div>
 
-
 </div>
-
 
 <script>
-
-
-/* =====================================================
-   TELEGRAM
-===================================================== */
-
-const tg =
-    window.Telegram.WebApp;
-
+const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 
+/* =========================================
+   RENDER API
+   ВАЖНО: сюда ставится адрес Render
+========================================= */
 
-/*
-    =====================================================
-    ВАЖНО!
+const API_URL = "https://upbrainrots-api.onrender.com";
 
-    СЮДА ВСТАВЬ ПУБЛИЧНЫЙ HTTPS АДРЕС
-    ТВОЕГО PYTHON API.
-
-    Например:
-
-    https://abc123.trycloudflare.com
-
-    НЕ:
-
-    http://127.0.0.1:8080
-
-    НЕ:
-
-    https://abc123.trycloudflare.com/api
-    =====================================================
-*/
-
-const API_URL =
-    "https://eroska49-rgb.github.io/upbrainrots/";
-
-
-const initData =
-    tg.initData;
-
+const initData = tg.initData;
 
 const API_HEADERS = {
-
-    "Content-Type":
-        "application/json",
-
-    "X-Telegram-Init-Data":
-        initData
+    "Content-Type":"application/json",
+    "X-Telegram-Init-Data":initData
 };
 
-
-/* =====================================================
-   API
-===================================================== */
-
-async function api(
-    url,
-    options = {}
-){
-
-    const response =
-        await fetch(
-            API_URL + url,
-            {
-                ...options,
-
-                headers:{
-                    ...API_HEADERS,
-
-                    ...(options.headers || {})
-                }
-            }
-        );
-
+async function api(url, options={}) {
+    const response = await fetch(API_URL + url, {
+        ...options,
+        headers:{
+            ...API_HEADERS,
+            ...(options.headers || {})
+        }
+    });
 
     let data;
 
-    try{
-
-        data =
-            await response.json();
-
-    }catch{
-
-        throw new Error(
-            "Сервер вернул неправильный ответ."
-        );
-
+    try {
+        data = await response.json();
+    } catch {
+        throw new Error("Сервер вернул неправильный ответ.");
     }
 
-
-    if(!response.ok){
-
-        throw new Error(
-            data.error ||
-            data.message ||
-            "Ошибка сервера."
-        );
-
+    if (!response.ok) {
+        throw new Error(data.error || data.message || "Ошибка сервера.");
     }
-
 
     return data;
 }
 
-
-/* =====================================================
-   PLAYER
-===================================================== */
-
 let balance = 0;
-
 let inventory = [];
 
+async function loadPlayer() {
+    try {
+        const data = await api("/api/user");
 
-async function loadPlayer(){
-
-    try{
-
-        const data =
-            await api(
-                "/api/user"
-            );
-
-
-        if(!data.ok){
-
-            throw new Error(
-                data.error ||
-                "Ошибка пользователя."
-            );
-
-        }
-
-
-        balance =
-            Number(
-                data.balance || 0
-            );
-
-
-        inventory =
-            data.inventory || [];
-
+        balance = Number(data.balance || 0);
+        inventory = data.inventory || [];
 
         render();
 
+        document.getElementById("loading").classList.add("hide");
 
-        document
-            .getElementById("loading")
-            .classList
-            .add("hide");
+    } catch(error) {
+        console.error(error);
 
-
-    }catch(error){
-
-        console.error(
-            error
-        );
-
-
-        document
-            .getElementById("loading")
-            .classList
-            .add("hide");
-
+        document.getElementById("loading").classList.add("hide");
 
         document.body.innerHTML = `
-
+        <div style="
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:25px;
+            background:#030611;
+            color:white;
+            font-family:Arial;
+            text-align:center">
             <div style="
-                min-height:100vh;
-                display:flex;
-                align-items:center;
-                justify-content:center;
+                background:#0b142b;
+                border:1px solid #ff1744;
+                border-radius:20px;
                 padding:25px;
-                background:#030611;
-                color:white;
-                font-family:Arial;
-                text-align:center;
-            ">
-
-                <div style="
-                    background:#0b142b;
-                    border:1px solid #ff1744;
-                    border-radius:20px;
-                    padding:25px;
-                    max-width:430px;
-                ">
-
-                    <div style="
-                        font-size:50px;
-                    ">
-                        ⚠️
-                    </div>
-
-                    <h2>
-                        Ошибка подключения
-                    </h2>
-
-                    <p style="
-                        color:#91a8cf;
-                    ">
-                        Сервер вернул
-                        неправильный ответ.
-                    </p>
-
-                    <p style="
-                        color:#ff6b81;
-                        font-size:12px;
-                        word-break:break-all;
-                    ">
-                        ${error.message}
-                    </p>
-
-                </div>
-
+                max-width:430px">
+                <div style="font-size:50px">⚠️</div>
+                <h2>Ошибка подключения</h2>
+                <p style="color:#91a8cf">
+                    Не удалось подключиться к серверу Render.
+                </p>
+                <p style="color:#ff6b81;font-size:12px;word-break:break-all">
+                    ${error.message}
+                </p>
             </div>
-
-        `;
-
+        </div>`;
     }
-
 }
 
+function render() {
+    document.getElementById("balance").textContent = balance;
 
-/* =====================================================
-   RENDER
-===================================================== */
+    const list = document.getElementById("inventoryList");
 
-function render(){
-
-    document
-        .getElementById("balance")
-        .textContent =
-        balance;
-
-
-    const list =
-        document.getElementById(
-            "inventoryList"
-        );
-
-
-    if(!inventory.length){
-
-        list.innerHTML =
-            `
-            <div class="msg">
-                Инвентарь пуст.
-            </div>
-            `;
-
+    if (!inventory.length) {
+        list.innerHTML = `<div class="msg">Инвентарь пуст.</div>`;
         return;
     }
 
-
-    list.innerHTML =
-        inventory
-            .map(
-                item => `
-
-                    <div
-                        class="inventory-item"
-                    >
-
-                        🧠 ${item.name}
-
-                        <div style="
-                            color:#ffd83d;
-                            margin-top:5px;
-                        ">
-                            ${item.price} 🧠
-                        </div>
-
-                    </div>
-
-                `
-            )
-            .join("");
-
+    list.innerHTML = inventory.map(item => `
+        <div class="inventory-item">
+            🧠 ${escapeHtml(item.name)}
+            <div style="color:#ffd83d;margin-top:5px">
+                ${item.price} 🧠
+            </div>
+        </div>
+    `).join("");
 }
 
-
-/* =====================================================
-   SHOP
-===================================================== */
+function escapeHtml(str) {
+    return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
 
 const ITEMS = {
-
     "La Secret Combinasion":45,
     "Garama And Madundung":50,
     "Burguro And Fryuro":63,
@@ -1720,941 +401,302 @@ const ITEMS = {
     "Strawbery Elephant":21000,
     "Jhon Pork":8000,
     "Antonio":4500
-
 };
 
+function renderShop() {
+    const grid = document.getElementById("shopGrid");
 
-function renderShop(){
-
-    const grid =
-        document.getElementById(
-            "shopGrid"
-        );
-
-
-    grid.innerHTML =
-        Object.entries(
-            ITEMS
-        )
-        .map(
-            ([name, price]) => {
-
-                const safeName =
-                    name
-                        .replace(
-                            /\\/g,
-                            "\\\\"
-                        )
-                        .replace(
-                            /'/g,
-                            "\\'"
-                        );
-
-
-                return `
-
-                    <div class="card">
-
-                        <div class="img">
-                            🧠
-                        </div>
-
-                        <div>
-                            ${name}
-                        </div>
-
-                        <div class="price">
-                            ${price} 🧠
-                        </div>
-
-                        <button
-                            class="buy"
-                            onclick="buy('${safeName}')"
-                        >
-                            Купить
-                        </button>
-
-                    </div>
-
-                `;
-
-            }
-        )
-        .join("");
-
+    grid.innerHTML = Object.entries(ITEMS).map(([name,price]) => `
+        <div class="card">
+            <div class="img">🧠</div>
+            <div>${escapeHtml(name)}</div>
+            <div class="price">${price} 🧠</div>
+            <button class="buy" onclick="buy(${JSON.stringify(name)})">
+                Купить
+            </button>
+        </div>
+    `).join("");
 }
 
+async function buy(name) {
+    try {
+        const data = await api("/api/buy", {
+            method:"POST",
+            body:JSON.stringify({name})
+        });
 
-async function buy(name){
-
-    try{
-
-        const data =
-            await api(
-                "/api/buy",
-                {
-                    method:"POST",
-
-                    body:
-                        JSON.stringify({
-                            name:name
-                        })
-                }
-            );
-
-
-        if(!data.ok){
-
-            alert(
-                data.message ||
-                "Ошибка покупки."
-            );
-
-            return;
-        }
-
-
-        balance =
-            data.balance;
-
-
-        inventory =
-            data.inventory || [];
-
+        balance = data.balance;
+        inventory = data.inventory || [];
 
         render();
 
+        alert("✅ Куплено: " + name);
 
-        alert(
-            "✅ Куплено: " + name
-        );
-
-
-    }catch(error){
-
-        alert(
-            error.message
-        );
-
+    } catch(error) {
+        alert(error.message);
     }
-
 }
 
+async function dailyBonus() {
+    try {
+        const data = await api("/api/daily", {
+            method:"POST"
+        });
 
-/* =====================================================
-   DAILY
-===================================================== */
-
-async function dailyBonus(){
-
-    try{
-
-        const data =
-            await api(
-                "/api/daily",
-                {
-                    method:"POST"
-                }
-            );
-
-
-        if(!data.ok){
-
-            alert(
-                data.message
-            );
-
-            return;
-        }
-
-
-        balance =
-            data.balance;
-
-
+        balance = data.balance;
         render();
 
+        alert(data.message || "🎁 +3 🧠");
 
-        alert(
-            "🎁 +3 🧠"
-        );
-
-
-    }catch(error){
-
-        alert(
-            error.message
-        );
-
+    } catch(error) {
+        alert(error.message);
     }
-
 }
-
-
-/* =====================================================
-   UPGRADE
-===================================================== */
 
 let selectedChance = 75;
 
+function selectChance(element,chance) {
+    document.querySelectorAll(".chance")
+        .forEach(x=>x.classList.remove("active"));
 
-function selectChance(
-    element,
-    chance
-){
+    element.classList.add("active");
+    selectedChance = chance;
 
-    document
-        .querySelectorAll(
-            ".chance"
-        )
-        .forEach(
-            x =>
-                x.classList
-                    .remove("active")
-        );
-
-
-    element
-        .classList
-        .add("active");
-
-
-    selectedChance =
-        chance;
-
-
-    updateUpgradeCircle(
-        chance
-    );
-
+    updateUpgradeCircle(chance);
 }
 
+function updateUpgradeCircle(percent) {
+    const degrees = percent * 3.6;
 
-function updateUpgradeCircle(
-    percent
-){
-
-    const degrees =
-        percent * 3.6;
-
-
-    const circle =
-        document.getElementById(
-            "upgradeCircle"
-        );
-
-
-    circle.style.background = `
-
+    document.getElementById("upgradeCircle").style.background = `
         conic-gradient(
-
             #00ff91 0deg,
-
             #00ff91 ${degrees}deg,
-
             #ff1744 ${degrees}deg,
-
             #ff1744 360deg
+        )`;
 
-        )
-
-    `;
-
-
-    document
-        .getElementById(
-            "upgradePercent"
-        )
-        .textContent =
+    document.getElementById("upgradePercent").textContent =
         percent + "%";
-
 }
 
+async function upgrade() {
+    const amount = Number(document.getElementById("upgradeAmount").value);
+    const msg = document.getElementById("upgradeMsg");
 
-async function upgrade(){
-
-    const amount =
-        Number(
-            document
-                .getElementById(
-                    "upgradeAmount"
-                )
-                .value
-        );
-
-
-    const msg =
-        document
-            .getElementById(
-                "upgradeMsg"
-            );
-
-
-    if(
-        !amount ||
-        amount <= 0
-    ){
-
-        msg.textContent =
-            "❌ Введи ставку.";
-
+    if (!amount || amount <= 0) {
+        msg.textContent = "❌ Введи ставку.";
         return;
     }
 
-
-    if(
-        amount >
-        balance
-    ){
-
-        msg.textContent =
-            "❌ Недостаточно мозгов.";
-
+    if (amount > balance) {
+        msg.textContent = "❌ Недостаточно мозгов.";
         return;
     }
 
+    msg.textContent = "⚡ Играем...";
 
-    msg.textContent =
-        "⚡ Играем...";
+    try {
+        const data = await api("/api/upgrade", {
+            method:"POST",
+            body:JSON.stringify({
+                chance:selectedChance,
+                amount
+            })
+        });
 
-
-    try{
-
-        const data =
-            await api(
-                "/api/upgrade",
-                {
-                    method:"POST",
-
-                    body:
-                        JSON.stringify({
-
-                            chance:
-                                selectedChance,
-
-                            amount:
-                                amount
-
-                        })
-                }
-            );
-
-
-        if(!data.ok){
-
-            msg.textContent =
-                data.message;
-
-            return;
-        }
-
-
-        balance =
-            data.balance;
-
-
+        balance = data.balance;
         render();
 
+        msg.textContent = data.success
+            ? "🟢 ПОБЕДА! +" + data.profit + " 🧠"
+            : "🔴 ПРОИГРЫШ. -" + amount + " 🧠";
 
-        if(data.success){
-
-            msg.textContent =
-                "🟢 ПОБЕДА! +" +
-                data.profit +
-                " 🧠";
-
-        }else{
-
-            msg.textContent =
-                "🔴 ПРОИГРЫШ. -" +
-                amount +
-                " 🧠";
-
-        }
-
-
-    }catch(error){
-
-        msg.textContent =
-            error.message;
-
+    } catch(error) {
+        msg.textContent = error.message;
     }
-
 }
-
-
-/* =====================================================
-   MINES
-===================================================== */
 
 let mineGame = false;
-
 let mineAmount = 0;
 
-
-function createMines(){
-
-    const grid =
-        document.getElementById(
-            "minesGrid"
-        );
-
-
+function createMines() {
+    const grid = document.getElementById("minesGrid");
     grid.innerHTML = "";
 
+    for(let i=0;i<25;i++) {
+        const cell = document.createElement("div");
 
-    for(
-        let i = 0;
-        i < 25;
-        i++
-    ){
+        cell.className = "mine";
+        cell.textContent = "◇";
 
-        const cell =
-            document.createElement(
-                "div"
-            );
+        cell.onclick = () => openMine(cell,i);
 
-
-        cell.className =
-            "mine";
-
-
-        cell.textContent =
-            "◇";
-
-
-        cell.onclick =
-            () =>
-                openMine(
-                    cell,
-                    i
-                );
-
-
-        grid.appendChild(
-            cell
-        );
-
+        grid.appendChild(cell);
     }
-
 }
 
+async function startMines() {
+    mineAmount = Number(document.getElementById("minesAmount").value);
 
-async function startMines(){
+    const msg = document.getElementById("minesMsg");
 
-    mineAmount =
-        Number(
-            document
-                .getElementById(
-                    "minesAmount"
-                )
-                .value
-        );
-
-
-    if(
-        !mineAmount ||
-        mineAmount <= 0
-    ){
-
-        document
-            .getElementById(
-                "minesMsg"
-            )
-            .textContent =
-            "❌ Введи ставку.";
-
+    if(!mineAmount || mineAmount <= 0) {
+        msg.textContent = "❌ Введи ставку.";
         return;
     }
 
-
-    if(
-        mineAmount >
-        balance
-    ){
-
-        document
-            .getElementById(
-                "minesMsg"
-            )
-            .textContent =
-            "❌ Недостаточно мозгов.";
-
+    if(mineAmount > balance) {
+        msg.textContent = "❌ Недостаточно мозгов.";
         return;
     }
-
 
     mineGame = true;
-
-
     createMines();
 
-
-    document
-        .getElementById(
-            "minesMsg"
-        )
-        .textContent =
-        "💣 Выбирай клетку.";
-
+    msg.textContent = "💣 Выбирай клетку.";
 }
 
+async function openMine(cell,index) {
+    if(!mineGame) return;
 
-async function openMine(
-    cell,
-    index
-){
+    mineGame = false;
 
-    if(!mineGame)
-        return;
+    try {
+        const data = await api("/api/mines", {
+            method:"POST",
+            body:JSON.stringify({
+                amount:mineAmount,
+                cell:index
+            })
+        });
 
-
-    mineGame =
-        false;
-
-
-    try{
-
-        const data =
-            await api(
-                "/api/mines",
-                {
-                    method:"POST",
-
-                    body:
-                        JSON.stringify({
-
-                            amount:
-                                mineAmount,
-
-                            cell:
-                                index
-
-                        })
-                }
-            );
-
-
-        if(!data.ok){
-
-            document
-                .getElementById(
-                    "minesMsg"
-                )
-                .textContent =
-                data.message;
-
-            return;
-        }
-
-
-        balance =
-            data.balance;
-
-
+        balance = data.balance;
         render();
 
-
-        if(data.bomb){
-
-            cell.textContent =
-                "💣";
-
-            cell.classList
-                .add("bomb");
-
-
-            document
-                .getElementById(
-                    "minesMsg"
-                )
-                .textContent =
-                "💥 Мина!";
-
-        }else{
-
-            cell.textContent =
-                "💎";
-
-            cell.classList
-                .add("open");
-
-
-            document
-                .getElementById(
-                    "minesMsg"
-                )
-                .textContent =
-                "💎 Победа! +" +
-                data.win +
-                " 🧠";
-
+        if(data.bomb) {
+            cell.textContent = "💣";
+            cell.classList.add("bomb");
+            document.getElementById("minesMsg").textContent = "💥 Мина!";
+        } else {
+            cell.textContent = "💎";
+            cell.classList.add("open");
+            document.getElementById("minesMsg").textContent =
+                "💎 Победа! +" + data.win + " 🧠";
         }
 
-
-    }catch(error){
-
-        document
-            .getElementById(
-                "minesMsg"
-            )
-            .textContent =
-            error.message;
-
+    } catch(error) {
+        document.getElementById("minesMsg").textContent = error.message;
     }
-
 }
-
-
-/* =====================================================
-   DICE
-===================================================== */
 
 let selectedColor = "";
 
+function selectColor(element,color) {
+    document.querySelectorAll(".color")
+        .forEach(x=>x.classList.remove("selected"));
 
-function selectColor(
-    element,
-    color
-){
-
-    document
-        .querySelectorAll(
-            ".color"
-        )
-        .forEach(
-            x =>
-                x.classList
-                    .remove("selected")
-        );
-
-
-    element
-        .classList
-        .add("selected");
-
-
-    selectedColor =
-        color;
-
+    element.classList.add("selected");
+    selectedColor = color;
 }
 
+async function rollDice() {
+    const amount = Number(document.getElementById("diceAmount").value);
+    const msg = document.getElementById("diceMsg");
 
-async function rollDice(){
-
-    const amount =
-        Number(
-            document
-                .getElementById(
-                    "diceAmount"
-                )
-                .value
-        );
-
-
-    const msg =
-        document
-            .getElementById(
-                "diceMsg"
-            );
-
-
-    if(!selectedColor){
-
-        msg.textContent =
-            "❌ Выбери цвет.";
-
+    if(!selectedColor) {
+        msg.textContent = "❌ Выбери цвет.";
         return;
     }
 
-
-    if(
-        !amount ||
-        amount <= 0
-    ){
-
-        msg.textContent =
-            "❌ Введи ставку.";
-
+    if(!amount || amount <= 0) {
+        msg.textContent = "❌ Введи ставку.";
         return;
     }
 
+    try {
+        const data = await api("/api/dice", {
+            method:"POST",
+            body:JSON.stringify({
+                amount,
+                color:selectedColor
+            })
+        });
 
-    try{
-
-        const data =
-            await api(
-                "/api/dice",
-                {
-                    method:"POST",
-
-                    body:
-                        JSON.stringify({
-
-                            amount:
-                                amount,
-
-                            color:
-                                selectedColor
-
-                        })
-                }
-            );
-
-
-        if(!data.ok){
-
-            msg.textContent =
-                data.message;
-
-            return;
-        }
-
-
-        balance =
-            data.balance;
-
-
+        balance = data.balance;
         render();
 
-
-        if(
-            data.result ===
-            selectedColor
-        ){
-
-            msg.textContent =
-                "🎉 Выпал твой цвет! +" +
-                data.win +
-                " 🧠";
-
-        }else{
-
-            msg.textContent =
-                "❌ Выпал другой цвет.";
-
-        }
-
-
-    }catch(error){
-
         msg.textContent =
-            error.message;
+            data.result === selectedColor
+            ? "🎉 Выпал твой цвет! +" + data.win + " 🧠"
+            : "❌ Выпал другой цвет: " + data.result;
 
+    } catch(error) {
+        msg.textContent = error.message;
     }
-
 }
 
+async function spin() {
+    const amount = Number(document.getElementById("slotsAmount").value);
+    const msg = document.getElementById("slotMsg");
 
-/* =====================================================
-   SLOTS
-===================================================== */
-
-async function spin(){
-
-    const amount =
-        Number(
-            document
-                .getElementById(
-                    "slotsAmount"
-                )
-                .value
-        );
-
-
-    const msg =
-        document
-            .getElementById(
-                "slotMsg"
-            );
-
-
-    if(
-        !amount ||
-        amount <= 0
-    ){
-
-        msg.textContent =
-            "❌ Введи ставку.";
-
+    if(!amount || amount <= 0) {
+        msg.textContent = "❌ Введи ставку.";
         return;
     }
 
-
-    try{
-
-        const data =
-            await api(
-                "/api/slots",
-                {
-                    method:"POST",
-
-                    body:
-                        JSON.stringify({
-                            amount:amount
-                        })
-                }
-            );
-
-
-        if(!data.ok){
-
-            msg.textContent =
-                data.message;
-
-            return;
-        }
-
+    try {
+        const data = await api("/api/slots", {
+            method:"POST",
+            body:JSON.stringify({amount})
+        });
 
         const reels = [
-
-            document.getElementById(
-                "r1"
-            ),
-
-            document.getElementById(
-                "r2"
-            ),
-
-            document.getElementById(
-                "r3"
-            )
-
+            document.getElementById("r1"),
+            document.getElementById("r2"),
+            document.getElementById("r3")
         ];
 
+        data.result.forEach((symbol,index)=>{
+            reels[index].classList.remove("spin");
+            void reels[index].offsetWidth;
+            reels[index].classList.add("spin");
+            reels[index].textContent = symbol;
+        });
 
-        data.result.forEach(
-            (symbol, index) => {
-
-                reels[index]
-                    .classList
-                    .remove("spin");
-
-                void reels[index]
-                    .offsetWidth;
-
-                reels[index]
-                    .classList
-                    .add("spin");
-
-                reels[index]
-                    .textContent =
-                    symbol;
-
-            }
-        );
-
-
-        balance =
-            data.balance;
-
-
+        balance = data.balance;
         render();
 
+        msg.textContent = data.win > 0
+            ? "🎉 Выигрыш: +" + data.win + " 🧠"
+            : "❌ Проигрыш.";
 
-        if(data.win > 0){
-
-            msg.textContent =
-                "🎉 Выигрыш: +" +
-                data.win +
-                " 🧠";
-
-        }else{
-
-            msg.textContent =
-                "❌ Проигрыш.";
-
-        }
-
-
-    }catch(error){
-
-        msg.textContent =
-            error.message;
-
+    } catch(error) {
+        msg.textContent = error.message;
     }
-
 }
 
+document.querySelectorAll(".tab").forEach(tab=>{
+    tab.addEventListener("click",()=>{
+        document.querySelectorAll(".tab")
+            .forEach(x=>x.classList.remove("active"));
 
-/* =====================================================
-   TABS
-===================================================== */
+        document.querySelectorAll(".screen")
+            .forEach(x=>x.classList.remove("active"));
 
-document
-    .querySelectorAll(".tab")
-    .forEach(
-        tab => {
+        tab.classList.add("active");
 
-            tab.addEventListener(
-                "click",
-                () => {
+        document.getElementById(tab.dataset.screen)
+            .classList.add("active");
 
-                    document
-                        .querySelectorAll(
-                            ".tab"
-                        )
-                        .forEach(
-                            x =>
-                                x.classList
-                                    .remove(
-                                        "active"
-                                    )
-                        );
-
-
-                    document
-                        .querySelectorAll(
-                            ".screen"
-                        )
-                        .forEach(
-                            x =>
-                                x.classList
-                                    .remove(
-                                        "active"
-                                    )
-                        );
-
-
-                    tab
-                        .classList
-                        .add("active");
-
-
-                    document
-                        .getElementById(
-                            tab.dataset.screen
-                        )
-                        .classList
-                        .add("active");
-
-
-                    window.scrollTo({
-                        top:0,
-                        behavior:"smooth"
-                    });
-
-                }
-            );
-
-        }
-    );
-
-
-/* =====================================================
-   START
-===================================================== */
+        window.scrollTo({top:0,behavior:"smooth"});
+    });
+});
 
 renderShop();
-
-updateUpgradeCircle(
-    75
-);
-
+updateUpgradeCircle(75);
 loadPlayer();
-
 </script>
 
 </body>
-
 </html>
