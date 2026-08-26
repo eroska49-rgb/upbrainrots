@@ -550,12 +550,6 @@ input:focus{
         <span id="balance">0</span> 🧠
     </div>
 
-    <button class="bonus" onclick="dailyBonus()">
-        🎁 Получить ежедневный бонус +3
-    </button>
-
-</div>
-
 <div class="tabs">
 
     <div class="tab active" data-screen="welcome">
@@ -743,6 +737,8 @@ input:focus{
 
 <!-- DICE -->
 
+<!-- DICE -->
+
 <div id="dice" class="screen">
 
     <div class="section">
@@ -750,6 +746,10 @@ input:focus{
         <h2>
             🎲 Color Dice
         </h2>
+
+        <p class="msg">
+            Выбери цвет и попробуй удвоить ставку.
+        </p>
 
         <div class="colors">
 
@@ -803,18 +803,43 @@ input:focus{
 
         </div>
 
+        <!-- 4 КУБИКА -->
+
+        <div class="dice-board">
+
+            <div class="dice-cube" id="dice1">
+                <div class="dice-color red"></div>
+            </div>
+
+            <div class="dice-cube" id="dice2">
+                <div class="dice-color blue"></div>
+            </div>
+
+            <div class="dice-cube" id="dice3">
+                <div class="dice-color green"></div>
+            </div>
+
+            <div class="dice-cube" id="dice4">
+                <div class="dice-color purple"></div>
+            </div>
+
+        </div>
+
         <input
             id="diceAmount"
             type="number"
             min="1"
+            step="1"
+            inputmode="numeric"
             placeholder="Ставка"
         >
 
         <button
             class="action"
+            id="diceButton"
             onclick="rollDice()"
         >
-            🎲 Бросить
+            🎲 Играть
         </button>
 
         <div
@@ -1257,43 +1282,6 @@ async function buy(name) {
 
 
 /* ============================================================
-   DAILY
-============================================================ */
-
-async function dailyBonus() {
-
-    try {
-
-        const data =
-            await api(
-                "/api/daily",
-                {
-                    method:"POST"
-                }
-            );
-
-        balance =
-            Number(data.balance);
-
-        render();
-
-        tg.showAlert(
-            data.message ||
-            "🎁 +3 🧠"
-        );
-
-    } catch(error) {
-
-        tg.showAlert(
-            error.message
-        );
-
-    }
-
-}
-
-
-/* ============================================================
    UPGRADE
 ============================================================ */
 
@@ -1630,6 +1618,129 @@ async function openMine(
    DICE
 ============================================================ */
 
+/* ============================================================
+   COLOR DICE
+============================================================ */
+
+.dice-board{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin:20px 0;
+    padding:10px;
+}
+
+.dice-cube{
+    height:95px;
+    border-radius:20px;
+
+    display:grid;
+    place-items:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #101d39,
+            #071126
+        );
+
+    border:1px solid #29466f;
+
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,.45),
+        0 0 15px rgba(0,180,255,.08);
+
+    transition:
+        transform .15s,
+        border-color .15s,
+        box-shadow .15s;
+}
+
+.dice-color{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+
+    transition:
+        background .08s,
+        box-shadow .08s,
+        transform .08s;
+}
+
+.dice-cube.rolling{
+    animation:diceRolling .14s linear infinite;
+}
+
+.dice-cube.win{
+    border-color:#00ff91;
+
+    box-shadow:
+        0 0 20px rgba(0,255,145,.55),
+        inset 0 0 20px rgba(0,255,145,.15);
+}
+
+.dice-cube.lose{
+    border-color:#ff1744;
+}
+
+@keyframes diceRolling{
+
+    0%{
+        transform:
+            translateY(0)
+            rotate(-3deg)
+            scale(1);
+    }
+
+    50%{
+        transform:
+            translateY(-8px)
+            rotate(3deg)
+            scale(1.04);
+    }
+
+    100%{
+        transform:
+            translateY(0)
+            rotate(-3deg)
+            scale(1);
+    }
+
+}
+
+.dice-color.red{
+    background:#ff1744;
+    box-shadow:0 0 22px #ff1744;
+}
+
+.dice-color.orange{
+    background:#ff8a00;
+    box-shadow:0 0 22px #ff8a00;
+}
+
+.dice-color.yellow{
+    background:#ffd600;
+    box-shadow:0 0 22px #ffd600;
+}
+
+.dice-color.green{
+    background:#00ff3c;
+    box-shadow:0 0 22px #00ff3c;
+}
+
+.dice-color.blue{
+    background:#0066ff;
+    box-shadow:0 0 22px #0066ff;
+}
+
+.dice-color.purple{
+    background:#a020f0;
+    box-shadow:0 0 22px #a020f0;
+}
+
+.color.selected{
+    transform:translateY(-2px);
+}    
 let selectedColor = "";
 
 
